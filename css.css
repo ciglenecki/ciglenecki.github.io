@@ -1,16 +1,31 @@
 * {
-    background-color: #EADDCA;
+    /* background-color: #EADDCA; */
     font-size: 110%;
-    color: #5C4033;
+    color: rgb(253, 253, 253);
+    text-shadow: 1px 1px #542a8f;
+}
+
+body {
+    background-image: linear-gradient(to bottom right, #DBE6F6, #C5796D);
+    background-image: linear-gradient(to bottom right, #E8CBC0, #636FA4);
+    background-image: linear-gradient(to bottom right, #FAAE7B, #432371);
 }
 
 .icon {
     /* font-size: 16px; */
+    height: 24px;
+    width: 24px;
+    max-height: 24px;
+    max-width: 24px;
+    font-size: 24px;
+    margin-right: 10px;
     vertical-align: middle;
-    height: 24;
-    width: 24;
-    margin-right: 5;
     text-decoration: none;
+}
+
+.icon_link {
+    text-decoration: none;
+    vertical-align: middle;
 }
 
 a {
