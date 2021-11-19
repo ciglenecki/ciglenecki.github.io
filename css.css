@@ -2,13 +2,13 @@
     /* background-color: #EADDCA; */
     font-size: 110%;
     color: rgb(253, 253, 253);
-    text-shadow: 1px 1px #542a8f;
+    text-shadow: 1px 1px #520b00;
 }
 
 body {
     background-image: linear-gradient(to bottom right, #DBE6F6, #C5796D);
-    background-image: linear-gradient(to bottom right, #E8CBC0, #636FA4);
-    background-image: linear-gradient(to bottom right, #FAAE7B, #432371);
+    /* background-image: linear-gradient(to bottom right, #E8CBC0, #636FA4); */
+    /* background-image: linear-gradient(to bottom right, #FAAE7B, #432371); */
 }
 
 .icon {
