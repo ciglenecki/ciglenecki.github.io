@@ -1,16 +1,19 @@
 * {
-    /* background-color: #EADDCA; */
     font-size: 110%;
-    color: rgb(202 214 233);
+    color: #083358;
 }
 
 body {
-    background-color: #131856;
+    background-color: #f7f7f8;
     /* background-image: linear-gradient(to bottom right, rgb(55, 57, 65), rgb(24, 44, 58)) */
     /* background-image: linear-gradient(to bottom right, #DBE6F6, #C5796D); */
     /* background-image: linear-gradient(to bottom right, #E8CBC0, #636FA4); */
     /* background-image: linear-gradient(to bottom right, #FAAE7B, #432371); */
 }
+
+
+
+
 
 .icon {
     /* font-size: 16px; */
@@ -26,10 +29,8 @@ body {
 }
 
 .invert {
-    filter: invert(90%);
+    /* filter: invert(90%); */
 }
-
-
 
 .icon_link {
     text-decoration: none;
@@ -43,6 +44,11 @@ a {
 .linkpack {
     text-align: center;
     margin-bottom: 10%;
+}
+
+.linkpack:hover a {
+    font-weight: bolder;
+    color: #0257a1;
 }
 
 .parent {
