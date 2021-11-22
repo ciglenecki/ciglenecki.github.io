@@ -1,12 +1,13 @@
 * {
     /* background-color: #EADDCA; */
     font-size: 110%;
-    color: rgb(253, 253, 253);
-    text-shadow: 1px 1px #520b00;
+    color: rgb(202 214 233);
 }
 
 body {
-    background-image: linear-gradient(to bottom right, #DBE6F6, #C5796D);
+    background-color: #131856;
+    /* background-image: linear-gradient(to bottom right, rgb(55, 57, 65), rgb(24, 44, 58)) */
+    /* background-image: linear-gradient(to bottom right, #DBE6F6, #C5796D); */
     /* background-image: linear-gradient(to bottom right, #E8CBC0, #636FA4); */
     /* background-image: linear-gradient(to bottom right, #FAAE7B, #432371); */
 }
@@ -21,7 +22,14 @@ body {
     margin-right: 10px;
     vertical-align: middle;
     text-decoration: none;
+
 }
+
+.invert {
+    filter: invert(90%);
+}
+
+
 
 .icon_link {
     text-decoration: none;
