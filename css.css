@@ -51,13 +51,11 @@ a {
     color: #0257a1;
 }
 
-.parent {
-    position: relative;
-}
 
 .child {
     position: absolute;
-    top: 70%;
+    bottom: 10%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
 }
