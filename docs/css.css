@@ -1,5 +1,4 @@
 * {
-    font-size: 110%;
     color: #083358;
 }
 
@@ -9,7 +8,9 @@ body {
     /* background-image: linear-gradient(to bottom right, #DBE6F6, #C5796D); */
     /* background-image: linear-gradient(to bottom right, #E8CBC0, #636FA4); */
     /* background-image: linear-gradient(to bottom right, #FAAE7B, #432371); */
+    font-size: 24px;
 }
+
 
 
 
@@ -36,6 +37,7 @@ body {
     text-decoration: none;
     vertical-align: middle;
 }
+
 
 a {
     vertical-align: middle;
