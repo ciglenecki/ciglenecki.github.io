@@ -1,0 +1,19 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<div class="single-content">
+    <header>
+        <h1 class="single-title">{{ .Title }}</h1>
+        <div class="single-meta">
+            <time datetime="{{ .Date.Format " 2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+            {{ with .Params.group }}
+            <span> · {{ . }}</span>
+            {{ end }}
+        </div>
+    </header>
+
+    <article>
+        {{ .Content }}
+    </article>
+</div>
+{{ end }}

@@ -1,0 +1,30 @@
+[
+    {
+        "group": "development",
+        "date": "2024-11-15",
+        "description": "Hugo Static Site Generator Documentation",
+        "url": "https://gohugo.io/documentation/",
+        "icon": "https://gohugo.io/favicon.ico"
+    },
+    {
+        "group": "development",
+        "date": "2024-10-20",
+        "description": "GitHub - Version Control",
+        "url": "https://github.com",
+        "icon": "https://github.com/favicon.ico"
+    },
+    {
+        "group": "design",
+        "date": "2024-09-10",
+        "description": "Tailwind CSS - Utility-first CSS Framework",
+        "url": "https://tailwindcss.com",
+        "icon": "https://tailwindcss.com/favicon.ico"
+    },
+    {
+        "group": "design",
+        "date": "2024-08-05",
+        "description": "Google Fonts - Roboto",
+        "url": "https://fonts.google.com/specimen/Roboto",
+        "icon": "https://www.gstatic.com/images/branding/product/1x/google_fonts_blue_ios_96dp.png"
+    }
+]

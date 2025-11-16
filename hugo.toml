@@ -1,0 +1,29 @@
+baseURL = 'https://ciglenecki.github.io/'
+languageCode = 'en-us'
+title = 'Matej Ciglenečki'
+theme = 'matej'
+
+[params]
+  [params.profile]
+    name = "Matej Ciglenečki"
+    photo = "/images/profile.jpg"
+    description = "Software engineer and researcher"
+    
+    [[params.profile.links]]
+      name = "GitHub"
+      url = "https://github.com/ciglenecki"
+      external = true
+      
+    [[params.profile.links]]
+      name = "Email"
+      url = "mailto:your.email@example.com"
+      external = false
+      
+    [[params.profile.links]]
+      name = "LinkedIn"
+      url = "https://linkedin.com/in/yourprofile"
+      external = true
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
