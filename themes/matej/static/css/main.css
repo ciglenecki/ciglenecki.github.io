@@ -3,7 +3,7 @@
 
 :root {
     --primary-bg: #ffffff;
-    --text-color: #2c3e50;
+    --text-color: #000000;
     --accent-color: #0000ff;
     --accent-hover: #0000cc;
     --border-color: #e1e8ed;
@@ -119,7 +119,7 @@ body {
 }
 
 .profile-links li {
-    margin-bottom: var(--spacing-tight);
+    margin-bottom: 0;
 }
 
 .profile-links a {
@@ -130,7 +130,7 @@ body {
     text-decoration: underline;
     font-size: var(--font-small);
     transition: color 0.2s ease;
-    padding: var(--spacing-tight) 0;
+    padding: 0;
 }
 
 .profile-links a:hover {

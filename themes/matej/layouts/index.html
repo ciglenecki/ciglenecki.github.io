@@ -3,7 +3,8 @@
     {{ partial "profile.html" . }}
 
     <div class="content-area">
-        {{ $pages := where .Site.RegularPages "Section" "posts" }}
+        {{ $pages := where .Site.AllPages "Section" "posts" }}
+        {{ $pages = where $pages ".Draft" false }}
         {{ $groups := slice }}
 
         <!-- Collect unique groups -->
@@ -20,7 +21,7 @@
             <div class="content-group">
                 <h2 class="group-title">{{ $currentGroup }}</h2>
 
-                {{ range $pages }}
+                {{ range $pages.ByDate.Reverse }}
                 {{ if eq (.Params.group | default "uncategorized") $currentGroup }}
                 <article class="post-item">
                     <a href="{{ .RelPermalink }}" class="post-link"></a>
