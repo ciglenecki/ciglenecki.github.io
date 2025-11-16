@@ -409,7 +409,8 @@ body {
 .single-content article code {
     background-color: var(--code-bg);
     border: 1px solid var(--code-border);
-    padding: 0.1em 0.3em;
+    padding: 0.1em 0.2em;
+    margin: 0;
     border-radius: 2px;
     font-size: var(--font-small);
     font-family: 'Courier New', Courier, monospace;
@@ -418,16 +419,20 @@ body {
 .single-content article pre {
     background-color: var(--code-bg);
     border: 1px solid var(--code-border);
-    padding: 0.3rem;
+    padding: var(--spacing-sm);
+    margin: 0;
     border-radius: 2px;
     overflow-x: auto;
-    margin: 0.3rem 0;
+    line-height: 1.4;
 }
 
 .single-content article pre code {
     background: none;
     border: none;
     padding: 0;
+    margin: 0;
+    display: block;
+    line-height: inherit;
 }
 
 .single-content article img {
@@ -601,4 +606,13 @@ body {
 
 .mb-lg {
     margin-bottom: var(--spacing-md);
+}
+
+/* KaTeX Math Styling */
+.single-content article .katex {
+    font-size: 0.85rem !important;
+}
+
+.single-content article .katex-display .katex {
+    font-size: 0.85rem !important;
 }

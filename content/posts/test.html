@@ -1,0 +1,1340 @@
++++
+title = 'OOS'
+date = 2025-11-10T14:20:00+01:00
+draft = false
+thumbnail = "/images/post-thumbnail.jpg"
++++
+
+<style>
+    body {
+            background-color: #f7f7f8;
+        }
+
+        details {
+            margin-top: 1em;
+            padding-left: 1em;
+            border-left: 3px solid rgba(0, 0, 0, 0.2);
+            display: block;
+        }
+
+        summary {
+            padding-right: 5em;
+            color: black;
+            font-weight: bold;
+        }
+
+        summary:hover {
+            color: #0257a1;
+        }
+
+        # title {
+            font-size: 3em
+        }
+
+        h2,
+        h3,
+        h4 {
+            font-weight: bold;
+            margin: 1em 0px 0px 0px;
+        }
+
+        h1 {
+            font-weight: bold;
+            margin: 1em 0px 0px 0px;
+        }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/tex-mml-chtml.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<h1 id="osnove-obradbe-signala---usmeni">Osnove obradbe signala -
+usmeni</h1>
+<p>ako pronađeš grešku napravi PR na:
+https://github.com/ciglenecki/fer-oos</p>
+<pre><code>2024-02-22: dodan minus predznak kod &quot;Radi preglednosti uvodimo oznaku&quot;</code></pre>
+<button id="run_system">
+show / hide questions
+</button>
+<script>$("#run_system").click(function () {
+        console.log("click")
+        if ($("details").attr("open") == "open") {
+            $("details").removeAttr("open");
+        } else {
+            $("details").attr("open", "")
+        }
+});
+</script>
+<h3 id="signali">Signali</h3>
+<details open>
+<summary>
+Definirajte osnovne signale (sinusoida, eksponencijala, jedinična
+stepenica i jedinični impuls).
+</summary>
+<p>Sinusoida/kosinusoida: <span class="math inline">\(x(t) = Asin(\Omega
+t + \phi)\)</span> <span class="math inline">\(x[x] = Asin(\omega n +
+\phi)\)</span></p>
+<p><span class="math inline">\(A\)</span> je amplitda <span
+class="math inline">\(\Omega\)</span> ili <span
+class="math inline">\(omega\)</span> je frekvencija signala <span
+class="math inline">\(\phi\)</span> je faza</p>
+<p>Reprezetnacija sinunsoide: <span class="math inline">\(x(t)=A \sin
+(\Omega t+\phi)=a \sin (\Omega t)+b \cos (\Omega t)\)</span></p>
+<p><span class="math inline">\(\begin{aligned} &amp; a=A \cos (\phi) \\
+&amp; b=A \sin (\phi)\end{aligned}\)</span> <span
+class="math inline">\(\phi=\operatorname{atan} 2(b, a)\)</span></p>
+<p>Eksponencijalna funkcija <span class="math inline">\(x(t) = Ae^{st},
+\quad A,s \in \mathbb{C}\)</span> <span class="math inline">\(x[n] =
+Az^{n}, \quad A,z \in \mathbb{C}\)</span></p>
+<p>Veza između diskretne i kont. eksponencijale: <span
+class="math inline">\(z = e^{sT}\)</span></p>
+<h3 id="jedinični-impuls-kroneckova-delta-funckija">Jedinični impuls
+(Kroneckova delta funckija)</h3>
+<p><img src="static/fer-oos/2023-02-03-17-50.jpg" /></p>
+<p><span class="math inline">\(\delta[n]= \begin{cases}1, &amp; n=0 \\
+0, &amp; \text { inače} \end{cases}\)</span></p>
+<h3 id="jedinična-stepenica">Jedinična stepenica:</h3>
+<p><span class="math inline">\(\mu[n] = \begin{cases}1, &amp; 0 \le n \\
+0, &amp; \text{inače} \end{cases}\)</span></p>
+<p><img src="static/fer-oos/2023-02-03-17-54.png" /></p>
+<p>Veza između Kroneckove delta funkcije i jedinične stepenice: sumacija
+od <span class="math inline">\(-\infty\)</span> do <span
+class="math inline">\(n\)</span> po <span
+class="math inline">\(\delta[m]\)</span></p>
+<p><span class="math inline">\(\mu[n] =
+\sum\limits_{m=-\infty}^{n}\delta[m]\)</span></p>
+</details>
+<details open>
+<summary>
+(1) Objasnite dekompoziciju signala u težinsku sumu baznih funkcija (2)
+Objasnite što je spektar signala. (3) Definirajte matricu baznih
+funkcija, Gramovu matricu i transforamcijsku matricu koju koristimo za
+računanje spektra nekog signala konačnog trajanja.
+</summary>
+<p>Signal rastavljamo u njegove gradivne komponente koje se sastoje od
+drugih signala (bazne funkcije <span
+class="math inline">\(\phi_k(t)\)</span>) a spektar (<span
+class="math inline">\(s_k\)</span>) označava doprinos pojedine bazne
+funkcije.</p>
+<p>Rastav signala na bazne funckije i njihov spektar može sadržavati
+prebrojivo ili neprebrojivo mnogo baznih funckija.</p>
+<p><span class="math inline">\(x(t) = \sum_{k}s_k\phi_k(t)\)</span></p>
+<p>Najpoznatnija metoda rastava signala je Fourierova
+transformacija.</p>
+<p>Skalarnim umnoškom možemo pronaći spektar <span
+class="math inline">\(s_k\)</span> na način da primjenimo skalarni
+umnožak na gornju jednadžbu nakon čega dobivamo sljedeći izraz:</p>
+<p><span class="math inline">\(\left\langle x[n],
+\phi_l[n]\right\rangle=\left\langle\sum_k s_k \phi_k[n],
+\phi_l[n]\right\rangle\)</span></p>
+<p><span class="math display">\[
+\underbrace{\left[\begin{array}{c}
+\left\langle x, \phi_0\right\rangle \\
+\left\langle x, \phi_1\right\rangle \\
+\vdots \\
+\left\langle x, \phi_{N-1}\right\rangle
+\end{array}\right]}_{\mathrm{b}}=\underbrace{\left[\begin{array}{ccc}
+\left\langle\phi_0, \phi_0\right\rangle &amp; \cdots &amp;
+\left\langle\phi_{N-1}, \phi_0\right\rangle \\
+\left\langle\phi_0, \phi_1\right\rangle &amp; \cdots &amp;
+\left\langle\phi_{N-1}, \phi_1\right\rangle \\
+\vdots &amp; \ddots &amp; \vdots \\
+\left\langle\phi_0, \phi_{N-1}\right\rangle &amp; \cdots &amp;
+\left\langle\phi_{N-1}, \phi_{N-1}\right\rangle
+\end{array}\right]}_{\mathrm{G}} \underbrace{\left[\begin{array}{c}
+s_0 \\
+s_1 \\
+\vdots \\
+s_{N-1}
+\end{array}\right]}_{\mathrm{s}},
+\]</span></p>
+<p>Primjetiti da je <span class="math inline">\(G = \Phi^{H} *
+\Phi\)</span>. Sad možemo izraziti spektar kao:</p>
+<p><span class="math inline">\(\begin{aligned}\\s = G^{-1}b = &amp; \\
+G^{-1}(x^T\Phi^*)^T = &amp; \\ G^{-1}\Phi^{H}x = &amp; \\
+(\Phi^H\Phi)^{-1}\Phi^Hx = &amp; \\ \Phi^{+}x = &amp; \\ Tx \quad
+&amp;\end{aligned}\)</span></p>
+<p>gdje:</p>
+<p><span class="math inline">\(\begin{aligned} x^T &amp;
+=\left[\begin{array}{llll}x[0] &amp; x[1] &amp; \cdots &amp;
+x[N-1]\end{array}\right] \\ \phi_k^T &amp;
+=\left[\begin{array}{llll}\phi_k[0] &amp; \phi_k[1] &amp; \cdots &amp;
+\phi_k[N-1]\end{array}\right] \\ \Phi &amp;
+=\left[\begin{array}{llll}\phi_0 &amp; \phi_1 &amp; \cdots &amp;
+\phi_{N-1}\end{array}\right] \\ T &amp; = \Phi^{+} =
+(\Phi^H\Phi)^{-1}\Phi^{H} \end{aligned}\)</span></p>
+<p>Operacija <span class="math inline">\(^*\)</span> konjugira sve
+elemente matrice. Konjugirana matrica je ista matrica kao i originalna
+ali svi kompleksni brojevi imaju promjenjeni predznak +-.</p>
+<p>Operacija <span class="math inline">\(^{H}\)</span> daje hermatski
+transponiranu matricu(matrica koja je konjugirana i transponirana)</p>
+Operacija <span class="math inline">\(^{+}\)</span> je Moore-Penrosev
+psuedoinverz matrice (učili na strojnom učenju)
+</details>
+</details>
+<details open>
+<summary>
+Definirajte diskretnu Fourierovu transformaciju u N točaka (DFTN).
+</summary>
+<p>Fouriervoa baza (<span class="math inline">\(DTF_N\)</span>) je <span
+class="math inline">\(\phi_k[n]=\exp \left(2 \pi j \frac{n
+k}{N}\right)\)</span> i također je ortogonalna</p>
+<p>Spektar (DTFN): <span class="math inline">\(X[k]=\left\langle x[n],
+\phi_k[n]\right\rangle=\sum\limits_{n=0}^{N-1} x[n] \exp \left(-2 \pi j
+\frac{n k}{N}\right)\)</span></p>
+<p>Signal (IDFTN): <span class="math inline">\(x[n]=\frac{1}{N}
+\sum\limits_{k=0}^{N-1} X[k] \exp \left(2 \pi j \frac{n
+k}{N}\right)\)</span></p>
+</details>
+<details open>
+<summary>
+Definirajte postupak očitavanja signala te iskažite teorem o očitavanju.
+</summary>
+<p>Očitavanje/uzorkovanje/otpikavanje kontinuiranog signala <span
+class="math inline">\(x(t) : \mathbb{R} \rightarrow \mathbb{C}\)</span>
+jest postupak uzimanja jednoliko vremenski razmaknutih uzoraka tog
+signala. Jednoliki vremenski razmak između uzoraka zovemo period
+očitavanja i označavamo s <span class="math inline">\(T_s\)</span>.</p>
+<p>Signalu <span class="math inline">\(x(t)\)</span> pridružjemo uzorke
+<span class="math inline">\(y[n]\)</span></p>
+<p><span class="math display">\[y[n] = x\left(n T_s\right)\]</span> što
+se može čitati “uzorak <span class="math inline">\(y[n]\)</span> u
+koraku n sadrži vrijednost signala <span
+class="math inline">\(x(t)\)</span> u trenutku <span
+class="math inline">\(t=nT_s\)</span></p>
+<p>Ako uz zadovoljen uvjet teorema očitavanja uzorci signala jednoznačno
+opisuju signal onda to znači da mora postojati postupak rekonstrukcije
+signala iz njegovih uzoraka. Taj postupak zovemo interpolacija.</p>
+<p>Međutim, želimo vremenski kont. signal <span
+class="math inline">\(x(t)\)</span> i njegove uzorke <span
+class="math inline">\(x[n]\)</span> prikazati u istoj domeni. To radimo
+tako da uvedemo novi kont. signal <span class="math inline">\(x_s(t) :
+\mathbb{R} \rightarrow \mathbb{C}\)</span> koji sadržava istu
+informaciju kao i <span class="math inline">\(x[n]\)</span>. To je
+zapravo kontinuirana verzija očitanog signala <span
+class="math inline">\(x[n]\)</span>. Logički gledajući situacija je
+sljedeća:</p>
+<p><span class="math inline">\(x(t) \rightarrow \text{očitavanje}
+\rightarrow x_s(t) \rightarrow \text{diskretizacija} \rightarrow
+x[n]\)</span></p>
+<p>Mora biti <span class="math inline">\(x_s(t) = 0, \quad t \ne
+nT_s\)</span> jer gubimo sve informacije na tim mjestima.</p>
+<p>Očitavanje na mjestima na kojima želimo radimo sa Diracovom delta
+funkcijom.</p>
+<p><span class="math inline">\(x_s(t)= \begin{cases}x[n] \delta\left(t-n
+T_s\right), &amp; \text { za } t=n T_s \\ 0, &amp; \text { za } t \neq n
+T_s\end{cases}\)</span></p>
+<p>Za jednostavniju interpretaciju koristimo Diracov češalj
+(periodizirane Diracove delta funkcije)</p>
+<p><span
+class="math inline">\(\operatorname{comb}_{T_s}(t)=\sum\limits_{k=-\infty}^{+\infty}
+\delta\left(t-k T_s\right)\)</span></p>
+<p><img src="static/fer-oos/2023-02-03-22-21.png" /></p>
+<p>Sad originalan signal <span class="math inline">\(x_s(t)\)</span>
+ponožimo sa Diracovim češljem</p>
+<p><img src="static/fer-oos/2023-02-03-22-23.png" /></p>
+<p><img src="static/fer-oos/2023-02-03-22-25.png" /></p>
+<p>Što je sa spektrom? Kako se on očitava?</p>
+<p>Spektar <span class="math inline">\(X_s({\Omega})\)</span> očitanog
+signal <span class="math inline">\(x_s(t)\)</span> iz spektra <span
+class="math inline">\(X(\Omega)\)</span> izvornog signala <span
+class="math inline">\(x(t)\)</span> dobivamo kao:</p>
+<p><span class="math display">\[X_s(\Omega)=\frac{1}{T_s}
+\sum_{k=-\infty}^{+\infty} X\left(\Omega-k \Omega_s\right)\]</span></p>
+<p>što je <strong>periodizacija spektra</strong></p>
+</details>
+<details open>
+<summary>
+Definirajte postupak rekonstrukcija signala iz uzoraka te iskažite
+idealnu interpolacijsku formulu.
+</summary>
+<p>Ako uz zadovoljen (za sada nedefinirani) uvjet teorema očitavanja
+uzorci signala jednoznačno opisuju signal onda to znači da mora
+postojati postupak rekonstrukcije signala iz njegovih uzoraka. Taj
+postupak zovemo interpolacija.</p>
+<p>Za rekonstrukciju u <strong>spektralnoj domeni</strong> potrebno je
+zadovoljiti Nyquistov uvjet. Za pojasno ograničene signale maksimalne
+frekvencije <span class="math inline">\(\Omega_{\text{MAX}}\)</span>
+nema preklapanja spektra ako je zadovoljen uvjet</p>
+<p><span class="math display">\[ \Omega_s &gt; 2\Omega_{\text{MAX}}
+\quad \text{ili} \quad T_s &lt;
+\frac{\pi}{\Omega_{\text{MAX}}}\]</span></p>
+<p>Jednostavnije: frekvencije očitavanja (<span
+class="math inline">\(\Omega_S\)</span>) mora biti duplo veća od
+maksimalne frekvencije <span
+class="math inline">\(\Omega_{\text{MAX}}\)</span></p>
+<p>Ako je Nyquistov uvjet zadovoljen iz pozantog spektra <span
+class="math inline">\(X_s(\Omega)\)</span> možemo odrediti polazni
+spektar <span class="math inline">\(X(\Omega)\)</span> tako da:</p>
+<ul>
+<li>spektar pomnožimo s <span class="math inline">\(T_s\)</span></li>
+<li>ostavimo samo temeljni period oko ishodišta koji je duljine <span
+class="math inline">\(\Omega_s\)</span></li>
+</ul>
+<p>Taj postupak se zove filtracija a matematički se može zapisati
+kao:</p>
+<p><span class="math display">\[ X(\Omega)  = X_s(\Omega) \cdot T_s
+\text{ rect}\left(\frac{\Omega}{\Omega_s}\right) = X_s(\Omega) \cdot
+F(\Omega)\]</span></p>
+<p>gdje je spektar <span class="math inline">\(F(\Omega)\)</span>:</p>
+<p><img src="static/fer-oos/2023-02-05-01-19.png" /></p>
+<p><img src="static/fer-oos/2023-02-05-01-22.png" /></p>
+<h3 id="veza-filtracije-i-konvolucije">Veza filtracije i
+konvolucije</h3>
+<p>Konvolucija <span class="math inline">\((*)\)</span> :</p>
+<p><span class="math inline">\(x[n] * y[n]=\sum_{m=-\infty}^{+\infty}
+x[m] y[n-m]\)</span></p>
+<p>Konvolucija u vremenskoj domeni rezultira množenjem u spektralnoj
+domeni.</p>
+<p><span class="math inline">\(x[n] *y[n] \quad \bigcirc - \bullet \quad
+X(z)Y(z)\)</span> <span class="math inline">\(x(t)*
+y(t)=\int_{-\infty}^{+\infty} x(\tau) y(t-\tau) d \tau\)</span></p>
+<p>Sad se mogu dva spektra pomnožiti (spektar se definira kao integral
+originalnog signala pomnožen sa <span class="math inline">\(e^{-j\Omega
+t}\)</span>) čime se dobiva izraz u kojem središnji integral sadržava
+definiciju konvolucije dva signala. Jedan signal je <span
+class="math inline">\(x_s(t)\)</span> a drugi je signal koji “tražimo”
+je <span class="math inline">\(f(t)\)</span>. Taj signal možemo
+izračunati tako da napravimo inverz (ICTFT) njegovog poznatog spektra
+<span class="math inline">\(F(\Omega)\)</span> koji je definiran gore.
+Inverz ispadne <span class="math inline">\(f(t) =
+\frac{\text{sin}(\frac{\pi t}{T_s})}{\frac{\pi t}{T_s}} =
+\text{sinc}(t)\)</span></p>
+<p><img src="static/fer-oos/2023-02-05-01-43.png" /></p>
+<p>Sad znamo da spektralna filtracija postaje konvolucija u vremenskoj
+domeni:</p>
+<p><span class="math inline">\(X(\Omega)=X_s(\Omega)
+F(\Omega)=X_s(\Omega) T_s \operatorname{rect}\left(\Omega /
+\Omega_s\right)\)</span></p>
+<p><span class="math inline">\(x(t)=x_s(t) *f(t)=x_s(t)*
+\operatorname{sinc}\left(t / T_s\right)\)</span></p>
+<p>Dodatno, <span class="math inline">\(x_s(t) =
+x(t)\text{comb}_{T_s}(t)\)</span></p>
+<p><img src="static/fer-oos/2023-02-05-01-46.png" /></p>
+<p>Shannonova interpolacijska formula ili jednostavnije idealnom sinc
+interpolacijom.</p>
+<p><span class="math inline">\(x(t)=\sum_{n=-\infty}^{+\infty} x[n]
+\operatorname{sinc}\left(\frac{t}{T_s}-n\right)\)</span></p>
+<p>Formula nam u osnovi govori da kontinuirani signal rekonstruiramo
+tako da na mjesto svakog uzorka postavimo funkciju sinc skaliranu tako
+da njena amplituda bude upravo jednaka amplitudi uzorka.</p>
+</details>
+<h3 id="sustavi">Sustavi</h3>
+<details open>
+<summary>
+Definirajte sustav preko ulazno/izlaznog modela.
+</summary>
+<p>Ulazne veličine <span class="math inline">\(x[n]\)</span> su one koje
+utječu na vladanje sustava i zovemo ih <strong>pobudom</strong>. Izlazne
+veličine <span class="math inline">\(y[n]\)</span> su one kojima sustav
+utječe na vanjski svijet i zovemo ih <strong>odzivom</strong>. Oboje su
+vremenske funkcije koje ovise o nezavisnoj varijabli koja mjeri
+vrijeme.</p>
+<p>Sustav prema tome možemo opisati tako da modeliramo kako ulazne
+veličine utječu na izlazne veličine.</p>
+<p><img src="static/fer-oos/2023-02-05-11-20.png" /></p>
+<p>Sustav <span class="math inline">\(\mathcal{S}\)</span> koja povezuje
+ulaz <span class="math inline">\(x\)</span> i izlaz <span
+class="math inline">\(y\)</span>. Kažemo da je <span
+class="math inline">\(y[n]\)</span> odziv sustava <span
+class="math inline">\(\mathcal{S}\)</span> na pobudu <span
+class="math inline">\(x[n]\)</span></p>
+<p><span class="math display">\[ y = \mathcal{S}[x] \]</span></p>
+<p>Primjeri sustava:</p>
+<p><img src="static/fer-oos/2023-02-05-11-31.png" /></p>
+</details>
+<details open>
+<summary>
+Definirajte linearni vremenski nepromjenjiv (LTI) sustav te objasnite
+svojstva linearnosti i vremenskenepromjenjivosti.
+</summary>
+<p>Malo šire o svojstvima sustava:</p>
+<ul>
+<li>vremenska nepromjenjivost (engl. time invariance)</li>
+<li>linearnost (engl. linearity)</li>
+<li>posjedovanje memorije (engl. systems with memory)</li>
+<li>kauzalnost (engl. causality)</li>
+<li>stabilnost (engl. stability)</li>
+<li>realizabilnost (engl. realizability)</li>
+</ul>
+<h3 id="vremenska-nepromjenjivost">Vremenska nepromjenjivost</h3>
+<p>Sustav je vremenski nepromjenjiv ako za svaki ulazno-izlazni par
+signala <span class="math inline">\(x[n]\)</span> i <span
+class="math inline">\(y[n]\)</span> te za svaki pomak <span
+class="math inline">\(m\)</span> vrijedi da je odziv na
+zakašnjelu/pomaknutu pobudu <span class="math inline">\(x[n-m]\)</span>
+jednak zakašnjelom/pomaknutom odzivu <span
+class="math inline">\(y[n-m]\)</span></p>
+<p><span class="math display">\[ \forall{\left(x[n], y[n]\right)},
+\forall{m} \in \mathbb{Z} : \mathcal{S}[x(n-m)] = y(n-m) \]</span></p>
+<p>U praksi smjer pomaka prema budućnosti je nemoguć jer to znači da
+ovisimo o budućim uzorcima signala.</p>
+<h3 id="linearnost-i-superpozicija">Linearnost i superpozicija</h3>
+<p>Svojstvo linearnosti sastoji se od:</p>
+<ol type="1">
+<li>svojstva aditivnosti</li>
+<li>svojstvo homogenosti</li>
+</ol>
+<p>a sustavi koji su linearni zadovoljavaju svojstvo superpozicije.</p>
+<p>Linearno vremenski nepromjenjivi (LTI) sustavi su oni koji
+zadovoljavaju svojstvo:</p>
+<ul>
+<li>linearnosti
+<ul>
+<li>aditivan</li>
+<li>homogen</li>
+</ul></li>
+<li>vremenske nepromjenjivosti</li>
+</ul>
+<h3 id="aditivnost">Aditivnost</h3>
+<p>Promatramo dva ulazna signala <span class="math inline">\(x_1[n],
+x_2[n]\)</span>. Svaki od njih ima svoj odziv <span
+class="math inline">\(y_1[n], y_2[n]\)</span> koji se dobije tako da
+provućemo ulazni signal kroz sustav <span
+class="math inline">\(\mathcal{S}\)</span>. Ako napravimo sljedeće:</p>
+<ul>
+<li>zbrojimo <span class="math inline">\(x_1[n] + x_2[n] =
+x[n]\)</span></li>
+<li><span class="math inline">\(x[n]\)</span> provućemo kroz kroz sustav
+<span class="math inline">\(\mathcal{S}\)</span> i dobijemo odziv <span
+class="math inline">\(y[n]\)</span></li>
+</ul>
+<p>ako je odziv <span class="math inline">\(y[n]\)</span> jednak zbroju
+pojedinih odziva <span class="math inline">\(y_1[n], y_2[n]\)</span>
+onda kažemo da je sustav aditivan (mora vrijediti za svaki
+ulazno-izlazni par signala)</p>
+<p><span class="math display">\[ \forall{\left(x_1[n], y_1[n]\right)},
+\forall{\left(x_2[n], y_2[n]\right)}:\\
+\mathcal{S}[x_1[x] + x_2[n]] = y_1[n] + y_2[n] \]</span></p>
+<h3 id="homogenost">Homogenost</h3>
+<p>Sustav je homogen ako ulazni signal pomnožimo sa <span
+class="math inline">\(a \in \mathbb{C}\)</span> a odziv bude pojačan
+upravo sa <span class="math inline">\(a\)</span> (ovisi je li <span
+class="math inline">\(|a| &lt; 1\)</span> ili <span
+class="math inline">\(|a| &gt; 1\)</span>)</p>
+<p><span class="math display">\[ \mathcal{S}[a\cdot x[n]] = a \cdot
+y[n]\]</span></p>
+<h3 id="linearnost">Linearnost</h3>
+<p>Sustav je linearan ako je aditivan i homogen za svaki ulazno-izlazni
+par:</p>
+<p><span class="math display">\[\forall{\left(x_1[n], y_1[n]\right)},
+\forall{\left(x_2[n], y_2[n]\right)}: \\
+\mathcal{S}[ax_1[n]+bx_2[n] = ay_1[n] + by_2[n]\]</span></p>
+</details>
+<details open>
+<summary>
+Definirajte kauzalnost sustava
+</summary>
+<p>Prije svega, želimo predstaviti sustav <span
+class="math inline">\(\mathcal{S}\)</span> sa funkcijom <span
+class="math inline">\(f\)</span> koja definira kako se računa jedan
+izlazni uzorak <span class="math inline">\(y[n]\)</span> u koraku <span
+class="math inline">\(n\)</span> a općenito ta funckija može ovisti o
+više ulaznih uzoraka (<span class="math inline">\(x[-\infty], ...
+,x[n],...x[+\infty]\)</span>), dakle:</p>
+<p><span class="math display">\[ y[n] = f_n((x[-\infty], ...
+,x[n],...x[+\infty])) \]</span> <span class="math display">\[ f_n :
+\mathbb{C^Z} \rightarrow \mathbb{C} \]</span></p>
+<p>Međutim želimo ograničiti broj uzoraka koji je potreban za računanje
+odziva na neku konačnu vrijednost (računala…)</p>
+<p>Dva svojstva koja ograničavaju broj uzoraka su:</p>
+<ul>
+<li>(ne)posjedovanje memorije
+<ul>
+<li>bezmemorijski sustavi</li>
+<li>memorijski sustavi</li>
+</ul></li>
+<li>kauzalnost</li>
+</ul>
+<h3 id="bezmemorijski-sustav">Bezmemorijski sustav</h3>
+<p>Sustav je bezmemorijski ako računamo odziv sustava u koraku <span
+class="math inline">\(n\)</span> (<span
+class="math inline">\(y[n]\)</span>) i za računanje odziva moramo znati
+samo vrijednost <span class="math inline">\(x[n]\)</span>.</p>
+<p><span class="math display">\[ y[n] = \mathcal{S}[x[n]] = f(x[n])
+\]</span></p>
+<h3 id="memorijski-sustav">Memorijski sustav</h3>
+<p>Sustav je memorijski ako za računanje odziva sustava u koraku <span
+class="math inline">\(n\)</span> (<span
+class="math inline">\(y[n]\)</span>) trebamo znati ulazni signal koji se
+NIJE dogodio u trenutku <span class="math inline">\(n\)</span> već u
+nekom drugom trenutku <span class="math inline">\(m\)</span>. Dakle
+<span class="math inline">\(m \ne n\)</span>.Red sustava je konačan broj
+ulaznih uzoraka <span class="math inline">\(m\)</span> o kojem ovisi
+pobuda <span class="math inline">\(n\)</span>.</p>
+<p><span class="math display">\[ y[n] = S[x[n]] = f(...,x[m],...)
+\]</span></p>
+<p>Primjer memorijskog sustava prvog reda. Ovaj sustav ovisi o samo
+jednom dodatnom uzorku osim <span class="math inline">\(x[n]\)</span> a
+to je <span class="math inline">\(x[n-1]\)</span>:</p>
+<p><span class="math display">\[ y[n] = x^2[n] + x^2[n-1] \]</span></p>
+<h3 id="kauzalnsot">Kauzalnsot</h3>
+<p>Kauzalnost u općem smislu jest veza koja opisuje kako neki događaj
+kojeg zovemo uzrok utječe na neki drugi događaj kojeg zovemo
+posljedica.</p>
+<p>U obradbi signala <strong>kauzalnost</strong> sustava znači da
+<strong>odziv sustava ne smije ovisiti o pobudi sustava koja se još nije
+dogodila.</strong></p>
+<p>Odziv <span class="math inline">\(y[n]\)</span> u koraku <span
+class="math inline">\(n\)</span> smije ovisiti samo o pobudama <span
+class="math inline">\(x[m]\)</span> za koje vrijedi <span
+class="math inline">\(m \le n\)</span>:</p>
+<p><span class="math display">\[ y[n] = f_n(x[-\infty],..., x[n-1],
+x[n])\]</span></p>
+<p>Formalno (Sustav je kauzalan ako ne postoji budući korak <span
+class="math inline">\(m &gt; n\)</span> takav da je izlaz sustava <span
+class="math inline">\(y[n]\)</span> ovisan o budućoj ulaznoj vrijednosti
+<span class="math inline">\(x[m]\)</span> u tom budućem koraku <span
+class="math inline">\(m\)</span>):</p>
+<p><span class="math display">\[ \forall{n}\forall{y(n)}
+\nexists{m&gt;n} : y[n] = f(...,x[m],...) \]</span></p>
+<h3 id="nekauzalnost">Nekauzalnost</h3>
+<p>Nekauzalan sustav je sustav koji nije kauzalan. Dakle, sustav čija
+pobuda <span class="math inline">\(y[n]\)</span> može ovisiti o ulazima
+<span class="math inline">\(x[m]\)</span> za koje vrijedi <span
+class="math inline">\(m &gt; n\)</span> (trenutak ulaznih signala se
+dogodio nakon trenutka pobuda).</p>
+</details>
+<details open>
+<summary>
+Definirajte impulsni odziv sustava i objasnite važnost konvolucije u
+modeliranju LTI sustava.
+</summary>
+<p>Impulsni odziv sustava je skup odziva koji su pomaknuti sa jediničnim
+impulsom <span class="math inline">\(\delta[n-k]\)</span> a označavamo
+ih sa <span class="math inline">\(h_k[n] =
+\mathcal{S}[\delta[n-k]]\)</span></p>
+<p>Skup svih <span class="math inline">\(h_k[x]\)</span> u potpunosti
+određuje sustav <span class="math inline">\(\mathcal{S}\)</span>.</p>
+<p>Bitno je napomenuti da je <span
+class="math inline">\(\delta[n]\)</span> svojstvena funckija a linearni
+sustav koji koristi svojstvenu funkciju ne mijenja ulazni signal <span
+class="math inline">\(x[n]\)</span> osim što ga eventualno amplitudno
+skalira.</p>
+<h3 id="konvolucija-i-odziv-sustava">Konvolucija i odziv sustava</h3>
+<p><span class="math display">\[
+y[n]=\mathcal{S}[x[n]]=\sum_{k \in \mathbb{Z}} x[k]
+\mathcal{S}[\delta[n-k]]=\sum_{k \in \mathbb{Z}} x[k] h_k[n]
+\]</span></p>
+<p>Odziv na <span class="math inline">\(\delta[n]\)</span> za <span
+class="math inline">\(k=0\)</span> bez pomaga je upravo <span
+class="math inline">\(\mathcal{S}[\delta[n]] = h_o[k]\)</span> a zbog
+vremenske nepromjenjivosti sustava imamo:</p>
+<p><span
+class="math display">\[\mathcal{S}[\delta[n-k]]=h_k[n]=h_0[n-k]\]</span></p>
+<p>Sad možemo ispustiti <span class="math inline">\(-k\)</span> i
+koristiti samo <span class="math inline">\(h_0[n]\)</span> tj. <span
+class="math inline">\(h[n]\)</span></p>
+<p>Sad za linearni vremenski nepromjenjivi sustav dobivamo
+konvoluciju:</p>
+<p><span class="math display">\[
+y[n]=\mathcal{S}[x[n]]=\sum\limits_{k=-\infty}^{+\infty} x[k] h[n-k] =
+x[n] * h[n] \]</span></p>
+<p>Pomoću konvolucije možemo opisati ponašanje svakog linearnog
+vremenski nepromjenjivog sustava.</p>
+<p>Rezime:</p>
+<p><img src="static/fer-oos/2023-02-05-14-52.png" /></p>
+<h3
+id="dodatno-kauzalni-linearni-vremenski-nepromjenjivi-sustavi">Dodatno:
+kauzalni linearni vremenski nepromjenjivi sustavi</h3>
+<p>Linearan vremenski nepromjenjiv sustav S opisan svojim impulsnim
+odzivom <span class="math inline">\(h[n]\)</span> je kauzalan ako je
+<span class="math inline">\(h[n] = 0\)</span> za sve negativne korake
+<span class="math inline">\(n\)</span>.</p>
+<p>Konvolucija za kauzalne signale za koje vrijedi <span
+class="math inline">\(x[n] = h[n] = 0\)</span> za <span
+class="math inline">\(n &lt; 0\)</span> se reducira u konačnu sumu:</p>
+<p><span class="math display">\[
+x[n] * h[n]=\sum_{k=0}^n x[k] h[n-k]
+\]</span></p>
+Dakle sve je isto samo što suma ide od <span
+class="math inline">\(0\)</span> do <span
+class="math inline">\(n\)</span>
+</details>
+<details open>
+<summary>
+Objasnite što je prijenosna funkcija sustava.
+</summary>
+<p>Dodatan način reprezentacije LTI sustava</p>
+<p>Krećemo od Z transformacija koje djeluje na konvolucije:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mathcal{Z}[y[n]] &amp; =\sum_{n \in \mathbb{Z}} y[n] z^{-n}=Y(z), &amp;
+r_y&lt;|z|&lt;R_y \\
+\mathcal{Z}[x[n]] &amp; =\sum_{n \in \mathbb{Z}} x[n] z^{-n}=X(z), &amp;
+r_x&lt;|z|&lt;R_x \\
+\mathcal{Z}[h[n]] &amp; =\sum_{n \in \mathbb{Z}} h[n] z^{-n}=H(z), &amp;
+r_h&lt;|z|&lt;R_h
+\end{aligned}
+\]</span></p>
+<p>presjek njihovih područja konvergencije je određen s</p>
+<p><span class="math display">\[ r = max(r_y, r_x, r_h) &lt; |z| &lt;
+min(R_y, R_x, R_h) \]</span></p>
+<p>ako su svi signali kauzalni rasta ne većeg od eksponencijalnog onda
+<span class="math inline">\(R_{\{y,x,h\}} \rightarrow +\infty\)</span>
+pa je područje konvergencije (RoC) uvijek neprazan oblika $ r &lt; |z|
+$.</p>
+<p>Kako Z transformacija konvoluciju pretvara u množak imamo:</p>
+<p><span class="math display">\[
+Y(z)=\mathcal{Z}[y[n]]=\mathcal{Z}[x[n] * h[n]]=X(z) H(z)
+\]</span></p>
+<p>Obzirom da impulsni odziv <span class="math inline">\(h[n]\)</span> u
+otpunosti opisuje LTI sustav isto to vrijedi i za njegovu Z
+transformaciju H(z).</p>
+<p><img src="static/fer-oos/2023-02-05-15-12.png" /></p>
+<p>Sad imamo tri glavne zadaće a mi promatramo uglavnom konvolucijsku
+zadaću:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; Y(z)=X(z) \cdot H(z) &amp; \text{konvolucijska zadaća} \\
+&amp; X(z)=Y(z) \cdot \frac{1}{H(z)} &amp; \text{dekonvolucijska zadaća}
+\\
+&amp; H(z)=Y(z) \cdot \frac{1}{X(z)} &amp; \text{identifikacija sustava}
+\end{aligned}
+\]</span></p>
+<p>Odziv LIT sustava na diskretnu eksponencijalu <span
+class="math inline">\(x[n] = z^n\)</span> je;</p>
+<p><span class="math display">\[
+\begin{aligned}
+y[n] &amp; =\mathcal{S}\left[z^n\right]=\sum_{m=-\infty}^{+\infty} h[m]
+z^{n-m} \\
+&amp; =z^n \underbrace{\sum_{m=-\infty}^{+\infty} h[m]
+z^{-m}}_{H(z)}=z^n H(z)
+\end{aligned}
+\]</span></p>
+<p>gdje je <span class="math inline">\(H(z)\)</span> prijenosna funkcija
+sustava. Diskretna eksponencijala <span
+class="math inline">\(z^n\)</span> jest svojstvena funckija LIT sustava
+i konvolucijske sume a <strong><span
+class="math inline">\(H(z)\)</span></strong> je pripadna
+<strong>svojestvena vrijednost</strong>:</p>
+<p><span class="math display">\[
+\mathcal{S}\left[z^n\right]=h[n] * z^n=H(z) \cdot z^n
+\]</span></p>
+</details>
+<details open>
+<summary>
+Objasnite što je frekvencijska karakteristika sustava.
+</summary>
+<p>Ukoliko zamjenimo Z transformaciju sa DTFT-om dobivamo:</p>
+<p><span class="math display">\[
+Y\left(e^{j
+\omega}\right)=\operatorname{DTFT}[y[n]]=\operatorname{DTFT}[x[n] *
+h[n]]=X\left(e^{j \omega}\right) H\left(e^{j \omega}\right)
+\]</span></p>
+<p>DTFT transformacija impulznog odziva <span
+class="math inline">\(h[n]\)</span> daje <span
+class="math inline">\(H(e^{jw})\)</span> što i dalje u potpunosti
+određuje LTI sustav pa vrijedi da je <strong>frekvencijska
+karakteristika sustava</strong> jednaka:</p>
+<p><span class="math display">\[
+\operatorname{DTFT}[h[n]] = \sum_{n \in \mathbb{Z}} h[n]e^{-j\omega} =
+H(e^{j\omega})
+\]</span></p>
+<p><strong>ako RoC prijenosne funkcije H(z) obuhvaća jediničnu
+kružnicu.</strong></p>
+</details>
+<details open>
+<summary>
+Definirajte stabilnost sustava i objasnite kako ispitujemo je li
+linearan vremenski nepromjenjiv sustavstabilan.
+</summary>
+<p>Sustav je (BIBO, bounded-input, bounded-output) stabilan ako za svaku
+amplitudno ograničenu pobudu daje amplitudno ograničeni odziv.</p>
+<p>Signal <span class="math inline">\(f[n]\)</span> je amplitudno
+ograničen ako postoji broj <span class="math inline">\(B\)</span> takav
+da vrijedi</p>
+<p><span class="math display">\[\forall{n \in \mathbb{Z}}, \exists{B}
+\in \mathbb{R}^+ : \quad |f[n]| &lt; B \]</span></p>
+<p>Dakle sustav <span class="math inline">\(\mathcal{S}\)</span> je
+stabilan ako za svaki ulaz <span class="math inline">\(x[n]\)</span>
+koji za koji vrijedi <span class="math inline">\(|x[n]| &lt;
+B_x\)</span> postoji pozitivna konstanta <span
+class="math inline">\(k\)</span> takva da:</p>
+<p><span class="math display">\[ |S[x[n]]| = |y[n]| &lt; k \cdot B_x =
+B_y \]</span></p>
+<h3 id="stabilnost-preko-impulsnog-odziva">Stabilnost preko impulsnog
+odziva</h3>
+<p>Neka je <span class="math inline">\(x[n]\)</span> amplitudno
+ograničen sa konstantom <span class="math inline">\(B_x\)</span>:</p>
+<p><span class="math inline">\(|y[n]| = |\sum_{m \in \mathbb{Z}}
+h[m]x[m-n]| \le \sum_{m \in \mathbb{Z}}|h[m]x[m-n]| =
+B_x\underbrace{\sum_{m \in \mathbb{Z}}|h[m]|}_{=k} = B_y\)</span></p>
+<p>LTI sustav određen impulsnim odzivom <span
+class="math inline">\(h[n]\)</span> je BIBO stabilan ako <span
+class="math inline">\(\sum_{n \in \mathbb{Z}}|h[n]| &lt;
++\infty\)</span></p>
+<h3 id="stabilnost-preko-prijenosne-funckije">Stabilnost preko
+prijenosne funckije</h3>
+<p><span class="math display">\[
+\left|H\left(e^{j \omega}\right)\right|=\left|\sum_{n \in \mathbb{Z}}
+h[n] e^{j \omega n}\right| \leq \sum_{n \in \mathbb{Z}}|h[n]|
+\cdot\left|e^{j \omega n}\right|=\sum_{n \in \mathbb{Z}}|h[n]|
+\]</span></p>
+<p>ako je LTI sustav stabilan onda područje konvergencije prijenosne
+funckije <span class="math inline">\(H(z)\)</span> sadrži jediničnu
+kružnicu <span class="math inline">\(z=e^{jw}\)</span></p>
+<h3 id="lti-stabilnost-konkretno">LTI stabilnost konkretno</h3>
+<p>Područje konvergencije stabilnog LTI sustava mora sadržavati
+jediničnu kružnicu pa je <span class="math inline">\(r_{\text{max}} =
+\max\limits_{k}|p_k| &lt; 1\)</span></p>
+<p>Vremenski diskretan LTI sustav opisan linearnom diferencijskom
+jednadžbom sa stalnim koeficijentima je stabilan <strong>ako se svi
+polovi njegove prijenosne funkcije nalaze unutar jedinične
+kružnice.</strong></p>
+</details>
+<h3 id="filtracija">Filtracija</h3>
+<details open>
+<summary>
+Objasnite što je filtracija signala.
+</summary>
+<p>Filtracija je postupak u kojem se dizajniraju sustavi koji propuštaju
+i/ili prigušavaju odredene frekvencije signala. To je postupak
+uklanjanja neželjenih značajki ili komponenta signala. Najčešće to znači
+uklanjanje nekih frekvencija ili frekvencijskih pojaseva.</p>
+<p>Dizajniranje filtra znači odrediti koeficijente prijenosne funkcije
+digitalnog filtra koje zadovoljavaju zadanu filtarsku specifikaciju. Tu
+zadaću pronalaženja filtarskih koeficijenata nazivamo računalnom
+podržani dizajn filtara. Glavni problem kod dizajniranja filtra jest
+određivanje koeficijenata prijenosne funkcije:</p>
+<p><span class="math display">\[H(z)={Y(z)\over
+X(z)}={b_0+b_1z^{-1}+b_2z^{-2}+\cdots+b_{M}z^{-M}\over1+a_1z^{-1}+a_2z^{-2}+\cdots+a_Nz^{-N}}={\displaystyle\sum_{j=0}^{M}b_jz^{-j}\over\displaystyle1+\sum_{i=1}^{N}a_iz^{-i}}=b_0\frac{\prod\limits_{m=1}^M
+(1 - z_m z^{-1}) }{\prod\limits_{m=1}^N (1 - p_m z^{-1})}\]</span></p>
+<p>takvih da frekvencijska karakteristika filtra <span
+class="math inline">\(H(e^{j\omega})\)</span> dobro aproksimira neku
+željenu frekvecnijsku karakteristiku <span
+class="math inline">\(D(\omega)\)</span>.</p>
+<h3 id="iir-i-fir">IIR i FIR</h3>
+<p>za kauzalne vremenski diskretne LTI sustave je <span
+class="math inline">\(h(n) = 0\)</span> za <span class="math inline">\(n
+&lt; 0\)</span> pa vrijedi:</p>
+<p>IIR (Infinite Impulse Response) sustavi su oni za koje je impulsni
+odziv definiran za beskonačni interval <span class="math inline">\(0 \le
+n \lt \infty\)</span></p>
+<p><span class="math display">\[
+y(n)=\sum_{m=0}^{\color{red}{\infty}}h(m) u(n-m)
+\]</span></p>
+<p>FIR (Finate Impulse Response) sustavi su oni za koje je impulsni
+odziv definiran za konačni interval <span class="math inline">\(0 \le n
+\le M\)</span></p>
+<p><span class="math display">\[
+y(n)=\sum_{m=0}^{\color{red}{M}} h(m) u(n-m)
+\]</span></p>
+<h3 id="iir-sustavi">IIR sustavi</h3>
+<p>Originalan izraz pretvaramo u implicitan oblik preko lienarne
+diferencijske jednadžbe s konstantnim koeficijentima:</p>
+<p><span class="math display">\[ y(n) + a_1 y(n-1) + ... + a_N y(n- N) =
+b_0 x(n) + ... + b_M x(n-m) \]</span></p>
+<p><span class="math display">\[ y(n) = - \sum\limits_{m=1}^N a_m y(n-m)
++ \sum\limits_{m=0}^N b_m x(n-m) \]</span></p>
+<p>Zbog toga što je postupak izračuna odziva rekurzivan onda IIR
+nazivamo rekurzivnim sustavima.</p>
+<h3 id="fir-sustavi">FIR sustavi</h3>
+<p>za FIR vrijedi da su svi koef. <span class="math inline">\(a_m =
+0\)</span>, dakle preostaje samo:</p>
+<p><span class="math display">\[ y(n) = \sum\limits_{m=0}^M b_m x(n-m)
+\]</span></p>
+<p><span class="math inline">\(h(m) = b_m\)</span> za <span
+class="math inline">\(m=0,...M\)</span> a inače je <span
+class="math inline">\(0\)</span> zbog čega su FIR nerekurzivni
+sustavi.</p>
+<h3 id="all-pole-sustavi">All-pole sustavi</h3>
+<p>Sustavi su ujedno i IIR sustavi (beskonačno trajanje impulsnog
+odziva) koji se sastoje od:</p>
+<ul>
+<li><span class="math inline">\(N\)</span> polova koji su određeni
+koeficijentima <span class="math inline">\(a_m\)</span></li>
+<li><span class="math inline">\(N\)</span> trivijalnih nula (<span
+class="math inline">\(z = 0\)</span>)</li>
+</ul>
+<p>Svi <span class="math inline">\(b_m\)</span> su <span
+class="math inline">\(0\)</span> osim prvog.</p>
+<p><span class="math display">\[
+H(z)=\frac{b_0}{1+\sum_{m=1}^N a_m z^{-m}}
+\]</span></p>
+<h3 id="all-zero-sustavi">All-zero sustavi</h3>
+<p>Sustavi su ujedno i FIR sustavi (konačno trajanje impulsnog odziva)
+koji se sastoje od:</p>
+<ul>
+<li><span class="math inline">\(N\)</span> nula koje su određene
+koeficijentima <span class="math inline">\(b_m\)</span></li>
+<li><span class="math inline">\(N\)</span> trivijalnih polova (<span
+class="math inline">\(z = 0\)</span>)</li>
+</ul>
+<p>Svi <span class="math inline">\(a_m\)</span> su <span
+class="math inline">\(0\)</span> osim prvog.</p>
+<p><span class="math display">\[
+H(z)=\frac{\sum_{m=0}^M b_m z^{-m}}{1}
+\]</span></p>
+<p>Utjecaj položaja polova i nula na frekvencijsku karakteristiku</p>
+<ul>
+<li>nula ili pol ima najveći utjecaj na područje frekvencijske
+karakteristike koja odgovara dijelu jedinične kružnice koji je najbliži
+promatranoj nuli ili polu</li>
+<li>približavanjem nule ili pola jediničnoj kružnici raste njihov
+utjecaj na frekvencijsku karakteristiku</li>
+<li>za <strong>pol</strong> čiji je modul <span
+class="math inline">\(|p_m|\)</span> <strong>blizak jedinici</strong>,
+amplitudna frekvencijska karakteristika ima lokalni maksimum za
+frekvenciju koja odgovara točki na jediničnoj kružnici koja je najbliža
+promatranom polu</li>
+<li>za <strong>nulu</strong> čiji je modul <span
+class="math inline">\(|z_m|\)</span> blizak jedinici, amplitudna
+frekvencijska karakteristika ima lokalni minimum za frekvenciju koja
+odgovara točki na jediničnoj kružnici koja je najbliža promatranoj
+nuli</li>
+<li>ako je neka od <strong>nula na jediničnoj kružnici</strong> <span
+class="math inline">\(z_m = e^{j\omega}\)</span> za kružnu frekvenciju
+<span class="math inline">\(\omega = \omega m\)</span> amplitudna
+frekvencijska karakteristika ima vrijednost nula, a faza skok od π
+radijana</li>
+<li>ako je neki od <strong>polova na jediničnoj kružnici</strong>, <span
+class="math inline">\(p_m = e^{j\omega_m}\)</span> za kružnu frekvenciju
+<span class="math inline">\(\omega = \omega_m\)</span> amplitudna
+frekvencijska karakteristika ima beskonačnu vrijednost</li>
+<li><strong>polovi i nule koje se nalaze u ishodištu (trivijalni) ne
+utječu na amplitudnu frekvencijsku karakteristiku nego samo na
+faznu</strong></li>
+</ul>
+</details>
+<details open>
+<summary>
+Definirajte fazno i grupno kašnjenje te objasnite zašto je pri
+filtraciji važna linearna fazna karakteristika.
+</summary>
+<p>fun fact: Prematanje faze za bilo koji višekratnik od <span
+class="math inline">\(2 \pi\)</span> ne mijenja odziv sustava.</p>
+<p>Fazno kašnjenje je negativni omjer fazne karakteristike i kružne
+frekvencije:</p>
+<p><span class="math display">\[ \tau_\phi(\omega) =
+-\frac{\phi(\omega)}{\omega} \]</span></p>
+<p>Kod filtriranja često želimo mijenjati samo amplitudu pojedinih
+komponenti signala bez mijenjanja njihove faze. Taj zahtjev da filtar
+utječe samo na amplitudu postavlja ogrnaičenja na željenu
+fazno-frekvencijsku karakteristiku. Preciznije, željena fazna
+karakteristika <span class="math inline">\(\angle \phi(\omega)\)</span>
+mora biti afina funkcija od <span class="math inline">\(\omega\)</span>
+(pravac), dakle mora vrijediti</p>
+<p><span class="math display">\[\angle \phi(\omega)=-a\cdot\omega, \quad
+a \in \mathbb{R}\]</span></p>
+<p>Pošto je fazno kašnjenje konstata, to znači da sve komponente
+složenog signala kasne podjednako i zbog toga takva konstantna faza ne
+unosi fazna izobličenja.</p>
+<p>Sustav koji ima različita kašnjenja za komponente složenog signala
+uzrokuje fazno izobličenje signala.</p>
+<p>Razramtramo spektar <span
+class="math inline">\(X(e^{j\omega})\)</span> koji se rastavlja na
+amplitudni i fazni dio:</p>
+<p><span class="math display">\[ X(e^{j\omega}) =
+|X(e^{j\omega})|e^{j\angle X(e^{j\omega})} \]</span></p>
+<p>Fazno-frekvencijska karakteristika <span class="math inline">\(\angle
+X(e^{j\omega})\)</span> je zapravo dio koji utječe na oblik faze.</p>
+<p>Kod filtriranja često želimo mijenjati samo amplitudu pojedinih
+komponenti signala bez mijenjanja njihove faze. Taj zahtjev da filtar
+utječe samo na amplitudu postavlja ograničenje na željenu
+fazno-frekvencijsku karakteristiku. Preciznije, željena fazna
+karakteristika <span class="math inline">\(\angle X(\omega)\)</span>
+mora biti afina funkcija od <span class="math inline">\(\omega\)</span>
+(pravac), dakle mora vrijediti</p>
+<p><span class="math display">\[\angle X(\omega)=a+b\omega\]</span></p>
+<p>gdje su <span class="math inline">\(a\)</span> i <span
+class="math inline">\(b\)</span> realni brojevi. Ako je taj uvjet
+zadovoljen, kažemo da je faza linearna.</p>
+<p>LTI sustave ili filtre čija fazna karakteristika je opisana gore
+navedenom jednadžbom nazivamo sustavima s <strong>generaliziranom
+linearnom fazom</strong>. Glavna prednost takvih filtara je da ne unose
+<strong>fazna izobličenja</strong>, no moguće je da uzrokuje grupno
+kašnjenje.</p>
+<p>Možemo pokazati da se taj uvjet <strong>generalizirane linearne
+faze</strong> koji je iskazan u frekvencijskoj domeni transformira u
+uvjet <strong>simetričnost</strong> ili
+<strong>antisimetričnosti</strong> impulsnog odziva u vremenskoj domeni.
+Prema tome impulsni odziv svakog filtra generalizirane linearne faze
+mora imati točku oko koje je ili simetričan ili antisimetričan.</p>
+<h3 id="dvokomponetni-signal-i-njegova-ovojnica">Dvokomponetni signal i
+njegova ovojnica</h3>
+<p>Promatramo signal: <span class="math display">\[
+x[n] = \cos \left(\omega_1 n\right)+\cos \left(\omega_2
+n\right)=\underbrace{2 \cos \left(\frac{\omega_2-\omega_1}{2}
+n\right)}_{=e[n]} \underbrace{\cos \left(\frac{\omega_1+\omega_2}{2}
+n\right)}_{=c[n]}
+\]</span></p>
+<p><span class="math inline">\(e[n]\)</span> je ovojnica signala a <span
+class="math inline">\(c[n]\)</span> nosilac</p>
+<p><img src="static/fer-oos/2023-02-05-20-04.png" /></p>
+<p><span class="math display">\[
+y[n]=2 \cos
+\left(\frac{\omega_2-\omega_1}{2}\left(n+\overbrace{\frac{\phi(\omega_2)-\phi(\omega_1)}{\omega_2-\omega_1}}^{\approx
+\color{blue}{\tau_g}}\right)\right) \cdot \cos
+\left(\frac{\omega_1+\omega_2}{2}\left(n+\underbrace{\frac{\phi(\omega_1)+\phi(\omega_2)}{\omega_1+\omega_2}}_{\approx
+\color{red} \tau_\phi}\right)\right) \\
+\]</span></p>
+<p><span class="math inline">\(\textcolor{red}{\tau_\phi}\)</span> je
+fazno kašnjenje (nosioca) <span
+class="math inline">\(\textcolor{blue}{\tau_g}\)</span> je grupno
+kašnjenje (ovojnice)</p>
+<p>Grupno vrijeme kašnjenja jest negativna derivacija
+fazno-frekvencijske karakteristike:</p>
+<p><span class="math display">\[\textcolor{blue}{\tau_g(\omega)} = -
+\frac{\partial \phi(\omega)}{\partial \omega}\]</span></p>
+<p>Idealno grupno vrijeme kašnjenje za filtre savršeno linearne faze je
+konstantno. Za dizajnirani IIR filtar stoga želimo da grupno vrijeme
+kašnjenje u području propuštanja bude što bliže konstanti. Grupno
+kašnjenje u području gušenja nas ne zanima jer se te frekvencije
+uklanjaju iz signala.</p>
+<p>Primijetite sljedeće:</p>
+<ul>
+<li>Sustavi s linearnom fazom imaju konstantno i grupno i fazno
+kašnjenje.</li>
+<li>Grupno kašnjenje možemo koristiti kao približnu mjeru faznih
+izobličenja; značajna promjenljivost grupnog kašnjenja znači da su fazna
+izobličenja moguća</li>
+<li>grupno i fazno kašnjenje poprimaju NEcjeloborne vrijednosti što
+otežava njihovu primjenu i interpretaciju u praksi</li>
+</ul>
+</details>
+<details open>
+<summary>
+Definirajte amplitudno selektivnu filtraciju i objasnite osnovne
+amplitudno selektivne filtre (NP, VP, PP i PB).
+</summary>
+<h3 id="svepropusni-filtar">Svepropusni filtar</h3>
+<p>Onaj koji ne utječe na amplitudno frekvencijsku karakteristiku već
+samo na faznu. Zbog toga se nazivaju i korektori faze. Ovaj sustav ima
+recipročne polove (unutar jedinične kružnice) i nule (izvan jedinične
+kružnice).</p>
+<h3 id="dizajniranje-amplitudno-selektivnih-iir-filtara">Dizajniranje
+amplitudno-selektivnih IIR filtara</h3>
+<p>Kod klasičnog dizajna filtara (i digitalnih i analognih) postupak
+dizajniranja se razdvaja u dva koraka:</p>
+<ol type="1">
+<li>dizajniranje amplitudno-selektivnog filtra</li>
+<li>dizajniranje faznog korektora.</li>
+</ol>
+<p>Takvo razdvajanje dizajna u dva odvojena koraka se temelji na
+činjenici da svaku prijenosnu funkciju stabilnog i kauzalnog filtra
+možemo jednoznačno rastaviti na kaskadu (produkt prijenosnih funkcija)
+<strong>minimalno-faznog filtra</strong> (engl. <em>minimum-phase
+filter</em>) i <strong>svepropusnog filtra</strong> (engl. <em>all-pass
+filter</em>), odnosno</p>
+<p><span class="math display">\[H(z)=H_{MP}(z)H_{A}(z).\]</span></p>
+<p>Minimalno-fazni filtar <span class="math inline">\(H_{MP}(z)\)</span>
+je određen time da su svi njegovi polovi i sve njegove nule unutar
+jedinične kružnice. Osim toga, amplituda i faza prijenosne funkcije
+<span class="math inline">\(H_{MP}(e^{j\omega})\)</span> su povezani <a
+href="https://ccrma.stanford.edu/~jos/sasp/Minimum_Phase_Filter_Design.html">Hilbertovom
+transformacijom</a>, odnosno ako je zadana amplitudna karakteristika
+<span class="math inline">\(|H_{MP}(e^{j\omega})|\)</span> onda iz nje
+možemo jednoznačno odrediti faznu karakteristiku <span
+class="math inline">\(\angle H_{MP}(e^{j\omega})\)</span>, i
+obrnuto.</p>
+<p>Svepropusni filtar <span class="math inline">\(H_{A}(z)\)</span> je
+određen time da ne utječe na amplitudni spektar signala, odnosno za
+njega vrijedi <span
+class="math inline">\(|H_{A}(e^{j\omega})|=1\)</span>, dok fazna
+karakteristika ovisi isključivo o položajima nula izvan jedinične
+kružnice. Prema tome svepropusni filtar utječe samo na fazu signala. On
+ima recipročne polove (unutar jedinične kružnice) i nule (izvan
+jedinične kružnice) (omjer mora biti 1 da ne mijenja amplitudu).</p>
+<p>Ova mogućnost rastava prijenosne funkcije znači da bilo koji IIR
+filtar možemo prikazati preko minimalno-faznog dijela koji u potpunosti
+određuje amplitudnu karakteristiku filtra, te preko svepropusnog dijela
+koji dodatno određuje faznu karakteristiku.</p>
+<p><span class="math display">\[
+\begin{aligned}
+|H(e^{j\omega}) &amp; = |H_{MP}(e^{j\omega})| \\
+\angle H(e^{j\omega}) &amp; = \angle H_{MP}(e^{j\omega}) + \angle
+H_A(e^{jw})
+\end{aligned}
+\]</span></p>
+<h3 id="četiri-tipa-amplitudno-selektivnih-filtara">Četiri tipa
+amplitudno-selektivnih filtara</h3>
+<p>Četiri tipa amplitudno-selektivih filtara obzirom na oblik željene
+<strong>amplitudne karakteristike</strong>:</p>
+<ol type="1">
+<li>nisko-propusni ili NP filtar,</li>
+<li>visoko-propusni ili VP filtar,</li>
+<li>pojasno-propusni ili PP filtar, i</li>
+<li>pojasnu branu (PB).</li>
+</ol>
+<p>Odgovarajuće kratice u engleskom jeziku su LP za nisko-propusni
+filtar, od engl. <em>low-pass</em>, HP za visoko-propusni filtar, od
+engl. <em>high-pass</em>, BP za pojasno-propusni filtar, od engl.
+<em>band-pass</em>, i BS za pojasnu branu, od engl.
+<em>band-stop</em>.</p>
+<p><strong>Nisko-propusni</strong> filtar propušta frekvencije manje od
+granične frekvencije <span class="math inline">\(\omega_c\)</span>.
+Frekvencije od <span class="math inline">\(0\)</span> d <span
+class="math inline">\(\omega_c\)</span> su propuštene zbog čega se
+raspon frekvencija <span
+class="math inline">\([0,\omega_c\rangle\)</span> naziva
+<strong>područjem propuštanja</strong>. Frekvencije of <span
+class="math inline">\(\omega_c\)</span> do <span
+class="math inline">\(\pi\)</span> su ugušene (zaustavljene) zbog čega
+se to frekvencijsko područje <span class="math inline">\(\langle
+\omega_c,\pi\rangle\)</span> naziva <strong>područjem gušenja</strong>.
+Ostvarivi (realizabilni) filtri ne mogu imati beskonačno strm prijelaz
+iz područja propuštanja u područje gušenja pa zbog toga uvijek postoji
+neko <strong>prijelazno područje</strong> oko granične frekvencije <span
+class="math inline">\(\omega_c\)</span>.</p>
+<p><strong>Visoko-propusni</strong> filtar guši frekvencije manje od
+granične frekvencije <span class="math inline">\(\omega_c\)</span>. U
+odnosu na nisko-propusni filtar iste granične frekvencije kod
+visoko-propusnog filtra područje propuštanja i područje gušenja su
+zamijenjeni.</p>
+<p><strong>Pojasno-propusni</strong> filtar propušta samo frekvencije
+unutar odabranog frekvencijskog pojasa <span
+class="math inline">\(\langle\omega_L,\omega_H\rangle\)</span>.</p>
+<p><strong>Pojasni brana</strong> gušiti sve frekvencije unutar
+odabranog frekvencijskog pojasa <span
+class="math inline">\(\langle\omega_L,\omega_H\rangle\)</span>. Pojasne
+brane s uskim područjem gušenja zovemo <strong>zapornim</strong>
+filtrima (engl. <em>notch filter</em>); digitalni zaporni filtri
+najčešće imaju jednu ili više nula na jediničnoj kružnici točno unutar
+njihovog uskog pojasa gušenja.</p>
+<p><img src="static/fer-oos/2023-02-05-22-26.png" /></p>
+<p>Ostali tipove filtara koji ne odgovaraju nekom od standardna četiri
+tipa amplitudno-selektivnih filtara možemo dizajnirati klasičnim
+postupkom samo ako se njihova amplitudna karakteristika može iskazati
+kao kombinacija standardnih NP, VP, PP i PB filtara, bilo kao njihov
+paralelni spoj (zbroj prijenosnih funkcija) bilo kao njihov kaskadni
+spoj (produkt prijenosnih funkcija).</p>
+</details>
+<details open>
+<summary>
+Definirajte FIR filtre te objasnite kako pomoću njih ostvarujemo
+filtraciju bez faznih izobličenja.
+</summary>
+<p>FIR smo već definirali gore.</p>
+<p>tldr; tako da impulsni odziv tih filtara zadovoljava svojstvo
+simetrije ili antisimetrije. To znači da su prvi i zadnji koeficijent
+jednaki, drugi i predzadnji jednaki, itd.</p>
+<h3 id="položaj-nula">Položaj nula</h3>
+<p>Svaki digitalni filtar u potpunosti je opisan položajem vlastitih
+polova i nula. FIR filtri nemaju ne-trivijalnih polova što znači da samo
+nule utječu na njihovu frekvencijsku karakteristiku. Prema tome kod FIR
+filtara nas zanima isključivo položaj vlastitih nula.</p>
+<p>Znamo da ako je impulsni odziv realan onda su nule digitalnog filtra
+ili čisto realne ili su sparene u konjugirano-kompleksne parove.</p>
+<p>Također, nula filtra postavljena na jediničnu kružnicu <span
+class="math inline">\(z=e^{j\omega}\)</span> na frekvenciju <span
+class="math inline">\(\omega_0\)</span> uzrokuje da amplitudna
+karakteristika na <span class="math inline">\(\omega_0\)</span> postane
+jednaka nuli. U tom slučaju kažemo da filtar u potpunosti
+<strong>zatire</strong> odabranu frekvenciju.</p>
+<h3
+id="položaj-nula-kod-fir-filtara-generalizirane-linearne-faze">Položaj
+nula kod FIR filtara generalizirane linearne faze</h3>
+<p>Kod određivanja položaja nula od posebnog interesa su <strong>FIR
+filtri generalizirane linearne faze</strong>. Impulsni odziv tih filtara
+zadovoljava svojstvo simetrije ili antisimetrije.</p>
+<p><span class="math display">\[h[n]=\pm h[M-n].\]</span></p>
+<p>To znači da su prvi i zadnji koeficijent jednaki, drugi i predzadnji
+jednaki, itd… Gore navedeno svojstvo impulsnog odziva omogućava nam da
+prijenosnu funkcija filtra izrazimo na dva različita načina,</p>
+<p><span
+class="math display">\[H(z)=\sum_{n=0}^{M}h[n]z^{-n}=\sum_{n=0}^{M}\pm
+h[M-n]z^{-n}.\]</span></p>
+<p>Zamjena varijable <span class="math inline">\(m=M-n\)</span> sada
+daje</p>
+<p><span class="math display">\[H(z)=\sum_{n=0}^{M}\pm
+h[M-n]z^{-n}=\sum_{m=0}^{M}\pm h[m]z^{-M+m}=z^{-M}\sum_{m=0}^{M}\pm
+h[m]z^{m}.\]</span></p>
+<p>Također vrijedi</p>
+<p><span
+class="math display">\[\sum_{m=0}^{M}h[m]z^{m}=H(z^{-1}),\]</span></p>
+<p>pa na kraju dobivamo</p>
+<p><span class="math display">\[H(z)=\pm z^{-M}H(z^{-1}).\]</span></p>
+<p>Polinome <span class="math inline">\(H(z)\)</span> s realnim
+koeficijentima koji zadovoljavu gore navedene uvjete obično zovemo
+polinomima sa zrcalnim koeficijentima. U engleskoj literaturi se još
+preciznije koriste izrazi <strong>mirror-image polynomial</strong> i
+<strong>antimirror-image polynomial</strong>.</p>
+<p>Za takav polinom vrijedi da ako je <span
+class="math inline">\(z_0\)</span> njegova nula onda je i <span
+class="math inline">\(1/z_0\)</span> također njegova nula.</p>
+<p>To svojstvo proizlazi odmah iz <span class="math inline">\(H(z)=\pm
+z^{-M}H(z^{-1})\)</span> jer za <span class="math inline">\(z_0\neq
+0\)</span> imamo <span
+class="math inline">\(H(z_0)=0=z_0^{-M}H(z_0^{-1})\)</span> što vrijedi
+samo ako je <span class="math inline">\(H(z_0^{-1})=0\)</span>.</p>
+<p><strong>Navedeno ograničenje položaja nula FIR filtra linearne faze
+je očekivano obzirom na to da simetrija ili antisimetrija pripadajućeg
+impulsnog odziva smanjuje broj stupnjeve slobode u optimizacijskom
+problemu na pola. Prema tome kada bi dizajnirali takve filtre
+korištenjem reprezentacije preko nula, polova i pojačanja onda je samo
+dio nula slobodno raspoređen i podložan optimizaciji, a preostale nule
+su unaprijed ograničene uvjetima koji ih sparuju u
+konjugirano-kompleksne i u recipročne parove.</strong></p>
+</details>
+<details open>
+<summary>
+Definirajte IIR filtre te objasnite njihove prednosti i nedostatke u
+odnosu na FIR filtre.
+</summary>
+<p>FIR prednosti:</p>
+<ul>
+<li>bezuvjetna stabilnost;</li>
+<li>precizna kontrola fazne karaketeristike (linearnost faze);</li>
+<li>optimalni algoritmi za dizajniranje</li>
+<li>robusniji što se tiče numeričke preciznosti (nazivnik je 1)</li>
+</ul>
+<p>FIR Mane:</p>
+<ul>
+<li>dulje input-output kašnjenje;</li>
+<li>skuplje za računski izračunati</li>
+</ul>
+<p>IIR prenosti:</p>
+<ul>
+<li>brže se računaju</li>
+<li>kraće input-output kašnjenje</li>
+<li>kompaktna reprezentacija</li>
+</ul>
+<p>IIR Mane:</p>
+<ul>
+<li>stabilnost nije garantirana (nazivnik može biti ne-jedan, tj. polovi
+nisu trivijalni)</li>
+<li>fazni oddziv nije lako kontrolirati</li>
+<li>osjetljiv na numeričke preciznosti</li>
+</ul>
+</details>
+<h3 id="todo-primjene">TODO: Primjene</h3>
+<details open>
+<summary>
+Definirajte brzu Fourierovu transformaciju (FFT) i navedite njenu
+asimptotsku složenost.
+</summary>
+<h3 id="ponavljanje">Ponavljanje</h3>
+<p>Bazna funckije <span class="math inline">\(\text{DTF}_N\)</span> su
+<span class="math inline">\(\phi_k[n] = exp(2\pi j \frac{n k}{N}), k =
+0, ..., N-1\)</span></p>
+<p>Radi preglednosti uvodimo oznaku <span class="math inline">\(W^{n
+k}_N = exp(-2\pi j \frac{n k}{N})\)</span></p>
+<p>Uoči da se “broj” i “nazivnik” kod <span
+class="math inline">\(W\)</span>-a mogu kratiti.</p>
+<p>Sad spektar možemo zapisati kao:</p>
+<p><span class="math display">\[ X[n] = \sum\limits_{n=0}^{N-1}x[n]W^{n
+k}_{\textcolor{red}{N}} \]</span></p>
+<p>a <span class="math inline">\(\textcolor{red}{N}\)</span> označava
+broj jednako raspodjeljenih kompleksnih brojeva na jediničnoj
+kružnici.</p>
+<p><img src="static/fer-oos/2023-02-06-00-10.png" /></p>
+<p>Broj operacija za izrarvno računanje <span
+class="math inline">\(\text{DTF}_N\)</span> jest: - <span
+class="math inline">\(4N^2\)</span> množenje realnih brojeva - <span
+class="math inline">\(4N^2 - 2N\)</span> zbrajanja realnih brojeva</p>
+<p>dakle složenost je <span class="math inline">\(O(N^2)\)</span></p>
+<p>Problem složenosti napadamo sa principom podjeli-pa-vladaj. Neka je
+<span class="math inline">\(N\)</span> složen broj oblika <span
+class="math inline">\(r^m\)</span>. Tad princip zovemo korijen-r metoda.
+Konkretno mi uvijek koristimo <span class="math inline">\(r=2\)</span>
+što je onda korijen-2 metoda (engl. radix-2)</p>
+<p>Sad svaki indeks rastavljamo na dva načina: 1. decimacija u vremenu
+,<span class="math inline">\(n\)</span> prestavljamo u obliku <span
+class="math inline">\(n = 2n_1 + n_0\)</span> 2. decimacija u
+frekvenciji, <span class="math inline">\(k\)</span> prestavljamo u
+obliku <span class="math inline">\(k=2 k_1 + k_0\)</span></p>
+<p>Razlažemo signal <span class="math inline">\(x[n]\)</span> na parne i
+neparne indeksirane uzorke:</p>
+<p><img src="static/fer-oos/2023-02-06-00-15.png" /></p>
+<p><span class="math display">\[
+\begin{aligned}
+X[k] &amp; =\operatorname{DFT}_N[x[n]]=\sum_{n=0}^{N-1} x[n] W_N^{n k}
+\\
+&amp; =\underbrace{\sum_{n=0}^{N / 2-1} x[2 n] W_N^{2 n k}}_{\text
+{parno indeksirani }}+\underbrace{\sum_{n=0}^{N / 2-1} x[2 n+1] W_N^{(2
+n+1) k}}_{\text {neparno indeksirani }} \\
+&amp; =\sum_{n=0}^{N / 2-1} x[2 n] W_{N / 2}^{n k}+W_N^k \sum_{n=0}^{N /
+2-1} x[2 n+1] W_{N / 2}^{n k} \\
+&amp; =\operatorname{DFT}_{N / 2}[x[2 n]]+W_N^k \operatorname{DFT}_{N /
+2}[x[2 n+1]]
+\end{aligned}
+\]</span></p>
+<p>Interpretacija člana <span class="math inline">\(W^k_n\)</span> je ta
+da množimo nešto sa kompleksnim brojem što u ovom slučaju rotira
+podgrupu i tako se prebacujemo na neparne indeksirani spektar.</p>
+<p><img src="static/fer-oos/2023-02-06-00-18.png" /></p>
+<h3 id="analiza-složenosti">Analiza složenosti</h3>
+<p>Složenost spajanja dvije <span
+class="math inline">\(DFT_{N/2}\)</span> u jednu <span
+class="math inline">\(DFT_N\)</span> je: - <span
+class="math inline">\(N\)</span> množenja kompleksnih brojeva - <span
+class="math inline">\(N\)</span> zbrajanja kompleksnih brojeva</p>
+<p>Dakle za rastavljanje imamo <span class="math inline">\(O(m
+N)\)</span> ako je <span class="math inline">\(m\)</span> broj razina
+rastava. Vrijedi <span class="math inline">\(N=2^m\)</span> pa je <span
+class="math inline">\(m = log_2 N\)</span></p>
+Konačna složenost potpunog rastava za korijen-2 decimaciju je <span
+class="math inline">\(O(N log_2 N)\)</span>
+</details>
+<details open>
+<summary>
+Objasnite razliku između linearne i cirkularne konvolucije te objasnite
+kako koristimo FFT za efikasno računanje linearne konvolucije konačnih
+signala.
+</summary>
+</details>
+<details open>
+<summary>
+Objasnite razliku između linearne i cirkularne korelacije te objasnite
+kako koristimo FFT za efikasno računanje linearne korelacije konačnih
+signala.
+</summary>
+<p>Linearna konvolucija:</p>
+<p><span class="math display">\[
+x[n] * y[n]=\sum_{m \in \mathbb{Z}} x[m] y[n-m]
+\]</span></p>
+<p>možemo ju lakše računati da izračunamo tablicu množenja pa radimo
+sumacije.</p>
+<p>Cirkularna konvolucija (<span class="math inline">\(\langle
+n-m\rangle _N\)</span> je oznaka za modulo <span
+class="math inline">\(N\)</span>):</p>
+<p><span class="math display">\[
+x[n] \otimes y[n]=\sum_{m=0}^{N-1} x[m] y\left[\langle
+n-m\rangle_N\right]
+\]</span></p>
+<p>Teorem o konvoluciji kaže da se konvolucija u vremenskoj domeni
+preslikava u običan umnožak u frekvencijskoj domeni.</p>
+<p>Za velike N možemo koristit FFT da izračunamo cirkularnu konvoluciju
+tako da prvo napravimo Fourierovu transformaciju nad oba signala. Sad
+imamo 2 spektra. Pomnožimo ih, a zatim ih vratimo u signal sa inverzom
+Foruierove transformacije. Složenost te operacije je <span
+class="math inline">\(O(N log_2 N)\)</span></p>
+<p><span class="math display">\[
+x[n] \otimes y[n]=\operatorname{IDFT}_N\left[\mathrm{DFT}_N[x[n]] \cdot
+\mathrm{DFT}_N[y[n]]\right]
+\]</span></p>
+<h3 id="linearna-korelacija">Linearna korelacija</h3>
+<p>Nije komutativna! No vrijedi <span class="math inline">\(r_{xy}[n] =
+r_{yx}[-n]\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; r_{x y}[n]=x[n] \star y[n]=\sum_{m \in \mathbb{Z}} x[n+m] y^*[m]
+\\
+&amp; r_{y x}[n]=y[n] \star x[n]=\sum_{m \in \mathbb{Z}} y[n+m] x^*[m]
+\end{aligned}
+\]</span></p>
+<h3 id="cirkularna-korelacija">Cirkularna korelacija</h3>
+<p>Nije komutativna! No vrijedi <span class="math inline">\(r_{xy}[n] =
+r_{yx}[-n]\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \tilde{r}_{x y}[n]=x[n] \circledast y[n]=\sum_{m=0}^{N-1}
+x\left[\langle n+m\rangle_N\right] y^*[m] \\
+&amp; \tilde{r}_{y x}[n]=y[n] \circledast x[n]=\sum_{m=0}^{N-1}
+y\left[\langle n+m\rangle_N\right] x^*[m]
+\end{aligned}
+\]</span></p>
+<p>Teorem o korelaciji kaže da se korelacija u vremenskoj domeni
+preslikava u umnožak dva spektra od kojih je drugi konjugiran u
+frekvencijskoj domeni.</p>
+<p>Vrijedi:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \operatorname{DTFT}[x[n] \star y[n]]=\operatorname{DTFT}[x[n]]
+\cdot \operatorname{DTFT}[y[n]]^* \\
+&amp; \operatorname{DTFT}[y[n] \star x[n]]=\operatorname{DTFT}[y[n]]
+\cdot \operatorname{DTFT}[x[n]]^*
+\end{aligned}
+\]</span></p>
+<p>Ako djelujemo sa IDTFT operacijom dobivamo sljedeće:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; x[n] \star y[n]=\operatorname{IDTFT}[\operatorname{DTFT}[x[n]]
+\cdot \operatorname{DTFT}[y[n]]^*] \\
+&amp; y[n] \star x[n]=\operatorname{IDTFT}[\operatorname{DTFT}[y[n]]
+\cdot \operatorname{DTFT}[x[n]]^*]
+\end{aligned}
+\]</span></p>
+<p>Dakle korelaciju možemo izračunati pomoću DTFT-a na sljedeći način: -
+primjeni DTFT na oba signala - sad imamo dva spektra - primjeni
+konjugaciju za drugi spektar - pomnoži dva spektra - koristi IDTFT da se
+vratiš u vremensku domenu</p>
+<p>Složenost za efikasno računanje korelacije uz FFT je <span
+class="math inline">\(O(N log_2 N)\)</span> uz veću skrivenu
+konstantu.</p>
+Signal korelacije postoji i lijevo i desno od toček <span
+class="math inline">\(n=0\)</span> dok standardne implementacije FFT-a
+očekuju desne signale koji počinju od <span
+class="math inline">\(n=0\)</span> pa zato: - računamo li <span
+class="math inline">\(r_{xy}[n]\)</span> koraku <span
+class="math inline">\(n\)</span> dodajemo <span class="math inline">\(-
+N_y +1\)</span> - računamo li <span
+class="math inline">\(r_{yx}[n]\)</span> koraku <span
+class="math inline">\(n\)</span> dodajemo <span class="math inline">\(-
+N_x +1\)</span>
+</details>
+<details open>
+<summary>
+Navedite nekoliko problema aritmetike konačne preciznosti te detaljno
+objasnite kako možemo otkloniti problem preljeva.
+</summary>
+<p>Realizacija filtra mora biti numerički stabila pa ćemo definirati
+česte numeričke probleme poput <strong>preljev, podljev i greška
+zaokruživanja</strong></p>
+<p>Svaki program koji izravno računa sljedeći izraz kažemo da odgovara
+direktnoj realizaciji</p>
+<p><span class="math display">\[
+y[n]=\frac{1}{a_0}\left(\sum_{l=0}^L b_l x[n-l]-\sum_{k=1}^K a_k
+y[n-k]\right)
+\]</span></p>
+<h3 id="početne-vrijednosti">Početne vrijednosti</h3>
+<p>Kažemo da se na početku filtracije javlja prijelazna pojava jer
+početne vrijednosti <span class="math inline">\(x[n]\)</span> i <span
+class="math inline">\(y[n]\)</span> nisu poznate. Ona je određena
+brzinom prigušenja impulsnog odziva. Generalno se postavljaju u nulu jer
+se time osiguravamo linearnost.</p>
+<p>Možemo smanjtii broj međurezutlata tako da spojimo ulaz <span
+class="math inline">\(x[n]\)</span> i izlaz <span
+class="math inline">\(y[n]\)</span> u programu.</p>
+<hr />
+<p>… TODO …</p>
+<hr />
+<p>Konačna preciznost određena je broj značajnih znamenki koje
+pohranjujemo i položaj decimalne točke. Kod prelaska u konačnu
+preciznost uvijek se javljaju greške zaokruživanja. Te operacije onda
+označavamo sa zaokruživanjem simbola.</p>
+<blockquote>
+<p>Rezultat približnih operacija u konačnoj preciznosti koje unose
+grešku mora biti jednak <strong>zaokruživanju</strong> rezultata kojeg
+bi dobili korištenjem artimetike beskonačne preciznosti na najbliži broj
+kojeg možemo zapisati.</p>
+</blockquote>
+<p>Ako je najveći broj kojeg možemo zapisati 9.9 a najmanji -9.9, a
+najmanji pozitivan 0.1</p>
+<p>onda 6.2 + 5.3 = 9.9 (nije 11.5) jer se dogodio
+<strong>preljev</strong>.</p>
+<p>Također ovisi o vrsti artimetike: - aritmetika zasićenjem: 9.9 (stane
+na max broju) - modulna artimetika: -8.4 (dolazi do prematanja)</p>
+<hr />
+<p>Pri množenju 6.2 * 0.2 = 1.24 ali zapravo dobivamo 1.2 i tu se
+dogodila greška zaokruživanja.</p>
+<p>Također 0.2 * 0.2 = 0.04 ali zapravo dobivamo 0 i to je greška
+<strong>podljeva</strong>.</p>
+<hr />
+<p>Prelijev se događa u čvoru grafa toka signala čija apsolutna
+vrijednost preskoči <strong>dinamku <span
+class="math inline">\(D\)</span></strong></p>
+<p>Ako postavimo ograničenje amplitude (ili dinamike) ulaza</p>
+<p><span class="math display">\[ |x[n]| \le D_x \lt D \]</span></p>
+<p>onda za svaki čvor kroz analizu najgoreg slučaja možemo odrediti
+kolika može biti najveća vrijednost u tom čvoru.</p>
+<p>Ako znamo sve dinamike čvorova <span
+class="math inline">\(D_v\)</span> onda možemo uvesti pojačanje <span
+class="math inline">\(k_ul\)</span> i <span
+class="math inline">\(k_izl\)</span> takva da vrijedi:</p>
+<p><span class="math display">\[
+k_{\mathrm{ul}}=\frac{1}{k_{\mathrm{iz}}}=\frac{D}{\max _v D_v}
+\]</span></p>
+<p>Dinamiku određujemo u tri koraka: 1. određujemo prijenosnu funkciju
+Hv (z) između ulaza i čvora - označimo sve čvorove i iz njih postavljamo
+jednadžbe. Na kraju svedemo sve na izraz: <span class="math display">\[
+Č_v(z) = H_v(z)X(z)\]</span> gdje je <span
+class="math inline">\(Č_v(z)\)</span> izraz za čvor koji tražimo a <span
+class="math inline">\(H_v(z)\)</span> je prijenosna funkcija između
+ulaza i čvora <span class="math inline">\(v\)</span></p>
+<ol start="2" type="1">
+<li>iz <span class="math inline">\(H_v (z)\)</span> računamo impulsni
+odziv <span class="math inline">\(h_v [n]\)</span></li>
+<li>računamo <span class="math inline">\(\sum_{n \in \mathbb{Z}}h_v
+[n]\)</span>.</li>
+<li>određujemo dinamiku kao $ D_v = D_x _{m }|h_v[m]|$</li>
+</ol>
+</details>
