@@ -1,0 +1,11 @@
+name = "Matej"
+license = "MIT"
+description = "A minimalistic Hugo theme with grouped content layout"
+homepage = "https://github.com/ciglenecki/ciglenecki.github.io"
+tags = ["blog", "minimal", "responsive", "clean"]
+features = ["responsive", "grouped-content", "bookmarks", "videos"]
+min_version = "0.41.0"
+
+[author]
+  name = "Matej"
+  homepage = "https://ciglenecki.github.io"

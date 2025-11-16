@@ -1,0 +1,32 @@
+<aside class="profile-sidebar">
+    {{ with .Site.Params.profile }}
+    {{ if .photo }}
+    <img src="{{ .photo | relURL }}" alt="{{ .name }}" class="profile-photo">
+    {{ end }}
+
+    {{ if .name }}
+    <h2 class="profile-name">{{ .name }}</h2>
+    {{ end }}
+
+    {{ if .description }}
+    <p class="profile-description">{{ .description }}</p>
+    {{ end }}
+
+    {{ if .links }}
+    <ul class="profile-links">
+        {{ range .links }}
+        <li>
+            <a href="{{ .url }}" {{ if .external }}target="_blank" rel="noopener" {{ end }}>
+                {{ if .icon }}
+                <svg class="icon" aria-hidden="true">
+                    <use href="{{ .icon }}"></use>
+                </svg>
+                {{ end }}
+                <span>{{ .name }}</span>
+            </a>
+        </li>
+        {{ end }}
+    </ul>
+    {{ end }}
+    {{ end }}
+</aside>

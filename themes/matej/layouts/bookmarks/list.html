@@ -1,0 +1,52 @@
+{{ define "main" }}
+<div class="main-container">
+    {{ partial "profile.html" . }}
+
+    <div class="content-area">
+        <h1 class="text-center mb-lg">Bookmarks</h1>
+
+        {{ $bookmarks := .Site.Data.bookmarks }}
+        {{ $groups := slice }}
+
+        <!-- Collect unique groups -->
+        {{ range $bookmarks }}
+        {{ $group := .group | default "uncategorized" }}
+        {{ if not (in $groups $group) }}
+        {{ $groups = $groups | append $group }}
+        {{ end }}
+        {{ end }}
+
+        <div class="content-groups">
+            {{ range $groups }}
+            {{ $currentGroup := . }}
+            <div class="content-group">
+                <h2 class="group-title">{{ $currentGroup }}</h2>
+
+                {{ range $bookmarks }}
+                {{ if eq (.group | default "uncategorized") $currentGroup }}
+                <article class="bookmark-item">
+                    {{ if .icon }}
+                    <img src="{{ .icon }}" alt="{{ .description }}" class="bookmark-icon">
+                    {{ else }}
+                    <svg class="bookmark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                    </svg>
+                    {{ end }}
+
+                    <div class="bookmark-info">
+                        {{ with .date }}
+                        <div class="bookmark-date">{{ . }}</div>
+                        {{ end }}
+                        <div class="bookmark-description">{{ .description }}</div>
+                        <a href="{{ .url }}" class="bookmark-url" target="_blank" rel="noopener">{{ .url }}</a>
+                    </div>
+                </article>
+                {{ end }}
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</div>
+{{ end }}
