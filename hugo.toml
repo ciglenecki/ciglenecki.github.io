@@ -5,9 +5,9 @@ theme = 'matej'
 
 [params]
   [params.profile]
-    name = "Matej Ciglenečki"
+    name = "Matej"
     photo = "/images/profile.jpg"
-    description = "Software engineer and researcher"
+    description = "lala"
     
     [[params.profile.links]]
       name = "GitHub"
