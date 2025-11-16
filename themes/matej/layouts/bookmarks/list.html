@@ -3,8 +3,6 @@
     {{ partial "profile.html" . }}
 
     <div class="content-area">
-        <h1 class="text-center mb-lg">Bookmarks</h1>
-
         {{ $bookmarks := .Site.Data.bookmarks }}
         {{ $groups := slice }}
 
@@ -16,7 +14,7 @@
         {{ end }}
         {{ end }}
 
-        <div class="content-groups">
+        <div class="bookmarks-groups">
             {{ range $groups }}
             {{ $currentGroup := . }}
             <div class="content-group">

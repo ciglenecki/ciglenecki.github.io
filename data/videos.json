@@ -1,17 +1,17 @@
 [
     {
-        "title": "Example YouTube Video",
-        "description": "Replace with your YouTube video ID",
-        "youtube": "dQw4w9WgXcQ"
+        "title": "Introduction to Machine Learning",
+        "description": "A comprehensive guide to ML fundamentals and algorithms",
+        "youtube": "aircAruvnKk"
     },
     {
-        "title": "Example Google Drive Video",
-        "description": "Replace with your Google Drive file ID",
-        "gdrive": "YOUR_GDRIVE_FILE_ID"
+        "title": "Web Development Tutorial",
+        "description": "Building modern web applications with React and Node.js",
+        "youtube": "Tn6-PIqc4UM"
     },
     {
-        "title": "Custom Embed",
-        "description": "You can also use custom embed code",
-        "embed": "<iframe src='https://player.vimeo.com/video/YOUR_VIDEO_ID' width='640' height='360' frameborder='0' allow='autoplay; fullscreen; picture-in-picture' allowfullscreen></iframe>"
+        "title": "Data Structures Explained",
+        "description": "Understanding arrays, linked lists, trees, and graphs",
+        "youtube": "RBSGKlAvoiM"
     }
 ]
