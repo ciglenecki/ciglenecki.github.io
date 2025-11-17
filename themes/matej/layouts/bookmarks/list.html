@@ -25,14 +25,16 @@
                 <article class="bookmark-item">
                     {{ $domain := urls.Parse .url }}
                     {{ $faviconUrl := printf "https://www.google.com/s2/favicons?domain=%s&sz=32" $domain.Host }}
-                    <img src="{{ $faviconUrl }}" alt="{{ .description }}" class="bookmark-icon">
-
+                    
                     <div class="bookmark-info">
-                        {{ with .date }}
-                        <div class="bookmark-date">{{ . }}</div>
-                        {{ end }}
+                        <a href="{{ .url }}" class="bookmark-header" target="_blank" rel="noopener">
+                            {{ with .date }}
+                            <div class="bookmark-date">{{ . }}</div>
+                            {{ end }}
+                            <img src="{{ $faviconUrl }}" alt="{{ .description }}" class="bookmark-icon">
+                            <div class="bookmark-url">{{ .url }}</div>
+                        </a>
                         <div class="bookmark-description">{{ .description }}</div>
-                        <a href="{{ .url }}" class="bookmark-url" target="_blank" rel="noopener">{{ .url }}</a>
                     </div>
                 </article>
                 {{ end }}

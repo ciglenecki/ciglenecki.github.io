@@ -5,7 +5,10 @@ theme = 'matej'
 
 [markup]
   [markup.highlight]
-    codeFences = false
+    codeFences = true
+    noClasses = false
+    lineNos = false
+    guessSyntax = false
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
@@ -20,7 +23,7 @@ theme = 'matej'
   [params.profile]
     name = "Matej"
     photo = "/images/profile.jpg"
-    description = "lala"
+    description = "triple checking"
     
     [[params.profile.links]]
       name = "GitHub"

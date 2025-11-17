@@ -1,5 +1,7 @@
 <header class="site-header">
     <nav>
+        <button id="mute-toggle" class="mute-button" aria-label="Toggle sound" title="Enjoy short 1200Hz and 880Hz sine waves.">🔇</button>
+        
         <a href="{{ "/" | relURL }}" class="{{ if .IsHome }}active{{ end }}">home</a>
 
         <a href="{{ "/bookmarks" | relURL }}" class="{{ if eq .RelPermalink "/bookmarks/" }}active{{ end }}">bookmarks</a>
