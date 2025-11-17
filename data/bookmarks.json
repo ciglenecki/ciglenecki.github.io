@@ -1,23 +1,92 @@
 [
     {
-        "group": "development",
-        "date": "2024-11-15",
-        "description": "React Official Documentation - Learn React fundamentals",
-        "url": "https://react.dev",
-        "icon": "https://react.dev/favicon.ico"
+        "group": "ml",
+        "date": "2023-01-30",
+        "description": "Tim Dettmers's Which GPU(s) to Get for Deep Learning. Not sure how up-to-date this is for this year.",
+        "url": "https://timdettmers.com/2023/01/30/which-gpu-for-deep-learning/"
     },
     {
-        "group": "development",
-        "date": "2024-10-20",
-        "description": "MDN Web Docs - Comprehensive web development resources",
-        "url": "https://developer.mozilla.org",
-        "icon": "https://developer.mozilla.org/favicon.ico"
+        "group": "ml",
+        "date": "2020-12-21",
+        "description": "Optimizing models using the PyTorch JIT, likely out of date",
+        "url": "https://lernapparat.de/jit-optimization-intro"
     },
     {
-        "group": "research",
-        "date": "2024-09-10",
-        "description": "arXiv.org - Open access to research papers in CS and ML",
-        "url": "https://arxiv.org",
-        "icon": "https://arxiv.org/favicon.ico"
+        "group": "study",
+        "date": "2018-07-15",
+        "description": "TODO Michael Nielsen's Long-Term Memory - Augmenting Cognition",
+        "url": "https://augmentingcognition.com/ltm.html"
+    },
+    {
+        "group": "ml",
+        "date": "2025-11-17",
+        "description": "Maxwell Forbes, The PhD Metagame. Gamification of attention slowly bleeds into the ML research.",
+        "url": "https://maxwellforbes.com/posts/how-to-get-a-paper-accepted/"
+    },
+    {
+        "group": "ml",
+        "date": "2024-11-16",
+        "description": "Google deep learning tuning Playbook -- maximize the performance of deep learning models. Read ~50% of this.",
+        "url": "https://github.com/google-research/tuning_playbook"
+    },
+    {
+        "group": "ml",
+        "date": "2024-10-16",
+        "description": "Umar Jamil's machine learning videos. Deep, formal and intuitive explanations with practical implementations.",
+        "url": "https://www.youtube.com/@umarjamilai/videos"
+    },
+    {
+        "group": "programming",
+        "date": "2024-10-16",
+        "description": "Jordi Cenzano's Frame accurate video client in the browser. This was a super useful resource when we tried to figure out how to build backend-based video player in TensorPix. The idea was ditched but I would still use this approach. ",
+        "url": "https://jordicenzano.github.io/frame-accurate-scrubbing/"
+    },
+    {
+        "group": "programming",
+        "date": "2024-10-16",
+        "description": "Jordi Cenzano's Frame accurate video client in the browser. This was a super useful resource when we tried to figure out how to build backend-based video player in TensorPix. The idea was ditched but I would still use this approach. ",
+        "url": "https://jordicenzano.github.io/frame-accurate-scrubbing/"
+    },
+    {
+        "group": "python",
+        "date": "2025-10-22",
+        "description": " Evan Hahn's Scripts I wrote that I use all the time",
+        "url": "https://evanhahn.com/scripts-i-wrote-that-i-use-all-the-time/"
+    },
+    {
+        "group": "math",
+        "date": "2020-10-04",
+        "description": "TODO Dr. PI - Kompleksna analiza",
+        "url": "https://www.youtube.com/watch?v=1UA6q4bW1ok&list=PLfg5S-V2k3ZK1cCUm4uHBfzT1r5k_0yCi"
+    },
+    {
+        "group": "math",
+        "date": "2020-10-04",
+        "description": "Art of Problem Solving's (Richard Rusczyk) Curriculum Map",
+        "url": "https://artofproblemsolving.com/store/recommendations.php#state/0"
+    },
+    {
+        "group": "distributed",
+        "date": "2025-11-17",
+        "description": "A distributed lock pattern with Redis. This was quite relevant for me when I was implementing per-user distributed queueing in TensorPix.",
+        "url": "https://redis.io/docs/latest/develop/clients/patterns/distributed-locks/"
+    },
+    {
+        "group": "other people's blogs",
+        "date": "2025-11-17",
+        "description": "Julia Evans's blog. Goldmine for everything. Thanks Šaja.",
+        "url": "https://jvns.ca/"
+    },
+    {
+        "group": "other people's blogs",
+        "date": "2023-12-11",
+        "description": "Jeronim Matijević's blog. Biggest CLIPpers fan I know",
+        "url": "https://jere357.github.io/"
+    },
+    {
+        "group": "other",
+        "date": "2025-09-22",
+        "description": "21 Facts About Throwing Good Parties. Some of these scream 'USA culture' and 'millennial' but relevant nonetheless.",
+        "url": "https://www.atvbt.com/21-facts-about-throwing-good-parties/"
     }
 ]

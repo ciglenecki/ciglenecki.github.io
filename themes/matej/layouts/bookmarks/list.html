@@ -23,14 +23,9 @@
                 {{ range $bookmarks }}
                 {{ if eq (.group | default "uncategorized") $currentGroup }}
                 <article class="bookmark-item">
-                    {{ if .icon }}
-                    <img src="{{ .icon }}" alt="{{ .description }}" class="bookmark-icon">
-                    {{ else }}
-                    <svg class="bookmark-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                    </svg>
-                    {{ end }}
+                    {{ $domain := urls.Parse .url }}
+                    {{ $faviconUrl := printf "https://www.google.com/s2/favicons?domain=%s&sz=32" $domain.Host }}
+                    <img src="{{ $faviconUrl }}" alt="{{ .description }}" class="bookmark-icon">
 
                     <div class="bookmark-info">
                         {{ with .date }}
