@@ -9,7 +9,10 @@
     border: 1px solid #c0c0c0;
     border-radius: 2px;
     padding: 0.5rem;
-    overflow-x: auto;
+    overflow-x: visible;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 /* Other */
