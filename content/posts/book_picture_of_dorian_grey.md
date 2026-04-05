@@ -1,5 +1,5 @@
 +++
-title = 'Book: The Picture of Dorian Gray by Oscar Wilde'
+title = 'The Picture of Dorian Gray by Oscar Wilde'
 date = 2026-04-03T23:41:40+01:00
 group = "books"
 +++
@@ -7,7 +7,7 @@ group = "books"
 ℹ️ contains **soft** spoilers
 
 ## Intro
-What intrigued me about this book before I read it was the multitude of variations of book covers that all, in a way, spoil the book. Up until that point, all I knew about Oscar Wilde was jailed for gross indecency. After finding out the book in question was quoted during the trial, I became more interested.
+What intrigued me about this book before I read it was the multitude of variations of book covers that all, in a way, spoil the book. Up until that point, all I knew about Oscar Wilde was jailed for gross indecency. After finding out the book in question was quoted during the trial, I became interested.
 
 The first few pages used as a setup were completely shattered by the conversation between the protagonist and the second major figure. I was taken away by just how malleable the main character was but, also felt deep satisfaction immediately realizing the true setup was revealed, and along with the book cover, transformed the reading experience into a interpolation between the two.
 
