@@ -4,15 +4,18 @@ date = 2026-04-03T23:41:40+01:00
 group = "books"
 +++
 
+grade: 4/10
+
 ℹ️ contains **soft** spoilers
 
 ## Intro
-What intrigued me about this book before I read it was the multitude of variations of book covers that all, in a way, spoil the book. Up until that point, all I knew about Oscar Wilde was jailed for gross indecency. After finding out the book in question was quoted during the trial, I became interested.
+What initially intrigued me about this book was the numerous variations of book covers that all represent the same depiction (and, in a way, spoil the book.) I didn't know much about Oscar Wilde except that he was sharp, witty, and jailed for two years for gross indecency. After finding out the book was quoted during the trial against Oscar Wilde, I became really interested and decided to pick it up.
 
-The first few pages used as a setup were completely shattered by the conversation between the protagonist and the second major figure. I was taken away by just how malleable the main character was but, also felt deep satisfaction immediately realizing the true setup was revealed, and along with the book cover, transformed the reading experience into a interpolation between the two.
+The first few pages deceive you into thinking the primary plot will be a sort of romance between Dorian and Basil. This narrative was completely shattered by the appearance of Lord Henry Wotton, or, more precisely, a conversation between him and Dorian Grey. During their conversation it's immediately obvious that Dorian Grey is beautiful and empty headed. With his novel, pretentious and snobby remarks, Lord Henry Wotton plants mental seeds that alter the course of Dorian's life by filling his head with ideas he never could have imagined. I was taken away by just how malleable the main character was, but I also felt deep satisfaction immediately upon realizing the true plot setup was revealed. The cover of the book completely spoiled the ending which surprisingly didn't bother me. It transformed the reading experience into trying to interpolate what happens between the opening setup the image on the cover.
+
 
 ## Dorian Grey
-Although Dorian's rocky way towards corruption was obvious, I expected an intellectual uprising on his part. One would imagine that cherishing sublime interests would produce experience, wisdom and evolved way of thinking. However, throughout the book, Dorian's mindset remained sheepish, the same sheepish kind when his thoughts were a mere meadow at the beginning of the book. For example, after conversing with Sibyl Vane, his decision not to ever see her again was countered by his own determination to marry her! The complete shift in his mindset happened in a span of a few hours, without any external events that would affect his actions. Later in the book, another naive determination to simply "be good", after living in indecency for over three decades, without any repentance, was especially shocking to me. I understand the his actions regarding the picture and find it difficult to see how any of us would behave differently in his position.
+Although Dorian's rocky way towards corruption was obvious, I expected an intellectual uprising on his part. One would imagine that cherishing sublime interests would produce experience, wisdom and evolved way of thinking. However, throughout the book, Dorian's mindset remained sheepish, the same sheepish kind when his thoughts were a mere meadow at the beginning of the book. After conversing with Sibyl Vane he decided never to see her again. Then, he changed his mind by determining he wants to marry her. This complete shift in his mindset happened within just a few hours, without any event occurring that would have affected his line of thinking. Later in the book, another naive determination to simply "be good", after living in indecency for over three decades without any repentance, was especially shocking to me. He gave me the impression that he understood himself better, but the smokescreen blows away each time he does something naive. It is hard to root for someone who refuses to learn from his own mistakes. On the other hand, I understand his actions regarding Bails' painting and find it difficult to believe that many of us would have acted differently in his position.
 
 ## Lord Henry Wotton
 The complete contrast in that regard was Lord Henry Wotton. A captivating figure at the start, but completely indigestible once I finished the book, even though he didn't change whatsoever. To me, he is a figure that represents what troubles Oscar Wilde in the Victorian society he lived in. Lord Henry Wotton oozes with unconventional, piercing, and snappy aphorisms. Although I didn't explicitly check this, in my opinion, they reflect some of Wilde's own vision and guiding principles. Lord Henry Wotton's ideas are captivating at first. They question ideas of pleasure, interpreting beauty as the highest form of intellectual observation, giving emphasis on one's current joys instead of banking moments for the future, or ruminating on the past. However, at some point, he started degrading the kind of people who are the opposite of him. People who settle down, enjoy recurring social events, and stay consistent with their interests. This became quite annoying. It came off as smug, pretentious, and outright unbearable towards the end. His hedonistic outlook on life was hard to take seriously as it was presented as the only way to satisfaction or purpose in life. Obviously, that's incorrect. There are many types of life purposes that are considered valuable by many of us, and hedonism may or may not be one of them. His inability to understand others was what cost him my respect. His one-dimensionality was magnetizing, but became repelling once the magnetic pole switched in the middle of the book. I think this issue would be solved if Lord Henry Wotton appeared less often in the book.  
@@ -50,19 +53,15 @@ The complete contrast in that regard was Lord Henry Wotton. A captivating figure
 ```
 
 ## Summary
-read this book if:
-- you like hedonism
-- you like self-conflict
-- you adore aesthetics
-- you like romantic tensions
-- you are intrigued by snobby/smart quotes
+
+
+Read this book if:
+- you are intrigued by snobby/smart remarks
 - you are a looksmaxxer and it's destroying your life
+- you like hedonism, self-conflict, aesthetics, romantic tensions
 
-don't read this book if:
-
+Don't read this book if:
 - you like plot driven books
 - you don't like pretentious characters
 - you don't like when the obvious happens
 - you are prejudiced against certain people
-
-grade: 3/5
