@@ -69,7 +69,12 @@ Don't read this book if:
 - you don't like when the obvious happens
 - you are prejudiced against certain people
 
-grade: 4/10
+<br>
+<br>
+<p style="text-align:center;">grade: 4/10</p>
+<br>
+
+
 
 ## References
 
