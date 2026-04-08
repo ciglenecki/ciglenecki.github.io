@@ -3,6 +3,7 @@ title = 'Fundamentals of Signal Processing – notes for verbal assessment'
 date = 2025-11-12T09:15:00+01:00
 draft = false
 thumbnail = "/images/post-thumbnail.jpg"
+group = "theory"
 +++
 
 

@@ -437,6 +437,35 @@ body {
 .single-content article h5,
 .single-content article h6 {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    scroll-margin-top: 5rem;
+    position: relative;
+}
+
+.single-content article .heading-anchor {
+    margin-left: 0.35rem;
+    color: var(--accent-color);
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.single-content article h1:hover .heading-anchor,
+.single-content article h2:hover .heading-anchor,
+.single-content article h3:hover .heading-anchor,
+.single-content article h4:hover .heading-anchor,
+.single-content article h5:hover .heading-anchor,
+.single-content article h6:hover .heading-anchor,
+.single-content article h1:focus-within .heading-anchor,
+.single-content article h2:focus-within .heading-anchor,
+.single-content article h3:focus-within .heading-anchor,
+.single-content article h4:focus-within .heading-anchor,
+.single-content article h5:focus-within .heading-anchor,
+.single-content article h6:focus-within .heading-anchor {
+    opacity: 1;
+}
+
+.single-content article .heading-anchor:hover {
+    color: var(--accent-hover);
 }
 
 
@@ -457,7 +486,7 @@ body {
 }
 
 .single-content article p {
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
     font-size: var(--font-small);
 }
 

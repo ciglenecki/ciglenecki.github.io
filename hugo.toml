@@ -32,8 +32,8 @@ theme = 'matej'
       
     [[params.profile.links]]
       name = "Email"
-      url = "mailto:your.email@example.com"
-      external = false
+      url = "matej dot ciglenecki at gmail dot com"
+      external = true
       
     [[params.profile.links]]
       name = "LinkedIn"
