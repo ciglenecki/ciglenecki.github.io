@@ -22,6 +22,12 @@ Don't read this book if:
 
 grade: 4/10
 
+
+## Intro
+
+This book is about a person with impeccable looks who accidentally finds a way to keep them forever. However, his selfishness, hedonism, aestheticism completely corrupt his soul. 
+
+
 ## What drew me in
 
 
@@ -29,6 +35,10 @@ What initially intrigued me about this book was the numerous variations of book 
 
 The first few pages deceive you into thinking the primary plot will be a sort of romance between Dorian and Basil. This narrative was completely shattered by the appearance of Lord Henry Wotton, or, more precisely, a conversation between him and Dorian Grey. During their conversation it's immediately obvious that Dorian Grey is beautiful and empty headed. With his novel, pretentious and snobby remarks, Lord Henry Wotton plants mental seeds that alter the course of Dorian's life by filling his head with ideas he never could have imagined. I was taken away by just how malleable the main character was, but I also felt deep satisfaction immediately upon realizing the true plot setup was revealed. The cover of the book completely spoiled the ending which surprisingly didn't bother me. It transformed the reading experience into trying to interpolate what happens between the opening setup the image on the cover.
 
+
+## On beauty
+
+In this book places heavily importance on beauty. There are numerous research papers showing that attractive people are perceived as more kind, successful and intelligent<sup>[dion1972]</sup>. In my experience, this is true, but only if the person has interesting traits that make his foundation solid. I often joke with my friends that the most attractive people are not the prettiest ones, but the gritty ugly hot people with an edge. I'm repulsed by 'perfect' looks if they are accompanied by nothing else at all.
 
 ## Dorian Grey
 Although Dorian's rocky way towards corruption was obvious, I expected an intellectual uprising on his part. One would imagine that cherishing sublime interests would produce experience, wisdom and evolved way of thinking. However, throughout the book, Dorian's mindset remained sheepish, the same sheepish kind when his thoughts were a mere meadow at the beginning of the book. After conversing with Sibyl Vane he decided never to see her again. Then, he changed his mind by determining he wants to marry her. This complete shift in his mindset happened within just a few hours, without any event occurring that would have affected his line of thinking. Later in the book, another naive determination to simply "be good", after living in indecency for over three decades without any repentance, was especially shocking to me. He gave me the impression that he understood himself better, but the smokescreen blows away each time he does something naive. It is hard to root for someone who refuses to learn from his own mistakes. On the other hand, I understand his actions regarding Bails' painting and find it difficult to believe that many of us would have acted differently in his position.
@@ -67,3 +77,7 @@ The complete contrast in that regard was Lord Henry Wotton. A captivating figure
 ```
 "When I like people immensely I never tell their names to any one. It is like surrendering a part of them. I have grown to love secrecy. It seems to be the one thing that can make modern life mysterious or marvelous to us. The commonest thing is delightful if one only hides it. When I leave town now I never tell my people where I am going. If I did, I would lose all my pleasure. It is a silly habit, I dare say, but somehow it seems to bring a great deal of romance into one's life.
 ```
+
+## References
+
+[dion1972] https://psycnet.apa.org/record/1973-09160-001
