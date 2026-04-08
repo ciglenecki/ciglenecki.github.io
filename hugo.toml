@@ -23,7 +23,7 @@ theme = 'matej'
   [params.profile]
     name = "Matej"
     photo = "/images/profile.jpg"
-    description = "triple checking"
+    description = "nonlinear, but smooth about it"
     
     [[params.profile.links]]
       name = "GitHub"

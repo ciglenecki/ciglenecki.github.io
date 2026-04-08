@@ -1,6 +1,9 @@
----
-title: Markdown Osnove obradbe signala - usmeni
----
++++
+title = 'Fundamentals of Signal Processing – notes for verbal assessment'
+date = 2025-11-12T09:15:00+01:00
+draft = false
+thumbnail = "/images/post-thumbnail.jpg"
++++
 
 
 <style>
@@ -42,10 +45,11 @@ title: Markdown Osnove obradbe signala - usmeni
         }
 </style>
 
-
 # Osnove obradbe signala - usmeni
 
-ako pronađeš grešku napravi PR na: [https://github.com/ciglenecki/fer-oos](https://github.com/ciglenecki/fer-oos)
+- my personal notes used for preparation for the verbal exam
+- course website: https://www.fer.unizg.hr/predmet/oos
+- ako pronađeš grešku napravi PR na: [https://github.com/ciglenecki/fer-oos](https://github.com/ciglenecki/fer-oos)
 
 ```
 2024-02-22: dodan minus predznak kod "Radi preglednosti uvodimo oznaku"
