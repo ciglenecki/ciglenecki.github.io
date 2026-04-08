@@ -1,14 +1,30 @@
 +++
-title = 'The Picture of Dorian Gray by Oscar Wilde'
+title = 'Reflections on The Picture of Dorian Gray by Oscar Wilde'
 date = 2026-04-03T23:41:40+01:00
 group = "books"
 +++
 
+> ℹ️ this article contains soft spoilers
+
+## Quick verdict
+
+
+Read this book if:
+- you are intrigued by snobby/smart remarks
+- you are a looksmaxxer and it's destroying your life
+- you like hedonism, self-conflict, aesthetics, romantic tensions
+
+Don't read this book if:
+- you like plot driven books
+- you don't like pretentious characters
+- you don't like when the obvious happens
+- you are prejudiced against certain people
+
 grade: 4/10
 
-ℹ️ contains **soft** spoilers
+## What drew me in
 
-## Intro
+
 What initially intrigued me about this book was the numerous variations of book covers that all represent the same depiction (and, in a way, spoil the book.) I didn't know much about Oscar Wilde except that he was sharp, witty, and jailed for two years for gross indecency. After finding out the book was quoted during the trial against Oscar Wilde, I became really interested and decided to pick it up.
 
 The first few pages deceive you into thinking the primary plot will be a sort of romance between Dorian and Basil. This narrative was completely shattered by the appearance of Lord Henry Wotton, or, more precisely, a conversation between him and Dorian Grey. During their conversation it's immediately obvious that Dorian Grey is beautiful and empty headed. With his novel, pretentious and snobby remarks, Lord Henry Wotton plants mental seeds that alter the course of Dorian's life by filling his head with ideas he never could have imagined. I was taken away by just how malleable the main character was, but I also felt deep satisfaction immediately upon realizing the true plot setup was revealed. The cover of the book completely spoiled the ending which surprisingly didn't bother me. It transformed the reading experience into trying to interpolate what happens between the opening setup the image on the cover.
@@ -51,17 +67,3 @@ The complete contrast in that regard was Lord Henry Wotton. A captivating figure
 ```
 "When I like people immensely I never tell their names to any one. It is like surrendering a part of them. I have grown to love secrecy. It seems to be the one thing that can make modern life mysterious or marvelous to us. The commonest thing is delightful if one only hides it. When I leave town now I never tell my people where I am going. If I did, I would lose all my pleasure. It is a silly habit, I dare say, but somehow it seems to bring a great deal of romance into one's life.
 ```
-
-## Summary
-
-
-Read this book if:
-- you are intrigued by snobby/smart remarks
-- you are a looksmaxxer and it's destroying your life
-- you like hedonism, self-conflict, aesthetics, romantic tensions
-
-Don't read this book if:
-- you like plot driven books
-- you don't like pretentious characters
-- you don't like when the obvious happens
-- you are prejudiced against certain people
