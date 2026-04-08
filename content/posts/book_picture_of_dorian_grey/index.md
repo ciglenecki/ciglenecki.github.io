@@ -4,6 +4,21 @@ date = 2026-04-03T23:41:40+01:00
 group = "books"
 +++
 
+<figure style="text-align: center;">
+<img
+    src="./narcissus.png"
+    alt="Narciso by Caravaggio"
+    style="display: block; margin: 0 auto 0.35rem; max-width: 100%;"
+>
+<figcaption style="margin-top: 0;">
+    <a href="https://en.wikipedia.org/wiki/Narcissus_%28Caravaggio%29">
+    Narciso by Caravaggio
+    </a>
+</figcaption>
+</figure>
+
+<br>
+
 > ℹ️ this article contains soft spoilers
 
 ## Intro

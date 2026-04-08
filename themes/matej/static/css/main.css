@@ -4,15 +4,18 @@
 :root {
     --primary-bg: #ffffff;
     --text-color: #000000;
+    --accent-color-grey: #555555;
     --accent-color: #0000ff;
     --accent-hover: #0000cc;
     --border-color: #e1e8ed;
     --sidebar-width: 10%;
     --content-width: 90%;
-    --max-width: 1400px;
+    --max-width: none;
+    --page-padding: clamp(1rem, 2vw, 2rem);
     --font-large: 3rem;
     --font-big: 2rem;
     --font-small: 1.2rem;
+    --font-code-size: 1rem;
     --spacing-tight: 0.25rem;
     --spacing-sm: 0.5rem;
     --spacing-md: 0.75rem;
@@ -22,7 +25,7 @@
     --title-break-margin: 3rem;
     --code-bg: #e2e2e2;
     --code-border: #c0c0c0;
-    --bookmark-spacing: 1rem;
+    --bookmark-spacing: 0.5rem;
 }
 
 * {
@@ -56,7 +59,7 @@ body {
 .site-header nav {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 var(--spacing-lg);
+    padding: 0 var(--page-padding);
     display: flex;
     gap: var(--spacing-lg);
     row-gap: var(--spacing-tight);
@@ -97,7 +100,7 @@ body {
     width: 100%;
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: var(--spacing-lg);
+    padding: var(--page-padding);
     display: flex;
     gap: var(--spacing-lg);
 }
@@ -193,7 +196,7 @@ body {
 .group-title {
     font-size: var(--font-big);
     font-weight: 600;
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-tight);
     color: var(--text-color);
     border-bottom: 2px solid var(--accent-color);
     padding-bottom: var(--spacing-tight);
@@ -204,8 +207,8 @@ body {
 .post-item {
     display: flex;
     gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-tight);
-    padding: var(--spacing-tight) 0;
+    margin-bottom: 0;
+    padding: 0.125rem 0;
     align-items: center;
     min-height: 2rem;
     position: relative;
@@ -273,7 +276,7 @@ body {
     display: flex;
     gap: var(--spacing-sm);
     margin-bottom: var(--bookmark-spacing);
-    padding: var(--spacing-tight) 0;
+    padding: 0.125rem 0;
     align-items: flex-start;
 }
 
@@ -326,7 +329,7 @@ body {
     font-size: var(--font-small);
     color: var(--text-color);
     line-height: 1.4;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 0;
 }
 
 .bookmark-url {
@@ -474,7 +477,7 @@ body {
     padding: 0.1em 0.2em;
     margin: 0;
     border-radius: 2px;
-    font-size: var(--font-small);
+    font-size: var(--font-code-size);
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -489,7 +492,8 @@ body {
     white-space: pre-wrap;
     overflow-wrap: anywhere;
     word-break: break-word;
-    line-height: 1.4;
+    line-height: 1.2;
+    font-size: var(--font-code-size);
 }
 
 /* Code blocks - remove background/border from code inside pre (handled by .chroma or pre) */
@@ -502,6 +506,7 @@ body {
     white-space: inherit;
     overflow-wrap: inherit;
     word-break: inherit;
+    font-size: var(--font-code-size);
 }
 
 .single-content article img {
@@ -581,7 +586,7 @@ body {
 
 /* Blockquotes */
 .single-content article blockquote {
-    border-left: 3px solid var(--accent-color);
+    border-left: 3px solid var(--accent-color-grey);
     padding-left: var(--spacing-md);
     margin: var(--spacing-md) 0;
     color: var(--text-color);
@@ -623,7 +628,7 @@ body {
 
     .main-container {
         flex-direction: column;
-        padding: var(--spacing-sm);
+        padding: var(--page-padding);
         width: 100%;
         max-width: 100%;
     }
@@ -712,7 +717,7 @@ body {
 
     .site-header nav {
         gap: var(--spacing-sm);
-        padding: 0 var(--spacing-sm);
+        padding: 0 var(--page-padding);
         align-items: flex-start;
     }
 
@@ -767,7 +772,7 @@ body {
 
 @media (min-width: 1200px) {
     .content-groups {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
