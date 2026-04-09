@@ -164,7 +164,29 @@ body {
 .profile-links .icon {
     width: 16px;
     height: 16px;
+    display: block;
     flex-shrink: 0;
+}
+
+.profile-links .profile-emoji {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.profile-contact-text {
+    margin-top: var(--spacing-lg);
+    color: var(--text-color);
+}
+
+.profile-contact-text p {
+    margin: 0;
+}
+
+.profile-contact-text p + p {
+    margin-top: var(--spacing-tight);
 }
 
 /* Content Area */

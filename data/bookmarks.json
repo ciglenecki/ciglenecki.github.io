@@ -24,6 +24,12 @@
         "url": "https://maxwellforbes.com/posts/how-to-get-a-paper-accepted/"
     },
     {
+        "group": "programming",
+        "date": "2025-11-17",
+        "description": "Processing video frames can be slow. This blog helped me to optimize some parts of the TensorPix video inference engine.",
+        "url": "https://paulbridger.com/posts/video-analytics-pipeline-tuning/"
+    },
+    {
         "group": "ml",
         "date": "2024-11-16",
         "description": "Google deep learning tuning Playbook -- maximize the performance of deep learning models. Read ~50% of this.",
@@ -34,12 +40,6 @@
         "date": "2024-10-16",
         "description": "Umar Jamil's machine learning videos. Deep, formal and intuitive explanations with practical implementations.",
         "url": "https://www.youtube.com/@umarjamilai/videos"
-    },
-    {
-        "group": "programming",
-        "date": "2024-10-16",
-        "description": "Jordi Cenzano's Frame accurate video client in the browser. This was a super useful resource when we tried to figure out how to build backend-based video player in TensorPix. The idea was ditched but I would still use this approach. ",
-        "url": "https://jordicenzano.github.io/frame-accurate-scrubbing/"
     },
     {
         "group": "programming",

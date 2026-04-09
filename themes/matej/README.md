@@ -81,17 +81,9 @@ theme = 'matej'
   [params.profile]
     name = "Your Name"
     photo = "/images/profile.jpg"
-    
-    [[params.profile.links]]
-      name = "GitHub"
-      url = "https://github.com/username"
-      external = true
-      
-    [[params.profile.links]]
-      name = "Email"
-      url = "mailto:your.email@example.com"
-      external = false
 ```
+
+Write the profile links directly in `themes/matej/layouts/partials/profile-links.html`.
 
 ## Directory Structure
 
