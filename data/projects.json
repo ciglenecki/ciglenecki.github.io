@@ -7,13 +7,6 @@
         "description": "Research of Neural Radiance Fields (NeRF) for generating synthetic data. I built model that generates personal document images from novel scene views, and identified constraints under which the NeRF model generates high quality images. The work also quantified novel view synthesis in interpolation and extrapolation regimes."
     },
     {
-        "title": "EEG Driver Fatigue Detection",
-        "slug": "eeg-driver-fatigue-detection",
-        "url": "https://github.com/ciglenecki/eeg-driver-fatigue-detection",
-        "image": "/project-images/eeg-driver-fatigue-detection.svg",
-        "description": "Driver fatigue detection through multiple entropy fusion analysis in an EEG-based system. The assignment was to implement steps described in the research paper and produce similar results. The pipeline applies filters to remove noise, extracts multiple entropies and other features from 1 second epochs, and trains several models including SVM, neural network, KNN, and random forest."
-    },
-    {
         "title": "ML Competition Audio Instruments",
         "slug": "ml-competition-audio-instruments",
         "url": "https://github.com/ciglenecki/ml-competition-audio-instruments",
@@ -40,6 +33,13 @@
         "url": "https://github.com/ciglenecki/stylegan2-latent-projection-inversion",
         "image": "/project-images/stylegan2-latent-projection-inversion.svg",
         "description": "Projecting faces into StyleGAN2-ADA's latent space, with results of StyleGAN2-ADA finetuned on images of art from the MetFaces dataset. The project creates a projector of images into latent space, reconstructs the final image, and explores latent directions for changing concrete facial features. It also compares StyleGAN2 and StyleGAN2-ADA under different data regimes."
+    },
+    {
+        "title": "EEG Driver Fatigue Detection",
+        "slug": "eeg-driver-fatigue-detection",
+        "url": "https://github.com/ciglenecki/eeg-driver-fatigue-detection",
+        "image": "/project-images/eeg-driver-fatigue-detection.svg",
+        "description": "Driver fatigue detection through multiple entropy fusion analysis in an EEG-based system. The assignment was to implement steps described in the research paper and produce similar results. The pipeline applies filters to remove noise, extracts multiple entropies and other features from 1 second epochs, and trains several models including SVM, neural network, KNN, and random forest."
     },
     {
         "title": "Holt Linear",

@@ -395,7 +395,7 @@ body {
 
 .project-item {
     display: grid;
-    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-columns: 100px minmax(0, 1fr);
     gap: var(--spacing-lg);
     align-items: start;
     padding: 0;
@@ -407,10 +407,11 @@ body {
 
 .project-image-link {
     display: block;
-    width: 200px;
+    width: 100px;
     aspect-ratio: 1;
     flex-shrink: 0;
     overflow: hidden;
+    align-self: center;
 }
 
 .project-image {
@@ -431,8 +432,7 @@ body {
 }
 
 .project-title {
-    font-size: var(--font-big);
-    font-weight: 600;
+    font-size: var(--font-small);
     color: var(--accent-color);
     text-decoration: underline;
     overflow-wrap: anywhere;

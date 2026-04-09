@@ -6,6 +6,28 @@
         {{ $pages := where .Site.RegularPages "Section" "posts" }}
         {{ $pages = where $pages ".Draft" false }}
         {{ partial "grouped-pages.html" (dict "pages" $pages) }}
+
+        {{ $projects := .Site.Data.projects }}
+        <div class="bookmarks-groups">
+            <div class="content-group">
+                <h2 class="group-title">projects</h2>
+
+                <div class="projects-list">
+                    {{ range $projects }}
+                    <article class="project-item">
+                        <a href="{{ .url }}" class="project-image-link" target="_blank" rel="noopener">
+                            <img src="{{ .image | relURL }}" alt="{{ .title }}" class="project-image">
+                        </a>
+
+                        <div class="project-info">
+                            <a href="{{ .url }}" class="project-title" target="_blank" rel="noopener">{{ .title }}</a>
+                            <p class="project-description">{{ .description }}</p>
+                        </div>
+                    </article>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {{ end }}
