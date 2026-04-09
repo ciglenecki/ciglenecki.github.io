@@ -9,6 +9,8 @@
     --max-width: 960px;
     --page-padding: clamp(1rem, 2vw, 2rem);
     --mobile-page-padding: var(--page-padding);
+    --container-max-width: var(--max-width);
+    --container-inline-padding: var(--page-padding);
     --font-big: 2rem;
     --font-small: 1rem;
     --font-medium: 1rem;
@@ -62,9 +64,9 @@ body {
 }
 
 .site-header nav {
-    max-width: var(--max-width);
+    max-width: var(--container-max-width);
     margin: 0 auto;
-    padding: 0 var(--page-padding);
+    padding: 0 var(--container-inline-padding);
     display: flex;
     gap: var(--spacing-lg);
     row-gap: var(--spacing-tight);
@@ -86,7 +88,6 @@ body {
     text-decoration: underline;
     font-weight: 400;
     font-size: var(--font-small);
-    padding: var(--spacing-tight);
 }
 
 .site-header nav a:hover {
@@ -121,9 +122,9 @@ body {
 /* Main Container */
 .main-container {
     width: 100%;
-    max-width: var(--max-width);
+    max-width: var(--container-max-width);
     margin: 0 auto;
-    padding: var(--page-padding);
+    padding: var(--container-inline-padding);
     display: flex;
     gap: var(--spacing-lg);
 }
@@ -472,9 +473,10 @@ body {
 
 /* Single Post/Page */
 .single-content {
-    max-width: var(--max-width);
+    width: 100%;
+    max-width: var(--container-max-width);
     margin: 0 auto;
-    padding: var(--spacing-lg);
+    padding: var(--container-inline-padding);
 }
 
 .single-header {
