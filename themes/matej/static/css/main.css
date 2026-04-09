@@ -55,13 +55,12 @@ body {
 
 /* Header Navigation */
 .site-header {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--accent-hover);
     padding: var(--spacing-sm) 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: var(--accent-color);
     width: 100%;
 }
 
@@ -74,34 +73,52 @@ body {
     row-gap: var(--spacing-tight);
     align-items: center;
     flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.site-nav-links {
+    display: flex;
+    gap: var(--spacing-lg);
+    row-gap: var(--spacing-tight);
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .site-header nav a {
-    color: var(--accent-color);
+    color: #ffffff;
     text-decoration: underline;
     font-weight: 400;
     font-size: var(--font-small);
     padding: var(--spacing-tight);
-    text-transform: lowercase;
 }
 
-.site-header nav a:hover,
+.site-header nav a:hover {
+    color: #ffffff;
+    opacity: 0.8;
+}
+
 .site-header nav a.active {
-    color: var(--accent-hover);
+    color: #ffffff;
+    opacity: 1;
+    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.18);
+    border-radius: 0.4rem;
 }
 
 .mute-button {
-    background: none;
-    border: none;
+    background-color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 0.5rem;
+    color: var(--accent-color);
     font-size: var(--font-small);
     cursor: pointer;
-    padding: var(--spacing-tight);
-    margin-right: var(--spacing-md);
+    padding: var(--spacing-tight) var(--spacing-sm);
     flex-shrink: 0;
+    margin-left: auto;
 }
 
 .mute-button:hover {
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 /* Main Container */
@@ -792,11 +809,19 @@ body {
 
     .site-header nav {
         gap: var(--spacing-sm);
-        align-items: flex-start;
+        align-items: center;
     }
 
     .site-header nav a {
         font-size: var(--font-medium);
+    }
+
+    .site-nav-links {
+        gap: var(--spacing-sm);
+    }
+
+    .mute-button {
+        margin-left: 0;
     }
 
     .single-content {

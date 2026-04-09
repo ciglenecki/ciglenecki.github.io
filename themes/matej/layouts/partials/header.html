@@ -1,8 +1,9 @@
 <header class="site-header">
     <nav>
+        <div class="site-nav-links">
+            <a href="{{ "/" | relURL }}" class="{{ if .IsHome }}active{{ end }}">Matej Ciglenečki</a>
+            <a href="{{ "/bookmarks" | relURL }}" class="{{ if eq .RelPermalink "/bookmarks/" }}active{{ end }}">bookmarks</a>
+        </div>
         <button id="mute-toggle" class="mute-button" aria-label="Toggle sound" title="Enjoy short 1200Hz and 880Hz sine waves.">🔇</button>
-        
-        <a href="{{ "/" | relURL }}" class="{{ if .IsHome }}active{{ end }}">home</a>
-        <a href="{{ "/bookmarks" | relURL }}" class="{{ if eq .RelPermalink "/bookmarks/" }}active{{ end }}">bookmarks</a>
     </nav>
 </header>
