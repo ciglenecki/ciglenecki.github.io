@@ -1,6 +1,3 @@
-/* Import Montserrat font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
-
 :root {
     --primary-bg: #ffffff;
     --text-color: #000000;
@@ -9,13 +6,11 @@
     --accent-hover: #0000cc;
     --border-color: #e1e8ed;
     --sidebar-width: 10%;
-    --content-width: 90%;
     --max-width: 960px;
     --page-padding: clamp(1rem, 2vw, 2rem);
     --mobile-page-padding: var(--page-padding);
-    --font-huge: 3rem;
     --font-big: 2rem;
-    --font-large: 1.2rem;
+    --font-small: 1rem;
     --font-medium: 1rem;
     --font-tiny: 0.9rem;
     --font-code-size: 1rem;
@@ -29,8 +24,10 @@
     --title-break-margin: 3rem;
     --code-bg: #e2e2e2;
     --code-border: #c0c0c0;
-    --bookmark-spacing: 0.5rem;
     --profile-sticky-top: 60px;
+    --surface-hover: #e8e8e8;
+    --surface-muted: #f5f5f5;
+    --surface-subtle: #fafafa;
 }
 
 * {
@@ -161,6 +158,7 @@ body {
     margin-top: 0.1rem;
 }
 
+.profile-intro,
 .profile-description {
     font-size: var(--font-small);
     color: var(--text-color);
@@ -279,10 +277,6 @@ body {
     z-index: 1;
 }
 
-.post-item:hover {
-    background-color: #e8e8e8;
-}
-
 .post-info {
     flex: 1;
     min-width: 0;
@@ -304,31 +298,18 @@ body {
     font-weight: 400;
     margin: 0;
     flex: 1;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
     overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    color: var(--accent-color);
-    text-decoration: underline;
 }
 
 .post-title a {
-    color: var(--accent-color);
-    text-decoration: underline;
     pointer-events: none;
-}
-
-.post-title a:hover {
-    color: var(--accent-hover);
 }
 
 /* Bookmark Item */
 .bookmark-item {
     display: flex;
     gap: var(--spacing-sm);
-    margin-bottom: var(--bookmark-spacing);
+    margin-bottom: var(--spacing-sm);
     padding: 0.125rem 0;
     align-items: flex-start;
     width: 100%;
@@ -337,10 +318,6 @@ body {
 
 .bookmark-item:last-child {
     margin-bottom: 0;
-}
-
-.bookmark-item:hover {
-    background-color: #e8e8e8;
 }
 
 .bookmark-icon {
@@ -389,17 +366,11 @@ body {
 
 .bookmark-url {
     font-size: var(--font-small);
-    color: var(--accent-color);
-    text-decoration: underline;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     flex: 1;
     min-width: 0;
-}
-
-.bookmark-header:hover .bookmark-url {
-    color: var(--accent-hover);
 }
 
 /* Projects */
@@ -413,10 +384,6 @@ body {
     gap: var(--spacing-lg);
     align-items: start;
     padding: 0;
-}
-
-.project-item:hover {
-    background-color: #e8e8e8;
 }
 
 .project-image-link {
@@ -435,7 +402,7 @@ body {
     border-radius: 8px;
     object-fit: cover;
     border: 2px solid var(--border-color);
-    background-color: #f5f5f5;
+    background-color: var(--surface-muted);
 }
 
 .project-info {
@@ -447,13 +414,7 @@ body {
 
 .project-title {
     font-size: var(--font-small);
-    color: var(--accent-color);
-    text-decoration: underline;
     overflow-wrap: anywhere;
-}
-
-.project-title:hover {
-    color: var(--accent-hover);
 }
 
 .project-url {
@@ -548,12 +509,29 @@ body {
     font-family: 'Times New Roman', Times, serif;
 }
 
-.single-content article h1,
-.single-content article h2,
-.single-content article h3,
-.single-content article h4,
-.single-content article h5,
-.single-content article h6 {
+.post-item:hover,
+.bookmark-item:hover,
+.project-item:hover {
+    background-color: var(--surface-hover);
+}
+
+.post-title,
+.post-title a,
+.bookmark-url,
+.project-title,
+.single-content article a {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.post-title a:hover,
+.bookmark-header:hover .bookmark-url,
+.project-title:hover,
+.single-content article a:hover {
+    color: var(--accent-hover);
+}
+
+.single-content article :is(h1, h2, h3, h4, h5, h6) {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     scroll-margin-top: 5rem;
     position: relative;
@@ -567,18 +545,7 @@ body {
     transition: opacity 0.15s ease;
 }
 
-.single-content article h1:hover .heading-anchor,
-.single-content article h2:hover .heading-anchor,
-.single-content article h3:hover .heading-anchor,
-.single-content article h4:hover .heading-anchor,
-.single-content article h5:hover .heading-anchor,
-.single-content article h6:hover .heading-anchor,
-.single-content article h1:focus-within .heading-anchor,
-.single-content article h2:focus-within .heading-anchor,
-.single-content article h3:focus-within .heading-anchor,
-.single-content article h4:focus-within .heading-anchor,
-.single-content article h5:focus-within .heading-anchor,
-.single-content article h6:focus-within .heading-anchor {
+.single-content article :is(h1, h2, h3, h4, h5, h6):is(:hover, :focus-within) .heading-anchor {
     opacity: 1;
 }
 
@@ -604,15 +571,6 @@ body {
 .single-content article p {
     margin-bottom: var(--spacing-xl);
     font-size: var(--font-small);
-}
-
-.single-content article a {
-    color: var(--accent-color);
-    text-decoration: underline;
-}
-
-.single-content article a:hover {
-    color: var(--accent-hover);
 }
 
 /* Inline code */
@@ -669,7 +627,7 @@ body {
 }
 
 .single-content article table th {
-    background-color: #f5f5f5;
+    background-color: var(--surface-muted);
     border: 1px solid var(--border-color);
     padding: var(--spacing-sm);
     text-align: left;
@@ -682,7 +640,7 @@ body {
 }
 
 .single-content article table tr:nth-child(even) {
-    background-color: #fafafa;
+    background-color: var(--surface-subtle);
 }
 
 /* Lists */
@@ -793,10 +751,7 @@ body {
     .bookmark-url {
         width: 100%;
         white-space: normal;
-        overflow: visible;
-        text-overflow: clip;
         overflow-wrap: break-word;
-        word-break: break-word;
     }
 
     .project-item {
@@ -844,19 +799,6 @@ body {
     .single-content article code {
         overflow-wrap: break-word;
     }
-}
-
-/* Utility Classes */
-.text-center {
-    text-align: center;
-}
-
-.mt-lg {
-    margin-top: var(--spacing-md);
-}
-
-.mb-lg {
-    margin-bottom: var(--spacing-md);
 }
 
 /* KaTeX Math Styling */
