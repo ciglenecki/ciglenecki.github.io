@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title desc">
+    <title id="title">EEG Driver Fatigue Detection</title>
+    <desc id="desc">Placeholder image for EEG Driver Fatigue Detection</desc>
+    <rect width="200" height="200" fill="#f4fbff"/>
+    <rect x="16" y="16" width="168" height="168" rx="10" fill="#ffffff" stroke="#0000ff" stroke-width="2"/>
+    <path d="M28 86 L44 86 L52 70 L62 110 L74 78 L84 96 L98 96 L108 84 L120 84 L130 70 L142 114 L154 86 L172 86" fill="none" stroke="#0000ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="28" y="138" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700">EEG driver</text>
+    <text x="28" y="156" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="700">fatigue detection</text>
+    <text x="28" y="176" fill="#555555" font-family="Helvetica, Arial, sans-serif" font-size="10">multiple entropy fusion</text>
+</svg>

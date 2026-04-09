@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title desc">
+    <title id="title">Holt Linear</title>
+    <desc id="desc">Placeholder image for Holt Linear</desc>
+    <rect width="200" height="200" fill="#f7f7ff"/>
+    <rect x="16" y="16" width="168" height="168" rx="10" fill="#ffffff" stroke="#0000ff" stroke-width="2"/>
+    <path d="M34 134 L64 120 L92 108 L118 90 L146 72 L166 58" fill="none" stroke="#0000ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M34 144 L64 128 L92 116 L118 98 L146 82 L166 66" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
+    <text x="34" y="164" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700">holt linear</text>
+    <text x="34" y="180" fill="#555555" font-family="Helvetica, Arial, sans-serif" font-size="10">second-order smoothing</text>
+</svg>

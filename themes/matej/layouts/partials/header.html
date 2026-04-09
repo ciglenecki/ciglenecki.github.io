@@ -4,6 +4,7 @@
         
         <a href="{{ "/" | relURL }}" class="{{ if .IsHome }}active{{ end }}">home</a>
 
+        <a href="{{ "/projects" | relURL }}" class="{{ if eq .RelPermalink "/projects/" }}active{{ end }}">projects</a>
         <a href="{{ "/bookmarks" | relURL }}" class="{{ if eq .RelPermalink "/bookmarks/" }}active{{ end }}">bookmarks</a>
         <a href="{{ "/videos" | relURL }}" class="{{ if eq .RelPermalink "/videos/" }}active{{ end }}">videos</a>
     </nav>

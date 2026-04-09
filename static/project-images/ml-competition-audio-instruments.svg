@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title desc">
+    <title id="title">ML Competition Audio Instruments</title>
+    <desc id="desc">Placeholder image for ML Competition Audio Instruments</desc>
+    <rect width="200" height="200" fill="#fff8f1"/>
+    <rect x="16" y="16" width="168" height="168" rx="10" fill="#ffffff" stroke="#0000ff" stroke-width="2"/>
+    <rect x="30" y="104" width="12" height="28" fill="#0000ff" opacity="0.25"/>
+    <rect x="48" y="92" width="12" height="40" fill="#0000ff" opacity="0.35"/>
+    <rect x="66" y="80" width="12" height="52" fill="#0000ff" opacity="0.45"/>
+    <rect x="84" y="70" width="12" height="62" fill="#0000ff" opacity="0.55"/>
+    <rect x="102" y="78" width="12" height="54" fill="#0000ff" opacity="0.45"/>
+    <rect x="120" y="90" width="12" height="42" fill="#0000ff" opacity="0.35"/>
+    <rect x="138" y="102" width="12" height="30" fill="#0000ff" opacity="0.25"/>
+    <text x="30" y="154" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700">audio instruments</text>
+    <text x="30" y="172" fill="#555555" font-family="Helvetica, Arial, sans-serif" font-size="10">lumen data science 2023</text>
+</svg>

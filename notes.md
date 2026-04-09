@@ -22,10 +22,3 @@ https://github.com/ciglenecki/holt-linear
 put placeholder images as well 
 
 you should create "projects" section in the navbar, that shows these projects, you should try to reuse components in style from home/bookmarks. but make sure the image is a square (200x200px) or something like this. the image should be fitted to that dimension and cropped where needed so it's not stretched.
-
-
-=====
-
-
-Limit the width of a page to certain width. The website can also always be smaller. Furthermore
-, on desktop, there should be only one content column.

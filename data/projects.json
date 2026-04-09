@@ -1,0 +1,51 @@
+[
+    {
+        "title": "NeRF Research",
+        "slug": "nerf-research",
+        "url": "https://github.com/ciglenecki/nerf-research",
+        "image": "/project-images/nerf-research.svg",
+        "description": "Research of Neural Radiance Fields (NeRF) for generating synthetic data. I built model that generates personal document images from novel scene views, and identified constraints under which the NeRF model generates high quality images. The work also quantified novel view synthesis in interpolation and extrapolation regimes."
+    },
+    {
+        "title": "EEG Driver Fatigue Detection",
+        "slug": "eeg-driver-fatigue-detection",
+        "url": "https://github.com/ciglenecki/eeg-driver-fatigue-detection",
+        "image": "/project-images/eeg-driver-fatigue-detection.svg",
+        "description": "Driver fatigue detection through multiple entropy fusion analysis in an EEG-based system. The assignment was to implement steps described in the research paper and produce similar results. The pipeline applies filters to remove noise, extracts multiple entropies and other features from 1 second epochs, and trains several models including SVM, neural network, KNN, and random forest."
+    },
+    {
+        "title": "ML Competition Audio Instruments",
+        "slug": "ml-competition-audio-instruments",
+        "url": "https://github.com/ciglenecki/ml-competition-audio-instruments",
+        "image": "/project-images/ml-competition-audio-instruments.svg",
+        "description": "A LUMEN Data Science 2023 competition project whose goal was to create a model that labels 11 musical instruments from an input audio signal. We trained and developed a model in PyTorch using deep learning, digital signal processing, audio feature engineering, and spectrogram or image representations derived from raw audio. We won 2nd place and achieved 1st place in model performance."
+    },
+    {
+        "title": "ML Competition CV GeoGuessr",
+        "slug": "ml-competition-cv-geoguessr",
+        "url": "https://github.com/ciglenecki/ml-competition-cv-geoguessr",
+        "image": "/project-images/ml-competition-cv-geoguessr.svg",
+        "description": "A LUMEN Data Science 2022 competition project whose goal was to build a computer vision model that predicts the geographic location from an image in a GeoGuessr-style setting. We trained a deep learning model for image based geolocation and achieved 22 km mean error. The solution uses a street-view image encoder and predicts either a class for a square region or latitude and longitude directly."
+    },
+    {
+        "title": "Torch JPEG Blockiness",
+        "slug": "torch-jpeg-blockiness",
+        "url": "https://github.com/ciglenecki/torch-jpeg-blockiness",
+        "image": "/project-images/torch-jpeg-blockiness.svg",
+        "description": "An implementation of a JPEG blockiness algorithm from the paper \"A JPEG blocking artifact detector for image forensics.\" It is based on gohtanii's implementation and improves it by writing operations in torch, vectorizing them, and supporting batched input. The higher the blockiness metric value, the more likely it is that the image was JPEG-compressed at a low quality."
+    },
+    {
+        "title": "StyleGAN2 Latent Projection Inversion",
+        "slug": "stylegan2-latent-projection-inversion",
+        "url": "https://github.com/ciglenecki/stylegan2-latent-projection-inversion",
+        "image": "/project-images/stylegan2-latent-projection-inversion.svg",
+        "description": "Projecting faces into StyleGAN2-ADA's latent space, with results of StyleGAN2-ADA finetuned on images of art from the MetFaces dataset. The project creates a projector of images into latent space, reconstructs the final image, and explores latent directions for changing concrete facial features. It also compares StyleGAN2 and StyleGAN2-ADA under different data regimes."
+    },
+    {
+        "title": "Holt Linear",
+        "slug": "holt-linear",
+        "url": "https://github.com/ciglenecki/holt-linear",
+        "image": "/project-images/holt-linear.svg",
+        "description": "A small implementation of second-order exponential smoothing, also known as Holt linear. It focuses on the Holt linear method with the limitation of a starting trend of 0."
+    }
+]
