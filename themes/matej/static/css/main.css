@@ -863,7 +863,7 @@ body {
 
     .project-image-link,
     .project-image {
-        width: min(200px, 100%);
+        width: min(100px, 100%);
     }
 
     .site-header nav {
