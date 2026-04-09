@@ -170,16 +170,13 @@ body {
 
 .profile-links {
     list-style: none;
-    margin-top: var(--spacing-sm);
+    margin-top: var(--spacing-xl);
 }
 
 .profile-links li {
     margin-bottom: 0;
 }
 
-.profile-links-break {
-    height: var(--spacing-sm);
-}
 
 .profile-links a {
     display: flex;
@@ -211,7 +208,7 @@ body {
 }
 
 .profile-contact-text {
-    margin-top: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
     color: var(--text-color);
 }
 
@@ -514,7 +511,7 @@ body {
 
 /* Single Post/Page */
 .single-content {
-    max-width: 800px;
+    max-width: var(--max-width);
     margin: 0 auto;
     padding: var(--spacing-lg);
 }
