@@ -138,6 +138,15 @@ body {
     color: var(--text-color);
 }
 
+.profile-intro,
+.profile-tagline {
+    margin: 0;
+}
+
+.profile-tagline {
+    margin-top: 0.1rem;
+}
+
 .profile-description {
     font-size: var(--font-small);
     color: var(--text-color);
@@ -152,6 +161,10 @@ body {
 
 .profile-links li {
     margin-bottom: 0;
+}
+
+.profile-links-break {
+    height: var(--spacing-sm);
 }
 
 .profile-links a {

@@ -28,7 +28,6 @@ This book is about a person with impeccable looks who accidentally finds a way t
 ## What drew me in
 What initially intrigued me about this book was the numerous variations of book covers that all represent the same depiction, and in a way, spoil the book. I didn't know much about Oscar Wilde except that he was sharp, witty, and jailed for two years for gross indecency. After finding out the book was quoted during the trial against Oscar Wilde, I became really interested and decided to pick it up.
 
-<br>
 
 The first few pages deceive you into thinking the primary plot will be a sort of romance between Dorian and Basil. This narrative was completely shattered by the appearance of Lord Henry Wotton, or, more precisely, a conversation between him and Dorian Grey. During their conversation it's immediately obvious that Dorian Grey is beautiful and empty headed. With his novel, pretentious and snobby remarks, Lord Henry Wotton plants mental seeds that alter the course of Dorian's life by filling his head with ideas he never could have imagined. I was taken away by just how malleable the main character was, but I also felt deep satisfaction immediately upon realizing the true plot setup was revealed. The cover of the book completely spoiled the ending which surprisingly didn't bother me. It transformed the reading experience into trying to interpolate what happens between the opening setup the image on the cover.
 
@@ -41,8 +40,6 @@ Although Dorian's rocky way towards corruption was obvious, I expected an intell
 
 ## Lord Henry Wotton
 The complete contrast in that regard was Lord Henry Wotton. A captivating figure at the start, but completely indigestible once I finished the book, even though he didn't change whatsoever. To me, he is a figure that represents what troubles Oscar Wilde in the Victorian society he lived in.
-
-<br>
 
 Lord Henry Wotton oozes with unconventional, piercing, and snappy aphorisms. Although I didn't explicitly check this, in my opinion, they reflect some of Wilde's own vision and guiding principles. Lord Henry Wotton's ideas are captivating at first. They question ideas of pleasure, interpreting beauty as the highest form of intellectual observation, giving emphasis on one's current joys instead of banking moments for the future, or ruminating on the past. However, at some point, he started degrading the kind of people who are the opposite of him. People who settle down, enjoy recurring social events, and stay consistent with their interests. This became quite annoying. It came off as smug, pretentious, and outright unbearable towards the end. His hedonistic outlook on life was hard to take seriously as it was presented as the only way to satisfaction or purpose in life. Obviously, that's incorrect. There are many types of life purposes that are considered valuable by many of us, and hedonism may or may not be one of them. His inability to understand others was what cost him my respect. His one-dimensionality was magnetizing, but became repelling once the magnetic pole switched in the middle of the book. I think this issue would be solved if Lord Henry Wotton appeared less often in the book.  
 
