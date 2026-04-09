@@ -76,13 +76,9 @@ baseURL = 'https://yourdomain.com/'
 languageCode = 'en-us'
 title = 'Your Name'
 theme = 'matej'
-
-[params]
-  [params.profile]
-    name = "Your Name"
-    photo = "/images/profile.jpg"
 ```
 
+Write the profile content directly in `themes/matej/layouts/partials/profile.html`.
 Write the profile links directly in `themes/matej/layouts/partials/profile-links.html`.
 
 ## Directory Structure

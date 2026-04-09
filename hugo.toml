@@ -19,12 +19,6 @@ theme = 'matej'
           block = [['$$', '$$']]
           inline = [['$', '$']]
 
-[params]
-  [params.profile]
-    name = "Matej Ciglenečki"
-    photo = "/images/profile.jpg"
-    description = "nonlinear, but smooth about it"
-
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
