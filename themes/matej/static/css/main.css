@@ -12,6 +12,7 @@
     --content-width: 90%;
     --max-width: 960px;
     --page-padding: clamp(1rem, 2vw, 2rem);
+    --mobile-page-padding: var(--page-padding);
     --font-large: 3rem;
     --font-big: 2rem;
     --font-small: 1.2rem;
@@ -692,7 +693,7 @@ body {
 
     .main-container {
         flex-direction: column;
-        padding: var(--page-padding);
+        padding: var(--mobile-page-padding);
         width: 100%;
         max-width: 100%;
     }
@@ -781,7 +782,7 @@ body {
 
     .site-header nav {
         gap: var(--spacing-sm);
-        padding: 0 var(--page-padding);
+        padding: 0 var(--mobile-page-padding);
         align-items: flex-start;
     }
 
@@ -790,7 +791,7 @@ body {
     }
 
     .single-content {
-        padding: var(--spacing-sm);
+        padding: var(--mobile-page-padding);
         width: 100%;
         max-width: 100%;
     }
