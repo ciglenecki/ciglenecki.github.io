@@ -814,11 +814,6 @@ body {
         white-space: normal;
     }
 
-    .single-title {
-        font-size: var(--font-huge);
-        overflow-wrap: break-word;
-    }
-
     .single-content article table {
         display: block;
         overflow-x: auto;
