@@ -1,6 +1,5 @@
 name: Build and deploy via Hugo
 on:
-on:
   push:
     branches:
       - main
