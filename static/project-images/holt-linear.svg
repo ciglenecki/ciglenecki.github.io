@@ -1,10 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title desc">
     <title id="title">Holt Linear</title>
     <desc id="desc">Placeholder image for Holt Linear</desc>
-    <rect width="200" height="200" fill="#f7f7ff"/>
-    <rect x="16" y="16" width="168" height="168" rx="10" fill="#ffffff" stroke="#0000ff" stroke-width="2"/>
-    <path d="M34 134 L64 120 L92 108 L118 90 L146 72 L166 58" fill="none" stroke="#0000ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M34 144 L64 128 L92 116 L118 98 L146 82 L166 66" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"/>
-    <text x="34" y="164" fill="#000000" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700">holt linear</text>
-    <text x="34" y="180" fill="#555555" font-family="Helvetica, Arial, sans-serif" font-size="10">second-order smoothing</text>
+    <rect width="200" height="200" fill="#ffffff"/>
+    <path d="M30 142 L46 136 L60 140 L74 122 L88 126 L102 102 L116 108 L130 82 L144 88 L158 62 L170 48" fill="none" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+    <path d="M46 134 C54 132, 62 129, 74 125 C84 121, 94 115, 102 109 C112 102, 122 93, 130 85 C138 77, 148 66, 158 54 C164 47, 168 43, 170 41" fill="none" stroke="#0000ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="38" y="180" fill="#000000" font-family="Roboto" font-size="28" font-weight="700">holt linear</text>
 </svg>
