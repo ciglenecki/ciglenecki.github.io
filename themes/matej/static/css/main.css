@@ -583,9 +583,10 @@ body {
     margin-top: var(--spacing-md);
 }
 
-.single-content article p {
-    margin-bottom: var(--spacing-xl);
-    font-size: var(--font-small);
+
+/* add extra spacing between paragraphs, but not before the first one */
+.single-content article p+p {
+    margin-top: var(--spacing-xl);
 }
 
 /* Inline code */
