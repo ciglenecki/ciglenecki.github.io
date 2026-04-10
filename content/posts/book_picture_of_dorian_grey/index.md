@@ -33,7 +33,7 @@ The first few pages deceive you into thinking the primary plot will be a sort of
 
 
 ## On beauty
-This book places importance on beauty heavily. There are numerous research papers showing that attractive people are perceived as kinder, more successful, and intelligent <sup>[dion1972]</sup>. In my experience, this is true, but only if the person has interesting traits that make their foundation solid. I often joke with my friends that the most attractive people are not the prettiest ones, but the gritty, ugly, hot people with an edge. There's something repulsive about the 'perfect' beauty when it's accompanied by nothing else at all.
+This book places importance on beauty heavily. There are numerous research papers showing that attractive people are perceived as kinder, more successful, and intelligent <sup>[dion1972]</sup>. In my experience, this is true, but only if the person has interesting traits that make their foundation solid. I often joke with my friends that the most attractive people are not the prettiest ones, but the gritty, imperfect, hot people with an edge. There's something repulsive about the 'perfect' beauty when it's accompanied by nothing else at all. This book implies the opposite: "Beauty is a form of Genius — is higher, indeed, than Genius, as it needs no explanation".
 
 
 ## Dorian Grey
@@ -47,34 +47,28 @@ Lord Henry Wotton oozes with unconventional, piercing, and snappy aphorisms. Alt
 ## Quotes from Lord Henry Wotton
 
 (1)
-```
-"You will always be fond of me. I represent to you all the sins you never had the courage to commit."
-```
+> "You will always be fond of me. I represent to you all the sins you never had the courage to commit."
+
 
 (2)
-```
-"When one is in love, one always begins by deceiving one's self, and one always ends by deceiving others. That is what the world calls a romance."
-```
+> "When one is in love, one always begins by deceiving one's self, and one always ends by deceiving others. That is what the world calls a romance."
+
 
 (3)
-```
-"The books that the world calls immoral are books that show the world its own shame."
-```
+> "The books that the world calls immoral are books that show the world its own shame."
+
 
 (4)
-```
-"The only artists I have ever known who are personally delightful are bad artists. Good artists exist simply in what they make, and consequently are perfectly uninteresting in what they are. A great poet, a really great poet, is the most unpoetical of all creatures. But inferior poets are absolutely fascinating. The worse their rhymes are, the more picturesque they look. The mere fact of having published a book of second-rate sonnets makes a man quite irresistible. He lives the poetry that he cannot write. The others write the poetry that they dare not realize."
-```
+> "The only artists I have ever known who are personally delightful are bad artists. Good artists exist simply in what they make, and consequently are perfectly uninteresting in what they are. A great poet, a really great poet, is the most unpoetical of all creatures. But inferior poets are absolutely fascinating. The worse their rhymes are, the more picturesque they look. The mere fact of having published a book of second-rate sonnets makes a man quite irresistible. He lives the poetry that he cannot write. The others write the poetry that they dare not realize."
+
 
 (5)
-```
-"Beauty is a form of Genius--is higher, indeed, than Genius, as it needs no explanation. It is one of the great facts of the world, like sunlight, or springtime, or the reflection in the dark waters of that silver shell we call the moon. It cannot be questioned. It has divine right of sovereignty. It makes princes of those who have it."
-```
+> "Beauty is a form of Genius--is higher, indeed, than Genius, as it needs no explanation. It is one of the great facts of the world, like sunlight, or springtime, or the reflection in the dark waters of that silver shell we call the moon. It cannot be questioned. It has divine right of sovereignty. It makes princes of those who have it."
+
 
 (6)
-```
-"When I like people immensely I never tell their names to any one. It is like surrendering a part of them. I have grown to love secrecy. It seems to be the one thing that can make modern life mysterious or marvelous to us. The commonest thing is delightful if one only hides it. When I leave town now I never tell my people where I am going. If I did, I would lose all my pleasure. It is a silly habit, I dare say, but somehow it seems to bring a great deal of romance into one's life.
-```
+> "When I like people immensely I never tell their names to any one. It is like surrendering a part of them. I have grown to love secrecy. It seems to be the one thing that can make modern life mysterious or marvelous to us. The commonest thing is delightful if one only hides it. When I leave town now I never tell my people where I am going. If I did, I would lose all my pleasure. It is a silly habit, I dare say, but somehow it seems to bring a great deal of romance into one's life.
+
 
 ## Verdict
 Read this book if:
