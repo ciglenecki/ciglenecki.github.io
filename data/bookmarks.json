@@ -12,7 +12,7 @@
         "url": "https://lernapparat.de/jit-optimization-intro"
     },
     {
-        "group": "study",
+        "group": "learning",
         "date": "2018-07-15",
         "description": "TODO Michael Nielsen's Long-Term Memory - Augmenting Cognition",
         "url": "https://augmentingcognition.com/ltm.html"
@@ -48,9 +48,9 @@
         "url": "https://jordicenzano.github.io/frame-accurate-scrubbing/"
     },
     {
-        "group": "python",
+        "group": "programming",
         "date": "2025-10-22",
-        "description": " Evan Hahn's Scripts I wrote that I use all the time",
+        "description": " Evan Hahn's \"Scripts I wrote that I use all the time\"",
         "url": "https://evanhahn.com/scripts-i-wrote-that-i-use-all-the-time/"
     },
     {
