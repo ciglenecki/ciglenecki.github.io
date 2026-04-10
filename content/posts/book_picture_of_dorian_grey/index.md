@@ -22,7 +22,7 @@ group = "books"
 > ℹ️ this article contains soft spoilers
 
 ## Intro
-This book is about a person with impeccable looks who accidentally finds a way to keep them forever. However, his selfishness, hedonism, aestheticism completely corrupt his soul. 
+This book is about a person with impeccable looks who accidentally finds a way to keep them forever. However, his selfishness, hedonism, and aestheticism completely corrupt his soul. 
 
 
 ## What drew me in
@@ -37,7 +37,7 @@ This book places importance on beauty heavily. There are numerous research paper
 
 
 ## Dorian Grey
-Although Dorian's rocky way towards corruption was obvious, I expected an intellectual uprising on his part. One would imagine that cherishing sublime interests would produce experience, wisdom and evolved way of thinking. However, throughout the book, Dorian's mindset remained sheepish, the same sheepish kind when his thoughts were a mere meadow at the beginning of the book. After conversing with Sibyl Vane he decided never to see her again. Then, he changed his mind by determining he wants to marry her. This complete shift in his mindset happened within just a few hours, without any event occurring that would have affected his line of thinking. Later in the book, another naive determination to simply "be good", after living in indecency for over three decades without any repentance, was especially shocking to me. He gave me the impression that he understood himself better, but the smokescreen blows away each time he does something naive. It is hard to root for someone who refuses to learn from his own mistakes. On the other hand, I understand his actions regarding Bails' painting and find it difficult to believe that many of us would have acted differently in his position.
+Although Dorian's rocky way towards corruption was obvious, I expected an intellectual uprising on his part. One would imagine that cherishing sublime interests would produce experience, wisdom, and an evolved way of thinking. However, throughout the book, Dorian's mindset remained sheepish, the same sheepish kind when his thoughts were a mere meadow at the beginning of the book. After conversing with Sibyl Vane he decided never to see her again. Then, he changed his mind by determining he wants to marry her. This complete shift in his mindset happened within just a few hours, without any event occurring that would have affected his line of thinking. Later in the book, another naive determination to simply "be good", after living in indecency for over three decades without any repentance, was especially shocking to me. He gave me the impression that he understood himself better, but the smokescreen blows away each time he does something naive. It is hard to root for someone who refuses to learn from his own mistakes. On the other hand, I understand his actions regarding Bails' painting and find it difficult to believe that many of us would have acted differently in his position.
 
 ## Lord Henry Wotton
 The complete contrast in that regard was Lord Henry Wotton. A captivating figure at the start, but completely indigestible once I finished the book, even though he didn't change whatsoever. To me, he is a figure that represents what troubles Oscar Wilde in the Victorian society he lived in.
@@ -63,11 +63,11 @@ Lord Henry Wotton oozes with unconventional, piercing, and snappy aphorisms. Alt
 
 
 (5)
-> "Beauty is a form of Genius--is higher, indeed, than Genius, as it needs no explanation. It is one of the great facts of the world, like sunlight, or springtime, or the reflection in the dark waters of that silver shell we call the moon. It cannot be questioned. It has divine right of sovereignty. It makes princes of those who have it."
+> "Beauty is a form of Genius--is higher, indeed, than Genius, as it needs no explanation. It is one of the great facts of the world, like sunlight, or springtime, or the reflection in the dark waters of that silver shell we call the moon. It cannot be questioned. It has the divine right of sovereignty. It makes princes of those who have it."
 
 
 (6)
-> "When I like people immensely I never tell their names to any one. It is like surrendering a part of them. I have grown to love secrecy. It seems to be the one thing that can make modern life mysterious or marvelous to us. The commonest thing is delightful if one only hides it. When I leave town now I never tell my people where I am going. If I did, I would lose all my pleasure. It is a silly habit, I dare say, but somehow it seems to bring a great deal of romance into one's life.
+> "When I like people immensely, I never tell their names to anyone. It is like surrendering a part of them. I have grown to love secrecy. It seems to be the one thing that can make modern life mysterious or marvelous to us. The commonest thing is delightful if one only hides it. When I leave town now I never tell my people where I am going. If I did, I would lose all my pleasure. It is a silly habit, I dare say, but somehow it seems to bring a great deal of romance into one's life.
 
 
 ## Verdict
@@ -78,9 +78,9 @@ Read this book if:
 
 Don't read this book if:
 - you like plot driven books
+- you are prejudiced against certain people
 - you don't like pretentious characters
 - you don't like when the obvious happens
-- you are prejudiced against certain people
 
 <br>
 <br>
