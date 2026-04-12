@@ -228,7 +228,8 @@ h2 {
 }
 
 .group-projects {
-    gap: var(--space-md);
+    align-items: center;
+    gap: var(--space-sm);
 }
 
 .videos-gallery {
@@ -251,6 +252,7 @@ h2 {
 .project-item {
     position: relative;
     min-width: 0;
+    padding: var(--space-2xs) 0;
 }
 
 .post-item,
