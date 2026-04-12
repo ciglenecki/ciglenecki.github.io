@@ -6,9 +6,85 @@ group = "programming"
 
 Everything I learned about Django which isn't mentioned in Django's docs, in some form or another.
 
+# Fundamental advice
+
+## Do not override `save()` or use signals, create `services` to abstract away the business logic.
+
+Often, there's some repetitive business logic you need to perform. Let's assume your system can create and store an image in the database. Before saving the image, you want to resize it and ensure it's resolution is bellow 1080p. The image can be created and saved in the database on different operational layers: direct user file upload (route), internal async task, side-effect of another piece of code. How should you ensure that the image is resized before it's saved into the database?
+
+```py
+from django.db import models
+
+class Image(models.Model):
+    file = models.ImageField(upload_to="photos/")
+```
+
+❌ case 1: override image's `save()` function at the ORM level
+
+```py
+class Image(models.Model):
+    file = models.ImageField(upload_to="photos/")
+
+    def save(self, *args, **kwargs):
+        # resize self.file here
+        self.file = resize_to_fit(self.file)
+
+        super().save(*args, **kwargs)
+```
+
+This will work, but it's a funky approach. You're defining a business logic in the Django Model class. You cannot easily extract your business logic from the Django code at a later point, and easily move it to another ORM. This approach also clutters the Django Model class with important details that are sometimes hard to remember. I will explain how this is contrasted with case 3. Furthermore, in the client code, the developer now only sees `image.save()`. He might be unaware of the image resizing that occurs under the hood. He's **operating with incomplete business information**.
+
+❌ case 2: signals
+Seems cute and fun at first but becomes a NIGHTMARE during a debugging session. You should avoid signals.
+
+```py
+class Image(models.Model):
+    file = models.ImageField(upload_to="photos/")
 
 
-### Don't use General Foreign Key (GFK)
+@receiver(pre_save, sender=Image)
+def resize_image_on_save(sender, instance, **kwargs):
+    if instance.file:
+        instance.file = ImageService.resize_to_fit(instance.file)
+```
+✅ case 3: defining a service
+
+I do not want to define a service formally. It's a reusable piece of code, whose naming describes the business action. A service can be a file with functions, a module, a class with static methods or anything else.
+
+Let us define an `ImageService`. It has a static function `resize_to_fit(image, res=1920*1080)`.
+
+<details ><summary>
+ImageSevice.py
+</summary>
+
+```py
+class ImageService:
+    @staticmethod
+    def resize_to_fit(image: Image.Image, res: int = 1920 * 1080) -> Image.Image:
+        # ... image resize logic ...
+        return resized_image
+```
+</details>
+
+
+```py
+image = ImageService.resize_to_fit(image, res=1920*1080)
+image.save()
+```
+You might think, calling `resize_to_fit` each time before `save()` seems repetitive. It's not as bad as it seems. In fact, it has multiple advantages over other approaches.
+1. You wrapped the business logic in the service's static method. You do not need to rewrite the business logic at multiple places, you just need to call it.
+2. You code became self-documented. A developer looking at the code will explicitly see `image = ImageService.resize_to_fit(image, res=1920*1080)` followed by a `.save()`. He understands the image will be resized.
+3. Your code stayed flexible. Your business logic changes. You might resize the image if it was uploaded by the user, but not if it was created by a image generation job. With this approach, you can directly alter the business logic at every level. In case (1), we would have to 
+## Use one app
+
+The biggest mistake you can make when creating a project/app/system is assuming you need to create three apps because "we have three different products".
+
+The data flow boundary is often not clear and predictable, especially in early-mid stage when product and business requirements change. 
+
+For example, you might think some Entity is only present in App A. You soon realize that it would be useful to use a feature from App B to transform an Entity. You now run into a problem where your App B depends on App because it modifies the Entity somewhere. 
+
+     
+## Don't use General Foreign Key (GFK)
 
 unless: https://lukeplant.me.uk/blog/posts/avoid-django-genericforeignkey/#legitimate-uses
 
@@ -43,7 +119,7 @@ Cons:
 - performance -- querying on Job is required
 - not obvious how to 
 
-### Explicitly define all tables and their names
+## Explicitly define all tables and their names
 
 Prevent Django from creating hidden data tables. As Luke said, your DB will likely outlive your ORM. Furthermore, later down the line, your system might have services that want to process data (read/write) from DB tables. Do not let Django name your tables for you. 
 
@@ -59,45 +135,27 @@ class Book(models.Model):
 
 (2) When using Many-To-Many, create explicit [`through`](https://docs.djangoproject.com/en/5.2/ref/models/fields/#django.db.models.ManyToManyField.through) table
 
+# Helpful but not important
+## Create `?include=` query param when dealing with deep objects
 
-### Django Agent instructions
+You are returning a `job`. job has expensive child field called `image_assets`. We do not want to fetch `images_assets` every time we fetch a job because it might hit the DB more times than necessary. 
 
+Create a `IncludeMixin` for Views
+- `allowed_includes`, lists the only accepted include tokens
+- `select_related_map` maps an include token to one or more FK paths that
+- `prefetch_related_map` maps an include token to one or more prefetch paths for reverse or many-to-many relations
 
 ```
-# Django Coding Convention
-
-## Environment
-
-- Django <____>
-- Django REST Framework (DRF) <____>
-- Django Q2 for task queuing, scheduling, and async tasks
-- PostgreSQL
-- drf-spectacular
-- PyJWT
-- django-taggit
-- django-imagekit
-
-## General Guidelines
-
-- For ForeignKey / ManyToManyField / OneToOneField, pass the model class, not a string. Do not set related_name.
-- Follow Django norms: Don't Repeat Yourself, keep logic in models/serializers, keep views thin.
-- Prefer GenericAPIView over APIView and ModelViewSet.
-- Use DRF serializers for all validation/serialization.Keep views focused on business logic and response handling.
-- Utilize Django's ORM effectively and avoid raw SQL queries unless absolutely necessary for performance.
-- Leverage Django’s security features (CSRF, XSS protections, etc.).
-- Prevent N+1 queries
-  - `select_related` for foreign keys and one-to-one relationships
-  - `prefetch_related` for many-to-many and reverse foreign key relationships
-
-## QuerySets & Managers
-
-- Put common filters in a custom manager/queryset (.active(), .for_user(user)).
-- Always annotate expensive aggregations in the queryset, not in views.
-
-## Testing
-
-- Test file names should follow the `test_*.py` pattern.
-- Aim for high test coverage. Every model, serializer, and view should have corresponding tests.
-- Write atomic tests that focus on a single piece of functionality.
-- Mock external services and dependencies (e.g., S3, payment gateways) using `unittest.mock`.
+    allowed_includes = {"job"}
+    select_related_map = {"job": ImageAsset.get_job_relation_names()}
+    prefetch_related_map = {"job": ("image_to_image_job__reference_images",)}
 ```
+
+# Other
+
+https://careersatdoordash.com/blog/tips-for-building-high-quality-django-apps-at-scale/
+
+
+## Django skills
+
+Add a link to skill files here. 
