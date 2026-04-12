@@ -14,7 +14,7 @@
     {
         "group": "learning",
         "date": "2018-07-15",
-        "description": "TODO Michael Nielsen's Long-Term Memory - Augmenting Cognition",
+        "description": "Michael Nielsen's Long-Term Memory - Augmenting Cognition. Didn't read yet.",
         "url": "https://augmentingcognition.com/ltm.html"
     },
     {
@@ -56,7 +56,7 @@
     {
         "group": "math",
         "date": "2020-10-04",
-        "description": "TODO Dr. PI - Kompleksna analiza",
+        "description": "Dr. PI - Kompleksna analiza. Didn't read yet.",
         "url": "https://www.youtube.com/watch?v=1UA6q4bW1ok&list=PLfg5S-V2k3ZK1cCUm4uHBfzT1r5k_0yCi"
     },
     {
@@ -84,9 +84,31 @@
         "url": "https://jere357.github.io/"
     },
     {
+        "group": "other people's blogs",
+        "date": "2026-04-12",
+        "description": "Marijan Smetko's blog",
+        "url": "https://terra-incognita.blog/"
+    },
+    {
         "group": "other",
         "date": "2025-09-22",
         "description": "21 Facts About Throwing Good Parties. Some of these scream 'USA culture' and 'millennial' but relevant nonetheless.",
         "url": "https://www.atvbt.com/21-facts-about-throwing-good-parties/"
+    },
+    {
+        "group": "piracy",
+        "url": "https://www.google.com/search?q=annas+archive"
+    },
+    {
+        "group": "piracy",
+        "url": "https://www.google.com/search?q=libgen"
+    },
+    {
+        "group": "piracy",
+        "url": "https://www.google.com/search?q=scihub"
+    },
+    {
+        "group": "piracy",
+        "url": "https://www.google.com/search?q=audiobookbay"
     }
 ]
