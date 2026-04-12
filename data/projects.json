@@ -4,21 +4,21 @@
         "slug": "nerf-research",
         "url": "https://github.com/ciglenecki/nerf-research",
         "image": "/project-images/specimen_3d_export.jpeg",
-        "description": "During my masters and time at Microblink, I researched Neural Radiance Fields (NeRF). NeRF model family generates images of novel scene views. I implemented a model that generates personal document images and identified constraints under which the NeRF model generates high quality images. The work also quantified novel view synthesis in interpolation and extrapolation setups."
+        "description": "During my master's and time at Microblink, I researched Neural Radiance Fields (NeRF) that generate images of novel scene views. I built a model that generates personal document images, identified constraints for generating high-quality images, and quantified image quality in angle interpolation and extrapolation setups. I also developed segmentation mask generation via transfer learning with a goal to minimize required annotation data. Created an automated cropping method to isolate documents in space that reduces image artifacts."
     },
     {
-        "title": "ML Competition Audio Instruments",
+        "title": "ML Competition Audio Instruments (2nd place)",
         "slug": "ml-competition-audio-instruments",
         "url": "https://github.com/ciglenecki/ml-competition-audio-instruments",
         "image": "/project-images/lumen_audio.png",
-        "description": "LUMEN Data Science 2023 competition. The goal was to create a model that labels 11 musical instruments from an input audio signal. We trained and developed a model in PyTorch using deep learning, digital signal processing, audio feature engineering, and spectrogram or image representations derived from raw audio. We won 2nd place and achieved 1st place in model performance."
+        "description": "LUMEN Data Science is the largest ML competition in the Croatia that lasts 3 months. The goal was to create a model that labels 11 musical instruments from an input audio signal. We trained and developed a model in PyTorch using deep learning, digital signal processing, audio feature engineering, and spectrogram or image representations derived from raw audio. We won 2nd place and achieved 1st place in model performance."
     },
     {
-        "title": "ML Competition CV GeoGuessr",
+        "title": "ML Competition CV GeoGuessr (finalist)",
         "slug": "ml-competition-cv-geoguessr",
         "url": "https://github.com/ciglenecki/ml-competition-cv-geoguessr",
         "image": "/project-images/lumen_geoguessr.png",
-        "description": "LUMEN Data Science 2023 competition. The goal was to build a computer vision model that predicts the geographic location from an image in a GeoGuessr-style setting. The model is trained on Croatia's Google Street View images. The model encodes and predicts either a class for a square region or latitude and longitude directly. We were the finalists in the competition and achieved 2nd place in model performance."
+        "description": "LUMEN Data Science is the largest ML competition in the Croatia that lasts 3 months. The goal was to build a computer vision model that predicts the geographic location from an image in a GeoGuessr-style setting. The model is trained on Croatia's Google Street View images. The model encodes and predicts either a class for a square region or latitude and longitude directly. We were the finalists in the competition and achieved 2nd place in model performance."
     },
     {
         "title": "Torch JPEG Blockiness",

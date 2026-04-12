@@ -1,8 +1,16 @@
 {{ define "main" }}
-{{ partial "main-wrapper.html" (dict
-    "context" .
-    "contentPartial" "grouped-list.html"
-    "section" "posts"
-    "showThumbnails" false
-) }}
+<div class="main-wrapper">
+    {{ partial "profile.html" . }}
+
+    <div class="content-area">
+        {{ partial "grouped-list.html" (dict
+            "context" .
+            "section" "posts"
+            "showThumbnails" false
+        ) }}
+        <br>
+        <br>
+        {{ partial "group-projects.html" (dict "context" .) }}
+    </div>
+</div>
 {{ end }}
