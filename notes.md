@@ -1,3 +1,15 @@
+remove all partials that are not truely reusable across multiple sites or called in for loops and move the code to 
+
+remove profile links
+
+
+layouts/index.html and layouts/_default/list.html are almost identical
+
+ask me questions
+
+
+====
+  
 when i scroll, my sticky profile moves, i think it should always be fixed even if i scroll (this has something to do with margin?)
 =====
 

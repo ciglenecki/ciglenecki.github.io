@@ -79,7 +79,7 @@ img {
 }
 
 .site-header nav,
-.main-container,
+.main-wrapper,
 .single-content {
     width: min(100%, var(--container-width));
     margin: 0 auto;
@@ -131,7 +131,7 @@ img {
     opacity: 0.85;
 }
 
-.main-container {
+.main-wrapper {
     display: flex;
     gap: var(--space-lg);
     padding: var(--page-padding);
@@ -217,19 +217,19 @@ h2 {
     min-width: 0;
 }
 
-.content-groups,
-.projects-list,
+.grouped-list,
+.group-projects,
 .videos-gallery {
     display: grid;
     grid-template-columns: 1fr;
 }
 
-.content-groups {
+.grouped-list {
     gap: var(--space-lg);
     margin-bottom: var(--space-lg);
 }
 
-.projects-list {
+.group-projects {
     gap: var(--space-md);
 }
 
@@ -660,7 +660,7 @@ h6 {
 }
 
 @media (max-width: 1024px) {
-    .main-container {
+    .main-wrapper {
         flex-direction: column;
     }
 

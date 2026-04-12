@@ -1,7 +1,7 @@
 {{ define "main" }}
-{{ partial "content-shell.html" (dict
+{{ partial "main-wrapper.html" (dict
     "context" .
-    "contentPartial" "regular-pages-list.html"
+    "contentPartial" "grouped-list.html"
     "section" "posts"
     "showThumbnails" false
 ) }}

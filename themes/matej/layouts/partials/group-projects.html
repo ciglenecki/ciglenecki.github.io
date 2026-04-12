@@ -1,10 +1,10 @@
 {{ $projects := .context.Site.Data.projects }}
 
-<div class="content-groups">
+<div class="grouped-list">
     <section class="content-group">
         <h2 class="group-title">projects</h2>
 
-        <div class="projects-list">
+        <div class="group-projects">
             {{ range $projects }}
                 <article class="project-item">
                     <a href="{{ .url }}" class="project-image-link" target="_blank" rel="noopener">

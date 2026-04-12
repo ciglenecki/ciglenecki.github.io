@@ -1,3 +1,0 @@
-{{ $pages := where .context.Site.RegularPages "Section" .section }}
-{{ $pages = where $pages ".Draft" false }}
-{{ partial "grouped-pages.html" (dict "pages" $pages "showThumbnails" .showThumbnails) }}
