@@ -7,10 +7,10 @@
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
     <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/syntax.css" | relURL }}">
-    
-    <!-- MathJax for math rendering -->
+
+    {{ if .IsPage }}
     <script>
-        MathJax = {
+        window.MathJax = {
             tex: {
                 inlineMath: [['$', '$']],
                 displayMath: [['$$', '$$']],
@@ -19,27 +19,15 @@
             },
             options: {
                 skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-            },
-            startup: {
-                ready: () => {
-                    MathJax.startup.defaultReady();
-                    MathJax.startup.promise.then(() => {
-                        console.log('MathJax initial typesetting complete');
-                    });
-                }
             }
         };
     </script>
-    
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script"></script>
+    {{ end }}
 
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script"></script>
-    
-    <!-- Hover sound effect -->
-    <script src="{{ "js/hover-sound.js" | relURL }}"></script>
-    <script src="{{ "js/heading-links.js" | relURL }}" defer></script>
-    <script src="{{ "js/sticky-sidebar-offset.js" | relURL }}" defer></script>
+    <script defer src="{{ "js/hover-sound.js" | relURL }}"></script>
+    <script defer src="{{ "js/heading-links.js" | relURL }}"></script>
+    <script defer src="{{ "js/sticky-sidebar-offset.js" | relURL }}"></script>
     
     {{ block "head" . }}{{ end }}
 </head>

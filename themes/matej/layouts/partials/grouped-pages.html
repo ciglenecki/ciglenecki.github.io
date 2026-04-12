@@ -13,7 +13,7 @@
 <div class="content-groups">
     {{ range $groups }}
     {{ $currentGroup := . }}
-    <div class="content-group">
+    <section class="content-group">
         <h2 class="group-title">{{ $currentGroup }}</h2>
 
         {{ range $pages.ByDate.Reverse }}
@@ -35,6 +35,6 @@
         </article>
         {{ end }}
         {{ end }}
-    </div>
+    </section>
     {{ end }}
 </div>

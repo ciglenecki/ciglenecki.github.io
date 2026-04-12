@@ -1,11 +1,8 @@
 {{ define "main" }}
-<div class="main-container">
-    {{ partial "profile.html" . }}
-
-    <div class="content-area">
-        {{ $pages := where .Site.RegularPages "Section" .Section }}
-        {{ $pages = where $pages ".Draft" false }}
-        {{ partial "grouped-pages.html" (dict "pages" $pages "showThumbnails" true) }}
-    </div>
-</div>
+{{ partial "content-shell.html" (dict
+    "context" .
+    "contentPartial" "regular-pages-list.html"
+    "section" .Section
+    "showThumbnails" true
+) }}
 {{ end }}

@@ -1,0 +1,29 @@
+{{ $videos := .context.Site.Data.videos }}
+
+<div class="videos-gallery">
+    {{ range $videos }}
+        <article class="video-item">
+            <div class="video-embed">
+                {{ if .youtube }}
+                    <iframe src="https://www.youtube.com/embed/{{ .youtube }}"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                {{ else if .gdrive }}
+                    <iframe src="https://drive.google.com/file/d/{{ .gdrive }}/preview" allow="autoplay">
+                    </iframe>
+                {{ else if .embed }}
+                    {{ .embed | safeHTML }}
+                {{ end }}
+            </div>
+
+            {{ with .title }}
+                <h3 class="video-title">{{ . }}</h3>
+            {{ end }}
+
+            {{ with .description }}
+                <p class="video-description">{{ . }}</p>
+            {{ end }}
+        </article>
+    {{ end }}
+</div>

@@ -1,47 +1,6 @@
 {{ define "main" }}
-<div class="main-container">
-    {{ partial "profile.html" . }}
-
-    <div class="content-area">
-        {{ $bookmarks := .Site.Data.bookmarks }}
-        {{ $groups := slice }}
-
-        <!-- Collect unique groups -->
-        {{ range $bookmarks }}
-        {{ $group := .group | default "uncategorized" }}
-        {{ if not (in $groups $group) }}
-        {{ $groups = $groups | append $group }}
-        {{ end }}
-        {{ end }}
-
-        <div class="bookmarks-groups">
-            {{ range $groups }}
-            {{ $currentGroup := . }}
-            <div class="content-group">
-                <h2 class="group-title">{{ $currentGroup }}</h2>
-
-                {{ range $bookmarks }}
-                {{ if eq (.group | default "uncategorized") $currentGroup }}
-                <article class="bookmark-item">
-                    {{ $domain := urls.Parse .url }}
-                    {{ $faviconUrl := printf "https://www.google.com/s2/favicons?domain=%s&sz=32" $domain.Host }}
-                    
-                    <div class="bookmark-info">
-                        <a href="{{ .url }}" class="bookmark-header" target="_blank" rel="noopener">
-                            {{ with .date }}
-                            <div class="bookmark-date">{{ . }}</div>
-                            {{ end }}
-                            <img src="{{ $faviconUrl }}" alt="{{ .description }}" class="bookmark-icon">
-                            <div class="bookmark-url">{{ .url }}</div>
-                        </a>
-                        <div class="bookmark-description">{{ .description }}</div>
-                    </div>
-                </article>
-                {{ end }}
-                {{ end }}
-            </div>
-            {{ end }}
-        </div>
-    </div>
-</div>
+{{ partial "content-shell.html" (dict
+    "context" .
+    "contentPartial" "bookmarks-content.html"
+) }}
 {{ end }}
