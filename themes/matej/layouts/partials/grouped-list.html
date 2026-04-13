@@ -18,7 +18,7 @@
 
             {{ range $pages.ByDate.Reverse }}
                 {{ if eq (.Params.group | default "uncategorized") $currentGroup }}
-                    <article class="post-item">
+                    <article class="post-entry">
                         <a href="{{ .RelPermalink }}" class="post-link"></a>
                         {{ if $showThumbnails }}
                             {{ if .Params.thumbnail }}
@@ -28,8 +28,8 @@
                             {{ end }}
                         {{ end }}
 
-                        <div class="post-info">
-                            <div class="post-date">{{ .Date.Format "2006-01-02" }}</div>
+                        <div class="post-entry">
+                            <div class="date-prefix">{{ .Date.Format "2006-01-02" }}</div>
                             <h3 class="post-title">{{ .Title }}</h3>
                         </div>
                     </article>

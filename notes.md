@@ -1,4 +1,6 @@
-simplify css
+analyze codebase
+
+simplify css where possible, ask further questions, very specific and precies change questions
 
 'item' keyword should be replaced with 'entry'
 

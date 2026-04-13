@@ -12,7 +12,7 @@ Everything I learned about Django which isn't mentioned in Django's docs, in som
 
 The biggest mistake you can make when creating a project/app/system is assuming you need to create three different Django apps because you have three different products under the same Django codebase. The data flow boundary is often not clear and predictable, especially in the early-mid stage when product and business requirements often change.
 
-> Let's say you define model `Entity` in App `A`. After some time, you realize it would be useful to use a feature from App `B` to transform an `Entity` in some way and then consumed by App `A`. You thought apps `A` and `B` are independent, when in fact `B` now depends on `A` because it modifies `Entity` defined in `A`. Are you fine with `B` being dependent on `A`? If not, you have to move `Entity` into a shared `core` app? Which entities will always live in `A`? Are you sure they will, or will you have to move them to `core` as well?
+Let's say you define model `Entity` in App `A`. After some time, you realize it would be useful to use a feature from App `B` to transform an `Entity` in some way and then consumed by App `A`. You thought apps `A` and `B` are independent, when in fact `B` now depends on `A` because it modifies `Entity` defined in `A`. Are you fine with `B` being dependent on `A`? If not, you have to move `Entity` into a shared `core` app? Which entities will always live in `A`? Are you sure they will, or will you have to move them to `core` as well?
 
      
      

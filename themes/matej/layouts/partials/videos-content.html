@@ -2,7 +2,7 @@
 
 <div class="videos-gallery">
     {{ range $videos }}
-        <article class="video-item">
+        <article class="video-entry">
             <div class="video-embed">
                 {{ if .youtube }}
                     <iframe src="https://www.youtube.com/embed/{{ .youtube }}"
@@ -19,10 +19,6 @@
 
             {{ with .title }}
                 <h3 class="video-title">{{ . }}</h3>
-            {{ end }}
-
-            {{ with .description }}
-                <p class="video-description">{{ . }}</p>
             {{ end }}
         </article>
     {{ end }}

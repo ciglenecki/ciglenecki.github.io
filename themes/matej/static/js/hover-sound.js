@@ -6,7 +6,7 @@
     const STORAGE_KEY = 'soundMuted';
     const SELECTORS = {
         muteButton: '#mute-toggle',
-        hoverableItems: '.post-item, .bookmark-item, .project-item',
+        hoverableItems: 'article.post-entry, article.bookmark-entry, article.project-entry, article.video-entry',
         headerLinks: '.site-header nav a'
     };
 
