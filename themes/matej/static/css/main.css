@@ -42,11 +42,11 @@
     --icon-size: 16px;
     --site-header-height: 3rem;
     --padding-page-default: 2rem;
-    --padding-page-default-mobile: 1rem;
+    --mobile-padding-page-default: 1rem;
+
     --header-offset: calc(var(--site-header-height) + var(--padding-page-default));
     --layout-gap: var(--space-sm);
     --page-padding: var(--padding-page-default) var(--padding-page-default) 12rem var(--padding-page-default);
-    --mobile-page-padding: var(--padding-page-default-mobile) var(--padding-page-default-mobile) 12rem;
 
 }
 
@@ -658,6 +658,11 @@ article.video-entry {
 }
 
 @media (max-width: 860px) {
+    :root {
+        /* Change base variable used for element variable */
+        --padding-page-default: var(--mobile-padding-page-default);
+    }
+
     .main-wrapper {
         grid-template-columns: 1fr;
         gap: 0;
@@ -700,9 +705,6 @@ article.video-entry {
         width: min(100%, var(--project-thumb-size));
     }
 
-    .single-content {
-        padding: var(--mobile-page-padding);
-    }
 
     .single-header {
         flex-direction: column;
