@@ -22,7 +22,7 @@
     --font-size-base: 1.125rem;
     --font-size-sm: 1rem;
 
-
+    --space-3xs: 0.125rem;
     --space-2xs: 0.25rem;
     --space-xs: 0.5rem;
     --space-sm: 0.75rem;
@@ -216,6 +216,7 @@ h2 {
 }
 
 .grouped-list,
+.group-bookmarks,
 .group-projects,
 .videos-gallery {
     display: grid;
@@ -227,9 +228,10 @@ h2 {
     margin-bottom: var(--space-lg);
 }
 
+.group-bookmarks,
 .group-projects {
     align-items: center;
-    gap: var(--space-sm);
+    gap: var(--space-md);
 }
 
 .videos-gallery {
@@ -247,19 +249,24 @@ h2 {
     text-transform: lowercase;
 }
 
-article.post-entry,
-article.bookmark-entry,
+
+article.bookmark-entry {
+    position: relative;
+    min-width: 0;
+}
+
 article.project-entry {
     position: relative;
     min-width: 0;
-    padding: var(--space-xs) 0;
+    padding: var(--space-3xs) 0;
 }
 
 article.post-entry {
+    position: relative;
+    min-width: 0;
     display: flex;
     align-items: flex-start;
-    gap: var(--space-xs);
-    padding: var(--space-2xs) 0;
+    padding: var(--space-3xs) 0;
 }
 
 article.post-entry {
@@ -374,7 +381,7 @@ article.bookmark-entry:last-child {
 }
 
 .bookmark-description {
-    margin-top: var(--space-2xs);
+    margin-top: var(--space-3xs);
     line-height: 1;
 }
 

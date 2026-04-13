@@ -14,25 +14,27 @@
         <section class="content-group">
             <h2 class="group-title">{{ $currentGroup }}</h2>
 
-            {{ range $bookmarks }}
-                {{ if eq (.group | default "uncategorized") $currentGroup }}
-                    <article class="bookmark-entry">
-                        {{ $domain := urls.Parse .url }}
-                        {{ $faviconUrl := printf "https://www.google.com/s2/favicons?domain=%s&sz=32" $domain.Host }}
+            <div class="group-bookmarks">
+                {{ range $bookmarks }}
+                    {{ if eq (.group | default "uncategorized") $currentGroup }}
+                        <article class="bookmark-entry group-bookmark">
+                            {{ $domain := urls.Parse .url }}
+                            {{ $faviconUrl := printf "https://www.google.com/s2/favicons?domain=%s&sz=32" $domain.Host }}
 
-                        <div class="bookmark-info">
-                            <a href="{{ .url }}" class="bookmark-link" target="_blank" rel="noopener">
-                                {{ with .date }}
-                                    <span class="date-prefix">{{ . }}</span>
-                                {{ end }}
-                                <img src="{{ $faviconUrl }}" alt="{{ .description }}" class="bookmark-icon">
-                                <span class="bookmark-url">{{ .url }}</span>
-                            </a>
-                            <div class="bookmark-description">{{ .description }}</div>
-                        </div>
-                    </article>
+                            <div class="bookmark-info">
+                                <a href="{{ .url }}" class="bookmark-link" target="_blank" rel="noopener">
+                                    {{ with .date }}
+                                        <span class="date-prefix">{{ . }}</span>
+                                    {{ end }}
+                                    <img src="{{ $faviconUrl }}" alt="{{ .description }}" class="bookmark-icon">
+                                    <span class="bookmark-url">{{ .url }}</span>
+                                </a>
+                                <div class="bookmark-description">{{ .description }}</div>
+                            </div>
+                        </article>
+                    {{ end }}
                 {{ end }}
-            {{ end }}
+            </div>
         </section>
     {{ end }}
 </div>
