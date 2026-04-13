@@ -40,7 +40,9 @@
     --sidebar-width-desktop: 280px;
     --project-thumb-size: 100px;
     --icon-size: 16px;
-    --header-offset: 4rem;
+    --site-header-height: 3rem;
+    --main-wrapper-padding-top: 2rem;
+    --header-offset: calc(var(--site-header-height) + var(--main-wrapper-padding-top));
     --layout-gap: var(--space-sm);
     --page-padding: 1rem 1rem 12rem 1rem;
     --mobile-page-padding: 1rem 1rem 12rem;
@@ -77,7 +79,6 @@ img {
     top: 0;
     z-index: 100;
     width: 100%;
-    padding: var(--space-xs) 0;
     background: var(--color-accent);
 }
 
@@ -94,6 +95,7 @@ img {
     align-items: center;
     justify-content: space-between;
     gap: var(--space-2xs) var(--space-md);
+    min-height: var(--site-header-height);
     padding: 0 1rem;
 }
 
@@ -138,7 +140,7 @@ img {
     grid-template-columns: var(--sidebar-width-desktop) minmax(0, 1fr);
     align-items: start;
     gap: var(--layout-gap);
-    padding: var(--page-padding);
+    padding: var(--main-wrapper-padding-top) 1rem 12rem 1rem;
 }
 
 .single-content {
