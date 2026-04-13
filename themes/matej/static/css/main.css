@@ -40,9 +40,8 @@
     --sidebar-width-desktop: 280px;
     --project-thumb-size: 100px;
     --icon-size: 16px;
-    --header-offset: 1rem;
+    --header-offset: 4rem;
     --layout-gap: var(--space-sm);
-    --page-inline-padding: 1rem;
     --page-padding: 1rem 1rem 12rem 1rem;
     --mobile-page-padding: 1rem 1rem 12rem;
 }
@@ -144,8 +143,7 @@ img {
 
 .profile-sidebar {
     position: fixed;
-    top: var(--header-offset);
-    left: max(var(--page-inline-padding), calc((100vw - var(--container-width)) / 2 + var(--page-inline-padding)));
+    left: calc(100vw - var(--container-width))/2;
     width: var(--sidebar-width-desktop);
 }
 
