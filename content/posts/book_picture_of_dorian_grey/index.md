@@ -2,6 +2,7 @@
 title = 'Reflections on The Picture of Dorian Gray by Oscar Wilde'
 date = 2026-04-03T23:41:40+01:00
 group = "books"
+thumbnail = "./narcissus.png"
 +++
 
 <figure style="text-align: center;">

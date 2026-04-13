@@ -645,7 +645,7 @@ h6 {
         top: auto;
         left: auto;
         width: 100%;
-        margin-bottom: var(--space-sm);
+        margin-bottom: var(--space-md);
         text-align: center;
     }
 
