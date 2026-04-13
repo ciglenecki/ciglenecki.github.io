@@ -47,6 +47,7 @@
     --layout-gap: var(--space-sm);
     --page-padding: var(--padding-page-default) var(--padding-page-default) 12rem var(--padding-page-default);
     --mobile-page-padding: var(--padding-page-default-mobile) var(--padding-page-default-mobile) 12rem;
+
 }
 
 * {
@@ -656,7 +657,7 @@ article.video-entry {
     font-size: 0.85rem !important;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 860px) {
     .main-wrapper {
         grid-template-columns: 1fr;
         gap: 0;
