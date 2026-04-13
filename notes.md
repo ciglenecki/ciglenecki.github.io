@@ -1,3 +1,27 @@
+simplify css
+
+'item' keyword should be replaced with 'entry'
+
+bookmark-item -> bookmark-entry
+
+ahref should be only used for links, now, the bookmark and icon is incldued in <a> in bookmarks
+
+.bookmark-description,
+.project-description,
+.video-description should all be removed, they dont to anything.
+
+there should be a "date-prefix" class whose
+
+post-info should be post-entry
+
+project-info -> project-entry
+
+
+when i scroll towards the bottom, profile seciton moves a bit, it should always be on the same level and not moving at all
+
+
+===
+
 remove all partials that are not truely reusable across multiple sites or called in for loops and move the code to 
 
 remove profile links
