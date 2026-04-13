@@ -382,7 +382,7 @@ article.bookmark-entry:last-child {
 
 .bookmark-description {
     margin-top: var(--space-3xs);
-    line-height: 1;
+    line-height: 1.2;
 }
 
 .post-title-text {
