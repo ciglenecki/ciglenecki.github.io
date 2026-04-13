@@ -19,6 +19,7 @@ theme = 'matej'
           block = [['$$', '$$']]
           inline = [['$', '$']]
 
+
 [params.meta]
   favicon = true
 

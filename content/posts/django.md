@@ -64,7 +64,7 @@ Let us define an `ImageService`. It has a static function `resize_to_fit(image, 
 ```py
 class ImageService:
     @staticmethod
-    def resize_to_fit(image: Image.Image, res: int = 1920 * 1080) -> Image.Image:
+    def resize_to_fit(image: Image.Image, res: int = 1920 * 1080):
         # ... image resize logic ...
         return resized_image
 # ...
