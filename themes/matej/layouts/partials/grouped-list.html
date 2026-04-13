@@ -28,9 +28,11 @@
                             {{ end }}
                         {{ end }}
 
-                        <div class="post-entry">
-                            <div class="date-prefix">{{ .Date.Format "2006-01-02" }}</div>
-                            <h3 class="post-title">{{ .Title }}</h3>
+                        <div class="post-content">
+                            <h3 class="post-line">
+                                <span class="date-prefix">{{ .Date.Format "2006-01-02" }}</span>
+                                <span class="post-title-text">{{ .Title }}</span>
+                            </h3>
                         </div>
                     </article>
                 {{ end }}

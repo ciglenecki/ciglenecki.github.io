@@ -1,42 +1,44 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-This repository is a Hugo site with a custom theme. Treat source files as the only editing surface:
+This repository is a Hugo site with a custom theme. Edit source files, not generated output.
 
-- `content/posts/`: Markdown posts with TOML front matter.
-- `content/bookmarks/` and `content/videos/`: section index pages.
-- `data/bookmarks.json` and `data/videos.json`: structured content rendered into lists/galleries.
+- `content/posts/`: blog posts in Markdown with TOML front matter.
+- `content/posts/<slug>/index.md`: page bundles for posts that ship local assets such as images.
+- `content/bookmarks/` and `content/videos/`: section landing pages.
+- `data/bookmarks.json`, `data/videos.json`, `data/projects.json`: structured content rendered by templates.
 - `themes/matej/layouts/`: Hugo templates and partials.
-- `themes/matej/static/css/` and `themes/matej/static/js/`: site styling and small client-side scripts.
-- `static/`: published assets such as images.
+- `themes/matej/static/css/` and `themes/matej/static/js/`: theme styles and small scripts.
+- `static/`: site assets copied as-is at build time.
 
-Do not hand-edit generated output in `public/` rebuild from source instead.
+Do not hand-edit `public/` or `resources/`; rebuild them from source.
 
 ## Build, Test, and Development Commands
-- `hugo server -D`: run the local dev server and include drafts.
-- `hugo --gc --minify`: produce a production build in `public/`.
+- `hugo server -D`: run the local site with drafts enabled.
+- `hugo --gc --minify`: build the production site into `public/`.
 - `hugo new posts/my-post.md`: scaffold a new post from `archetypes/default.md`.
 
-The GitHub Pages workflow in `.github/workflows/hugo.yaml` builds with Hugo and deploys the generated site artifact.
+The deployment workflow lives in `.github/workflows/hugo.yaml` and publishes the Hugo build to GitHub Pages.
 
 ## Coding Style & Naming Conventions
-Follow the existing repository style:
+Use the existing formatting in touched files:
 
-- Use 4-space indentation in HTML, CSS, JSON, and TOML.
-- Keep filenames lowercase and hyphenated, for example `profile-links.html` or `book-reflections.md`.
-- Posts use TOML front matter with `+++` delimiters and fields like `title`, `date`, `group`, and `draft`.
-- Keep `group` values short and lowercase because templates render them directly as section labels.
-- Prefer editing theme assets in `themes/matej/` over adding parallel overrides unless there is a clear reason.
+- 4-space indentation in HTML, CSS, JSON, and TOML.
+- TOML front matter with `+++`, for example `title`, `date`, `group`, and `draft`.
+- Lowercase section labels in `group` because templates render them directly.
+- Prefer lowercase content slugs and stable paths; avoid renaming existing files without a reason.
+
+Keep JSON entries consistently ordered and formatted like the surrounding records.
 
 ## Testing Guidelines
-There is no automated test suite in this repository. Validation is manual:
+There is no automated test suite in this repository. Validate changes manually:
 
 - Run `hugo --gc --minify` before opening a PR.
-- Preview touched pages with `hugo server -D`.
-- If you change templates, CSS, bookmarks, or videos, verify the archive, bookmarks, and videos pages in a browser.
-- If you edit JSON data files, ensure they stay valid and consistently formatted.
+- Preview affected pages with `hugo server -D`.
+- If you change templates, CSS, or data files, check the archive, bookmarks, videos, and projects sections in a browser.
+- If you edit JSON data, confirm it remains valid.
 
 ## Commit & Pull Request Guidelines
-Recent history uses short lowercase subjects such as `add structure` and `grade center`. Keep commit messages concise and imperative, but make them more descriptive than one-word summaries when possible.
+Recent commits use short lowercase subjects such as `update css simplification` and `friendly scoll deadspace`. Keep commits concise and imperative, but make them more descriptive than one-word summaries.
 
-PRs should include a brief scope summary, note affected content or templates, link related issues when applicable, and attach screenshots for any visible UI or layout change.
+PRs should summarize scope, note any affected sections or templates, link related issues when relevant, and include screenshots for visible layout or styling changes.
