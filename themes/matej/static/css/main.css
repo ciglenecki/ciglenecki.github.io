@@ -250,7 +250,7 @@ article.bookmark-entry,
 article.project-entry {
     position: relative;
     min-width: 0;
-    padding: var(--space-2xs) 0;
+    padding: var(--space-xs) 0;
 }
 
 article.post-entry {
@@ -295,7 +295,8 @@ div.project-entry {
 
 div.post-content {
     flex: 1;
-    pointer-events: none;
+    position: relative;
+    z-index: 2;
 }
 
 .date-prefix {
@@ -314,6 +315,11 @@ div.post-content {
     overflow-wrap: anywhere;
     font-size: var(--font-size-base);
     font-weight: 400;
+}
+
+.post-text-link {
+    color: inherit;
+    text-decoration: none;
 }
 
 .bookmark-url,
@@ -367,6 +373,7 @@ article.bookmark-entry:last-child {
 
 .bookmark-description {
     margin-top: var(--space-2xs);
+    line-height: 1;
 }
 
 .post-title-text {
