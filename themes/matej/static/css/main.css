@@ -41,11 +41,12 @@
     --project-thumb-size: 100px;
     --icon-size: 16px;
     --site-header-height: 3rem;
-    --main-wrapper-padding-top: 2rem;
-    --header-offset: calc(var(--site-header-height) + var(--main-wrapper-padding-top));
+    --padding-page-default: 2rem;
+    --padding-page-default-mobile: 1rem;
+    --header-offset: calc(var(--site-header-height) + var(--padding-page-default));
     --layout-gap: var(--space-sm);
-    --page-padding: 1rem 1rem 12rem 1rem;
-    --mobile-page-padding: 1rem 1rem 12rem;
+    --page-padding: var(--padding-page-default) var(--padding-page-default) 12rem var(--padding-page-default);
+    --mobile-page-padding: var(--padding-page-default-mobile) var(--padding-page-default-mobile) 12rem;
 }
 
 * {
@@ -96,7 +97,7 @@ img {
     justify-content: space-between;
     gap: var(--space-2xs) var(--space-md);
     min-height: var(--site-header-height);
-    padding: 0 1rem;
+    padding: 0 var(--padding-page-default);
 }
 
 .site-nav-links {
@@ -140,7 +141,7 @@ img {
     grid-template-columns: var(--sidebar-width-desktop) minmax(0, 1fr);
     align-items: start;
     gap: var(--layout-gap);
-    padding: var(--main-wrapper-padding-top) 1rem 12rem 1rem;
+    padding: var(--page-padding);
 }
 
 .single-content {
@@ -216,6 +217,7 @@ h2 {
 
 .content-area {
     min-width: 0;
+
 }
 
 .grouped-list,
@@ -664,8 +666,13 @@ article.video-entry {
     .profile-sidebar {
         position: static;
         width: 100%;
+        margin-top: 0;
         margin-bottom: 4rem;
         text-align: center;
+    }
+
+    .content-area {
+        margin-top: 0;
     }
 
     .profile-photo {
