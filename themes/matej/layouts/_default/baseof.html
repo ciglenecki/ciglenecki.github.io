@@ -5,7 +5,6 @@
     {{ $siteTitle := .Site.Title }}
     {{ $defaultImage := "angry.webp" | absURL }}
     {{ $metaTitle := .Title }}
-    {{ $metaDescription := $defaultDescription }}
     {{ $ogImage := $defaultImage }}
     {{ $ogType := "website" }}
 
@@ -13,9 +12,6 @@
         {{ $metaTitle = $siteTitle }}
     {{ end }}
 
-    {{ with .Params.description }}
-        {{ $metaDescription = . }}
-    {{ end }}
 
     {{ if and .IsPage (eq .Section "posts") }}
         {{ $ogType = "article" }}
@@ -36,11 +32,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
-    <meta name="description" content="{{ $metaDescription }}">
     <link rel="canonical" href="{{ .Permalink }}">
     <meta name="robots" content="index,follow">
     <meta property="og:title" content="{{ $metaTitle }}">
-    <meta property="og:description" content="{{ $metaDescription }}">
     <meta property="og:type" content="{{ $ogType }}">
     <meta property="og:url" content="{{ .Permalink }}">
     <meta property="og:image" content="{{ $ogImage }}">
