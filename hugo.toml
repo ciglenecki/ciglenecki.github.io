@@ -1,4 +1,4 @@
-baseURL = 'https://ciglenecki.github.io/'
+baseURL = 'https://matejciglenecki.com/'
 languageCode = 'en-us'
 title = 'Matej Ciglenečki'
 theme = 'matej'
