@@ -44,7 +44,7 @@
     <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
     <link rel="stylesheet" href="{{ "css/syntax.css" | relURL }}">
 
-    {{ if .IsPage }}
+    {{ if .Params.mathjax }}
     <script>
         window.MathJax = {
             tex: {

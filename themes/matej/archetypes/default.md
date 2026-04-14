@@ -4,4 +4,5 @@ date: {{ .Date }}
 draft: false
 group: "general"
 thumbnail: ""
+mathjax: false
 ---
