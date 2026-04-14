@@ -3,6 +3,8 @@ title = 'Reflections on The Picture of Dorian Gray by Oscar Wilde'
 date = 2026-04-03T23:41:40+01:00
 group = "books"
 thumbnail = "narcissus.png"
+description = "Reflections on The Picture of Dorian Gray. Focusing on beauty, corruption, hedonism, and why Lord Henry Wotton becomes unbearable."
+og_image = "narcissus.png"
 +++
 
 <figure style="text-align: center;">
@@ -48,6 +50,7 @@ Throughout his pleasures and delights, he gave me the impression that he underst
 The only sympathy I have for him is in regards to Basil's painting. Resisting the temptation to be youthful forever seems like a hard opportunity to turn down, especially when you do not have to provide anything in return (except your Soul). I find it difficult to believe that many of us would have acted differently in his position.
 
 ## Lord Henry Wotton
+
 The complete contrast in that regard was Lord Henry Wotton. A captivating figure at the start, but completely indigestible once I finished the book, even though he didn't change whatsoever. To me, he is a figure that represents what troubles Oscar Wilde in the Victorian society he lived in.
 
 Lord Henry Wotton oozes with unconventional, piercing, and snappy aphorisms. Although I didn't explicitly check this, in my opinion, they reflect some of Wilde's own vision and guiding principles. Lord Henry Wotton's ideas are captivating at first. They question ideas of pleasure, interpreting beauty as the highest form of intellectual observation, giving emphasis on one's current joys instead of banking moments for the future, or ruminating on the past. However, at some point, he started degrading the kind of people who are the opposite of him. People who settle down, enjoy recurring social events, and stay consistent with their interests. This became quite annoying. It came off as smug, pretentious, and outright unbearable towards the end. His hedonistic outlook on life was hard to take seriously as it was presented as the only way to satisfaction or purpose in life. Obviously, that's incorrect. There are many types of life purposes that are considered valuable by many of us, and hedonism may or may not be one of them. His inability to understand others was what cost him my respect. His one-dimensionality was magnetizing, but became repelling once the magnetic pole switched in the middle of the book. I think this issue would be solved if Lord Henry Wotton simply appeared less often.  
