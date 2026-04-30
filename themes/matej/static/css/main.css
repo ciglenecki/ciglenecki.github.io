@@ -37,7 +37,8 @@
     --radius-button: 0.5rem;
 
     --container-width: 1200px;
-    --sidebar-width-desktop: 280px;
+    --sidebar-width-desktop: 300px;
+    --photo-width: 226px;
     --project-thumb-size: 100px;
     --icon-size: 16px;
     --site-header-height: 3rem;
@@ -45,7 +46,7 @@
     --mobile-padding-page-default: 1rem;
 
     --header-offset: calc(var(--site-header-height) + var(--padding-page-default));
-    --layout-gap: var(--space-sm);
+    --layout-gap: var(--space-2xl);
     --page-padding: var(--padding-page-default) var(--padding-page-default) 12rem var(--padding-page-default);
 
 }
@@ -153,12 +154,13 @@ img {
     position: sticky;
     top: var(--header-offset);
     width: 100%;
+    text-align: left;
 }
 
 .profile-photo {
-    width: min(100%, 100px);
+    width: min(100%, var(--photo-width));
     aspect-ratio: 1;
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--space-lg);
     border: 2px solid var(--color-accent);
     border-radius: var(--radius-lg);
     object-fit: cover;
@@ -178,14 +180,22 @@ h2 {
     margin-bottom: var(--space-2xs);
 }
 
+.profile-description {
+    text-align: left;
+}
+
 .profile-links {
     margin-top: var(--space-lg);
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .profile-links a {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: var(--space-2xs);
     padding: 0;
     color: var(--color-accent);
@@ -683,6 +693,14 @@ article.video-entry {
 
     .profile-photo {
         margin-inline: auto;
+    }
+
+    .profile-description {
+        text-align: center;
+    }
+
+    .profile-links {
+        align-items: center;
     }
 
     .profile-links a {
