@@ -1,6 +1,12 @@
 [
     {
         "group": "ml",
+        "date": "2023-06-21",
+        "description": "Faster PyTorch Training by Reducing Peak Memory. Update weights immediately after computing the gradients, instead of waiting for the entire backward pass to finish. This can significantly reduce peak memory usage and speed up training. Fuse backwards and optimizer steps into one operation.",
+        "url": "https://lightning.ai/pages/community/tutorial/faster-pytorch-training-by-reducing-peak-memory/"
+    },
+    {
+        "group": "ml",
         "date": "2023-01-30",
         "description": "Tim Dettmers's Which GPU(s) to Get for Deep Learning. Not sure how up-to-date this is for this year.",
         "url": "https://timdettmers.com/2023/01/30/which-gpu-for-deep-learning/"
