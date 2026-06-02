@@ -5,7 +5,7 @@ group = "theory"
 +++
 
 
-> Extremely unstructured notes written during multimodal paper reading sessions. These notes are a byproduct of trying to actively understand papers instead of passively reading them. Although writing notes may not be an optimal approach for long-term memory and information retrieval, I notice note-taking definitely boosts my overall understanding of the paper, compared to passively reading it. My goal for the next reading session is to produce notes that are ready for public consumption and produce non-trivial insights or digressions not contained in the paper.
+> Extremely unstructured and informal notes written during multimodal paper reading sessions. These notes are a byproduct of trying to actively understand papers instead of passively reading them. Although writing notes may not be an optimal approach for long-term memory and information retrieval, I notice note-taking definitely boosts my overall understanding of the paper, compared to passively reading it. My goal for the next reading session is to produce notes that are ready for public consumption and produce non-trivial insights or digressions not contained in the paper.
 
 ## LLaVa
 
