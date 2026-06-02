@@ -1,7 +1,7 @@
 +++
 title = 'Django – Chained'
 date = 2025-11-12T09:15:00+01:00
-group = "programming"
+group = "engineering"
 +++
 
 Everything I learned about Django which isn't mentioned in Django's docs, in some form or another.

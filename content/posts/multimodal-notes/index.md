@@ -1,0 +1,840 @@
++++
+title = 'Unstructured Multimodal personal notes'
+date = 2026-03-06T09:15:00+01:00
+group = "theory"
++++
+
+
+> Extremely unstructured notes written during multimodal paper reading sessions. These notes are a byproduct of trying to actively understand papers instead of passively reading them. Although writing notes may not be an optimal approach for long-term memory and information retrieval, I notice note-taking definitely boosts my overall understanding of the paper, compared to passively reading it. My goal for the next reading session is to produce notes that are ready for public consumption and produce non-trivial insights or digressions not contained in the paper.
+
+## LLaVa
+
+terms:
+- instruction: "describe an image", "whats werid about this image"
+- instruction tuning: traing model on examples, input is instruction, output is correct answer
+- visual instruction tuning: instruction tuning for image/text task
+- llava: Large Language and Vision Assistant
+- vicuna: langauge model used as text decoder
+
+abstract:
+- create method using only gpt4 (langauge) to generate image/lang instruction following data
+- lavva model connects
+  - visual encoder
+  - language model
+- trained end to end for general image/language understanding
+- paper tries to make this image/text assistent act like instruction following assistant, not like a captioning model
+- key idea: use strong text only model, create training dataset for image-text assistant
+
+results:
+- multimodal chat
+- on synthetci multimodal instructionfollowing bench: 85.1% relative score compared to gpt-4 (has access to ground truth image texts)
+- scienceQA: 92.54% accuracy, sota
+
+technical ideas:
+- generate visual instructions (gpt4)
+- train image/text by connecting clip + vicuna
+- eval on visual chat and scienceqa
+
+### introduction
+
+two different systes:
+1. vision system with langauge labels/prompts
+- classifictaion, detection, segmentation, cpationing.... (fixed user interfact)
+2. instruction following LLM:
+- user can state many tasks via text
+- issue: this works mostly for text only
+
+paper main contributions (4):
+1. multimodal instruction following data
+  - pipeline that converts image/text into instruction-following data (gpt4)  
+2. large multimodal model (LMM)
+  - LLaVa connects CLIP's visual encoder with Vicuna, finetuned on image/lang instruct data
+3. multimodal instruction following BENCHAMRK
+  - llava-bench (paired images instructions and annotations)
+4. open source release (what a novel contribution!)
+
+main technical idea: visual instruction tune:
+1. start with image
+2. create text instrctuion about the image
+3. createa answers
+4. train model to follow instructions
+
+### related work
+
+priort approaches:
+1. end-to-end moodels trained for 1 task:
+  1. vision langauge navigation
+  2. instruct pix2pix
+2. systems that coordinate many models
+  1. visuial chatgpt
+  2. xgpt
+  3. mm-react
+  4. visprog...
+ 
+ 
+visual instruction tuning (VIT) vs visual prompt tuning (VPT):
+- VIT: improves instruction following
+- VPT: improves param-efficient model adaptation
+  - instead of finetuning model, you optimize small number of 'prompt' params (visual promots)
+  - rest of the model is frozen
+  - "parameter-efficient adaptation"
+    - this isnt lora or adapters
+  - prompt tuning: you train a small prompt automatically
+    - learned prompt is not interpretable/human readable
+    - trainable vectors: soft prompts/prompt embeddings
+    - `[learned vec_1][learned vec_2][learned vec_3] + raw text input`
+
+diff
+- previous papers: learn from image/text PAIRS (image/label)
+- this paper: learn from image/text instruction-following data
+- this then becomes user facing assistant!
+
+### gpt assisted visual instruction data gen
+
+problem: many public image/text pairs
+- little multimodal instruct. following data
+
+two kinds of image text:
+1. captions: sentance describing image
+2. bounding box: objetc lable plus cooridantes to localize obj in image
+
+uses COCO images and generates three response types:
+1. conversation (multiple questions about image)
+  - object types
+  - object count
+  - object actions (? maybe verbs that describe action)
+  - object location 
+  - relative obj positions
+
+2. detailed description (rich image descrpiton)
+3. complex reasoning (question where answer needs reasoning based on image content)
+   1. e.g what's the optimal next move on chess board or something like that
+
+dataset: 158k unique image/text instruction-following samples:
+- 58k conversion samples
+- 23k detailed descriptions
+- 77k ocmpelx reasonings
+
+naive expansion (bad, not enough)
+- image: X_v, caption: X_c, question: X_q
+- human instruction is: `Human X_q X_V <STOP> Assistant: X_c <STOP>`
+- human asks questions about the image, assistant answers with caption
+
+gpt assisted gen:
+- ask gpt4 to generate richer isntruction-anjwser pairs
+- how do they represent image if gpt can't see it? with:
+  - captions
+  - bounding boxes
+
+### 4 visual instruction tuning
+
+method, paper connects visual model with pretrained LLM:
+- clip vit-l/14 visaul encoder
+  - g(X_v) = Z_v
+- vicuna language model
+- connection between the two
+  - W * Z_v => same vector space as word embeddings from vicuna
+  - image features become visual tokens that vicuna can process
+  - `w` is trainable matrix, maps clip image features into vicuna token emb space!!!
+    - why do they use a simple/single `w` instead of something more complex? it seems that transforming clip's emb space to vicuna's language emb spaces would require something more powerful than a simple `w`
+    - they do this because they want to itterate fast (makes sense)
+    - other methods do more complex mappings
+      - gated cross-attn in flamingo paper
+      - q-former in blip-2 
+  - `X_v` input img
+  - `g` visual enc (clip)
+  - `Z_v = g(X_v)` clip visual features
+  - `W` trainable proj matrix
+  - `W * Z_v` proj matrix that converts clip visual features to `H_v` (projected visual tokens). `H_v` has same dim as model's word emb space
+  - $H_v = W \cdot Z_v,\quad \text{with } Z_v = g(X_v)$
+  - note: i can't believe how simple this approach is and that it wasn't done before this, of course, scale probably plays a huge role here. clip's implicit knowledge hidden in the dataset formation was key
+
+training:
+- for each image
+  - generate multi-turn conversation data
+  - $(X_q^1, X_a^1, \ldots, X_q^T, X_a^T)$
+  - `T` number of convertsation turns
+  - $X_q^t$ is a question or instruction at `t` turn
+  - $X_a^t$ is assistant answer
+  - first turn includes images, later ones don't
+  - objective: auto-regressive same as in language model (pred next token using prev tokens)
+
+training in stages:
+1. stage: pre-training for feature alignment
+   - how does model learn to map image features to lang?
+   - teach projection layer
+2. fine-tuning end to end
+
+first turn: instruction is either:
+1. question, then image
+2. image, then question
+
+later turns: instruction is only the question (because the image is already contained in the first turn which can be attented to)
+
+$X^t_{\text{instruct}} =
+\begin{cases}
+\text{Randomly choose } [X_q^1, X_v] \text{ or } [X_v, X_q^1], &amp; t = 1 \\
+X_q^t, &amp; t &gt; 1
+\end{cases}$
+- x^t, instruction at turn `t`
+- `x_q^1` first user question
+- `x_v` means image
+- `x_q^1, x_v` => question appears before the image token
+- reverse is possible
+- `t=1` first turn
+- `t>1` later turns
+
+model input:
+```
+X_system_message <STOP>
+Human:  X1_instruct <STOP> Assistant: X1_answer <STOP>
+Human:  X2_instruct <STOP> Assistant: X2_answer <STOP>
+...
+```
+- stop is `###`
+- what is used to compute the loss
+  - which tokens can you actually use to compute the loss?
+  - `<STOP>`, it's positions, `X1_answer`, `X2_answer`
+- insight: the model computes loss on assistant answer tokens and stop tokens!
+
+prediction  objective
+- model learns to: assign high prob. to correct assistant anwser, token by token, for an input (image, instruction, previous answer tokens)
+- model maximizes this likelihood
+- $p(X_a|X_v, X_{\text{instruct}})=  \prod_{i=1}^{L}
+p_\theta(x_i|X_v, X_{\text{instruct},\lt i}, X_{a,\lt i})$
+- the objective: learn how to maximize the likelihood of all answers (L), for a given image and instructions (L)
+  - you should do this by multiplying prob. of EACH answer / instruction
+  - what's the probability of one term?
+    - it's the likelihood that the model predicted a answer token for a given (image, previous instruction, previous answer)
+ 
+- `X_a` target assistant answer
+- `X_v` image
+- `X_instruct`, instruction sequence
+- `L` means the legnth of the target seq
+- `i` current token index
+- `x_i` current target answer token
+- `\phi` trainable parm
+- `X-instruct, <i`, instruction tokens before current token
+- `X_a, <i` same for anwsers
+
+stage 1: training `W` image->text proj
+- pretraing for feature alignment
+- for cc3m subste 595k image/text pairs
+- for each image
+  - x_q is randomly sampled instruction asking for image description
+  - x_a, original caption
+  - trainable params: only `W`
+  - everything else is frozen
+
+stage 2: finetuning:
+- trainable: `W`, llm params $\hi$:
+- $\theta = \{W, \phi\}$
+
+stage 2 is trained like a chatbot:
+- three response types sampled unifomrliy
+- scienceqa: question plus context as input + reasoning plus answer as output
+
+## CLIP: Learning Transferable Visual Models From Natural Language Supervision
+
+- visual model that reads images
+- cpation is paired with an image
+- zero shot model used on task WITHOUT training on task labeled examples!
+- one of the most impactful image/langauge papers
+- trained on 400 mil image/text pairs
+  
+technical ideas:
+- image encoder
+- text encoder
+- shared vector space matched images and texts are CLOSE
+
+resulst:
+- transfers to more than 30 cv datasets
+- mathces original resnet50 on imagenet in zeroshot mode
+- performs nontrivial ocr, action recognition, geo-loc, fine-grained classification
+
+
+realier work of theirs, text paired with images:
+- predict nouns and adjectives from image documents
+- predict words or n grams
+- VirTex, ICMLM, ConVIRT...
+- clip closes gap with much more data and compute (of course)
+
+previous problems: fixed softmaxs classifier predicts one class from fixed class list: inflexible
+- fixed-label computer vision systems can only predict fixed set of objects from catoegry
+- nlp is more flexible, describe many visual concepts, including new
+
+data:
+- imagenet
+- yfcc100m: 100m photos with metadata
+- jft-300m, instagram with hashtash
+- web image-text pairs
+
+
+training signal: text that naturally occurs with an image
+
+**natural language supervision**:
+1. scales more easily in large number of classes
+2. connects image features to langauge -> zero shotting
+
+**new dataset**: WIT (WebImageText) ~ 400mil
+- authors use 500,000 text queries
+- they include 20,000 image text pairs per query
+
+query list:
+- words appearing at least 100 times in wikipedia
+- high PMI bigrams
+  - bigram: character level gramming
+    - "Apple"
+    - "ap", "pp", "pl"...
+    - PMI: pointwise mutual infromation
+    - measures how strongly two words are associated
+    - $PMI(w_1,w_2)=\log\frac{P(w_1,w_2)}{P(w_1)P(w_2)}$
+    - P(w1, w2) = how often the two words appear together
+    - P(w1)P(w2) = how often we would expect them to appear together if they were unrelated
+    - examples of high PMI words:
+      - "hot dog", "traffic light", "red wine"
+        - describes a specific object/different, not just concat of two like "brown dog"
+    - names of wiki articles (above some threshold)
+
+pretraining:
+- they tried image caption prediction first (model generates the exact text paired with an image)
+  - this did not scale
+- better task: given a batch of image-text pairs, predicts which images and texts match
+  - this is a *contrastive* task
+  - matched pairs are close
+  - unmatched pairs are far apart
+- contrastive learning is much more compute efficient than caption generation
+  - given `N` image-text pairs (100_000)
+    - there are `N` real pairs
+    - there are `N^2` possible image-text pairs (10_000_000_000)
+    - there are `N^2-N incorrect pairs!! (9_999_900_000)
+- in contrastive learning, the number of 'corrections' is exactly `N` for one image
+  - in one backwards pass, the model lowers score for all negative words and incrases score for correct (positive word)
+  - you are not barely 'guessing' the correct word, you are shaping the emb space by separating from `N-1` words and bringing image closer to `1` word, this is much more efficient
+  - this scales especially when when you increase the batch size. in that case, you get huge number of negative examples for free
+- intutively:
+  - goal is not: "predict perfect caption"
+  - it's: "put matching images and text (1-1) close, non-matching (many) far apart
+
+
+
+terms:
+- `I` batch of images `[n, h, w, c]`
+- `T` batch of texts `[n, l]`
+- `W_i` learned image proj. matrix
+- `W_t` learned text proj matrix
+- `t` learned log-temperature scaling
+  - this temp scaling controls how strongy clip separates correct image/text pairs from wrong ones
+  - scale/range of logits before softmax
+- `d_e` shared embedding dimension (?)
+
+
+algo:
+```
+## Project both into the same vector space
+I_f = img_enc(I)
+T_f = img_enc(T)
+
+# normalize so that dot prod is cosine similarity
+I_e = l2_norm(I_f, W_i)
+T_e = l2_norm(I_t, W_t)
+
+# compute all pairwise image-text similarities.
+
+# scale similarities by a learned temp
+logits = dot_prod(I_e, T_e^T) * e^t
+
+labels = [0, 1..., n-1]
+
+# cross entropy in both directions, image to text, text to image
+loss_i = cross_ent(logits, labels, axis=0)
+loss_t = cross_ent(logits, labels, axis=1)
+
+loss = avg(loss_t, loss_i)
+```
+
+training augs:
+- random square crop from resized images
+
+
+they test both resnets and vit
+- resnet (with 1 multihead attn for pooling at end)
+  - they scaled width depth and input res
+  - use resnet-d changes
+    - uses 3 small stem convolutions (3x3) instead of one big (7x2 stride 2)
+    - more non linear layers early in image
+  - average pooling before the 1x1 downsampling
+  - 1x1 conv can ignore 3/4 of the input feature map
+  - use antialias blur pooling
+    - issue with aliasing: when shrinking image, small high freq details fold into wrong low-res pattern!
+      - thin lines, sharp edges, stripes...
+    - blur pooling fix:
+      - first blur a bit (mix nearby pixels)
+      - then shrink
+  - replace global avg pool with attention pooling
+    - one layer of transformer style multihead qkv attn
+    - output emb of model is 2048 x 7 x 7
+    - instead of avg pooling 7x7 -> do attn
+    - 49 spatial tokens
+      - add 1 global summary token (GST)
+      - 50 tokens in total
+      - the end information is contained in the GST global summary token
+      - 1 final image vector ([2048])
+- vit
+  - just regular vit
+  - add layer norm to patch plus position embeddings before the transformer layter
+  - 12 layers
+  - width 512
+  - 8 attn heads
+  - 63 mil papars
+  - lowercase bpe text enc
+  - vocab size: 49,152
+  - max seq len: 76
+  - text backeted with [sos] and [eos]
+    - start of sequence, end of sequence
+  - final layer activation at `[eos]` used as text representation
+
+training
+- 8 clip models
+  - resnet50,101,50x4,50x16,50x64
+  - vit/b32,b/16,l/14
+  - best model: vit-l/14@336px res (one more epoch finetune)
+- temp starts at 0.07 ans is cliped so logis are not scaled by more than 100
+- resnet50x64 | 18 days | 592 v100 gpus (insane)
+- large vision transformer | 12 days | 256 v100 gpus
+
+zero-shotting
+- only only unseen objects/classes, but unseen datasets and tasks as well!
+- how to classify an image?
+  - write each class as text
+  - encode each class text with text enc
+  - encode img with img enc
+  - compute img/text similiarity
+  - apply temp scaling + softmax
+  - pick class with highest prob
+    - e<details open><summary>
+    qui
+    </summary>
+    
+    
+    </details>
+    valent to lin classifier where text enc generates classifier weights
+```
+score_k = exp(t) * image_embedding · text_embedding_k
+p(y = k | image) = softmax(score_k)
+```
+
+Prompt engineering and ensembling
+- template: `A photo of a {label}`
+  - gives 1.3% better accuracy
+- prompt ensemble averages text embs from inputs
+  - 80 prompts add another +3.5% on imagenet
+- together, almost 5% better on imagenet
+
+zero-shot performance clip
+- beats 16/27 datasets supervised learning classifier (resnet50 features)
+- does weak on eurosat, kitti, gtsrb, dtd, flowers...
+
+data efficienty estimate:
+- median number of labeled examples for a class so that clip can match it's zero-shot performance: 5.4
+- mean: 20.8
+- on imagenet, zero-shot clip matches a 16-shot linear classifier on same feature space (16 labeled examples per class)
+- zer-shot performance to supervised linear probes on clip features:
+  - correlation r=0.82
+  - zero shot usually 10-25 points below fully supervised linear probing
+- zero shot error follow smooth log-log trend over 44x range
+
+
+representation learning:
+- they evaluate clips representations by training linear classifier on top of FROZEN features
+- linear probe:
+  - model encoder frozen
+  - linear classifier trained
+- better than finetuning because finetuning can hide weak representations by adapting the whole model to dataset
+results:
+- clip scales well
+- rn50x64 beats efficinetnetl2
+- clip vision transformers are 3x more compute efficient than clip resnet!!!
+- best clip model vitl/14@336px beats model by 2.6 points
+- clip worse on:
+  - imagenet
+  - cifar10
+  - patchcemlyno
+
+
+robusntess to natural distribution shift
+- test differs from training
+- imagenet shift datasets:
+  - imagenet v2
+  - youtube-bb
+  - imagenet-vid
+  - objectnet...
+- standard models lose accuracy on shifts
+- best zero-shot clip reduces imagenet gap by up to 75%
+
+results:
+- much more robust to natural distrubiton shifts than imagenet models
+- adapt clip to imagenet using logistic regresion on clip features
+- imagenet accuracy incrases by 9.2 points, reaching 85.4%
+
+dataset overlap problem:
+- clip is trained on huge amounts of images
+- for each eval dataset
+  - run duplicate detector
+  - manually inspect nearest neighbours
+  - set threhsold per dataset
+  - split into
+    - overlap
+    - clean
+    - all
+  - compute zeroshot accuracy on all splits
+  - use `all - clean` as the main estimate of accruacy inflation
+  - use one sided bonimal test
+  - 99.5% confiedence intervals
+- results acorss 35 dataset
+  - 9 dataset no overlap
+  - average overlap 3.2%
+  - largest (country211): 21.5%
+
+
+## ViLBERT: Pretraining Task-Agnostic Visiolinguistic Representations for Vision-and-Language Tasks.
+
+- reuse task representation on many tasks
+- model extends BERT
+- two streams
+    1. image regions (similar to bottom up top down paper)
+    2. processes words
+- streams exchange information via co-attentional transformer layers
+- pretrained on Conceptual Captions (image-caption dataset)
+- downstram tasks:
+  - VQA
+  - Visual commonsense reasoning
+    - "why is the person holding umbrella"
+      - bad: "because there is an umbrelaa"
+      - good: "because it's raining and the umbrella keeps person dry"1
+  - referring expression grounding
+    - finding region in the image based on input text
+      - "the man in the red shirt"
+      - model outputs object location of that man
+      - model understands:
+        - object category: man, dog
+        - attribute: red, small
+        - spatial relationship: on the left, behind the table
+        - context: "person holding the umbrella" (not any person)
+  - caption based image retrieval
+    - retrieve images based on caption? makes sense
+- SOTA on all four
+
+
+main paper claim: visual grounding can be pretrained and reused,
+  - previous papers trained only on one task instead of more
+
+main technical idea:
+  - keep image and text processing separate (visual stream, linguistic stream)
+  - let them interact at selected layers (co-attention)
+
+previous papers pattern:
+  1. start with pretrained image and langauge model (two different)
+  2. train a task specific model
+  3. learn visual grounding during that target task
+  - paper argues this approach produces myoptic groundings (too narrow and tied to one dataset or task)
+goal of this paper: pretrain visual grounding itself (self-supervised learning)
+
+- Conceptual Captions image-caption pairs have weak alignment between vision and language
+proxy tasks:
+  1. masked multimodal modeling
+  2. multi modal aligment prediction
+
+BERT: bidirectional language model based on transformer encoder blocks
+  - bidirectional: each token representation can use token on both left and right side
+  - token is a unit of text (ofc)
+  - bert flow:
+    - take sequence word tokens $w_0, ..., w_t$
+    - map each token to input vector $v_0, ..., v_0$
+    - apply $L$ transformer blocks (similar as classic transformer encoder)
+    - output $h_0, ..., h_T$
+    - ONE hidden vector is representation of ONE token
+
+Transformer block:
+  1. multi-head attn
+  2. residual add and norm
+  3. ff network (mlp applied at each position)
+  4. residual add and norm
+  - residual add: block adds the input to output (helps with DL stability resnet style)
+  - q k v matrices
+  - dot product between q and k creates attn weights over values
+  - $\text{softmax}(\frac{QK^T}{\sqrt{d_k}}V)$
+
+Text reps:
+- for each token, BERT sums:
+1. token emb
+2. position encoding (where is the token in the seq)
+3. segment encoding (which sentance segment the token belongs to)
+- special tokens:
+  - CLS: whole sequence representation
+  - SEP: separate text segments
+  - MASK: hide tokens during masked modeling
+
+Hidden state:
+- $H^{(L)}$ matrix of hidden vectors after layer $l$. each row is hidden vector for one token position
+- input tokens are:
+  - $X_M$: masked token (~15%)
+  - $X_O$: observevd token
+masked tokens:
+  - 80% replaced with MASK
+  - 10% replaced with rnd word
+  - 10% unchanged
+task: reconstgruct the original masked tokens
+loss: cross entropy loss, how wrong a predicted class distribution is compared to true class distribution
+
+model input: $\{CLS, w^A_1, \ldots, w^A_T, SEP, w^B_1, \ldots, w^B_T, SEP\}$
+
+model predits whether seg $B$ follows seg $A$
+linear layer reads final CLS vector: $h_{CLS}$
+loss: binary cross-entropy
+
+
+ViLBERT:
+- ways not to extend BERT:
+1. cluster visual inputs into discrete visual tokens (clustering loses details)
+2. treat visual tokens as words (image and text might need different processing needs)
+3. feed all tokens into bert (many visual tokens might damage bert pretrained)
+
+model:
+- two streams: visual and text, connected with coattn
+- design lets:
+  - presever strong text knowledge from bert
+  - process visual features independently
+  - combine img and text at any depth
+  - avoid forcing image regions and words to use same layers
+
+inputs:
+- image: $v_1, \ldots, v_T$ (region feature)
+- text input: $w_0, \ldots, w_T$
+- model output visual regions: $h_{v0}, \ldots, h_{vT}$
+- model output text tokens: $h_{w0}, \ldots, h_{wT}$
+
+co-attn transformer layer:
+- modality attends to other modality (image to text, text to image...)
+- for a given visual hidden state $H_V^{(i)}$ and $H_W^{(j)}$, model computes q k v
+- swaps (key and value) pairs modalities
+- visual stream:
+  - query: visual
+  - key, value: langauge
+- language stream:
+  - query: langauge
+  - key, value: visual
+visual stream: "which words matter most for this image region"
+langauge stream: "which image regions matter most for this word"
+
+image region representation: same as from [Bottom-Up and Top-Down Attention for Image Captioning and Visual Question Answering — full paper summary] 
+- each region -> 5 dim vector:
+  - x1,x2,y1,y2 cords
+  - fraction of image area covered by region
+
+IMG TOKEN
+- start of image region sequence
+  - uses mean pool visual features and spatial encoding for the whole image
+- just like `CLS` token, `IMG` token at the end contains all information about the image (last layers, after many attention layers)
+masked multimodal:
+- mask 15% of words and image regions
+- mask image region rule:
+  - region feature is 0 outed 90% of the time
+  - 10% left unchanged
+
+model does not regress visual features
+- it predicts distribvution over sematnic classes
+- semantic calss: obj or concept category from a detector
+
+loss: kv divergence between:
+- model's predicted class distrib
+- detectors class distrib
+- $D_{KL}(P \parallel Q) = \sum_x P(x)\log\frac{P(x)}{Q(x)}$
+- why not regress exact image features?
+  - because lanaguge gives high level semantics, not exact feature values
+
+multimodela aligment prediction task
+- second pretraining task
+- model gets image,text pair and predicts if they match
+- input $\{IMG, v_1, \ldots, v_T, CLS, w_1, \ldots, w_T, SEP\}$
+- model uses
+  - $h_{img}$ wholw image represenatioi
+  - $h_{cls}$ whole text representation
+- computes element wise product (Hadamard product)
+- $h_{IMG} \odot h_{CLS}$
+- linear layer predicts wheteher th eimage and text are aligned
+- loss: binary cross entropy
+
+
+
+### Training ViLBERT
+
+~3.3 mil image-caption pairs
+components:
+- langauge stream: BERTBASE
+  - pretrained on book corpus, english wiki
+- image region: Faster RCNN (ResNet101 backbone)
+  - keep between 10-36 high scoring boxes
+
+
+... anyway, they beat all downstream tasks
+
+
+## Bottom-Up and Top-Down Attention for Image Captioning and Visual Question Answering — full paper summary
+
+basically: instead of attending to image patches, attend to OBJECT extracted via fast-rcnn. Objects are transformed to same-size features of course. This works well, but is brittle and misses details.
+
+what does it mean "A small network slides over an intermediate CNN feature map. At each location it predicts"? Who produces the CNN feature map, isn't the Region Proposal Network the first one to do it?
+
+image
+  ↓
+backbone CNN, e.g. ResNet
+  ↓
+feature map: H' × W' × C
+  ↓
+Region Proposal Network
+  ↓
+region proposals: N boxes, each box = (x1, y1, x2, y2)
+
+
+### Training the bottom up model
+
+Detector is initialized with ResNet-101 (imagenet)
+- train on Visual Genome dataset
+  - predicts:
+    - object class ("dog")
+    - attribute classes ("brown", "small")
+      - attribute prediction, model concats
+        1. region feature $v_i$
+        2. learned embedding of ground truth obj class
+
+## NLP Metrics
+candidate caption - generated by model
+reference caption - human written caption
+
+#### BLEU
+
+BLEU is a geometric mean of modified n-gram precisions, usually for 1-grams to 4-grams, multiplied by a brevity penalty to punish captions that are too short.
+
+n-gram: sequence of n words.
+
+```
+n=1
+A
+dog
+is
+running
+on
+grass
+```
+
+```
+n=2
+A dog
+dog is
+is running
+running on
+on grass
+```
+
+ratio of correctly predicted words
+
+C: `a dog sits on grass`
+R: `a dog sit on grass`
+`p1 = 4/5 = 0.8`
+
+
+C: `a dog sits on grass`
+R: `a dog is sitting on the grass`
+C: `a dog | dog sits | sits on | on grass`
+R: `a dog | dog is | is sitting | sitting on | on the | the grass`
+`p2 = 1/4 = 0.25` (only one n gram was correct out of 4)
+
+
+"dog sits on grass" (5)
+"dog is sitting on the grass" (7)
+Brevity penalty: BP(1 - 7/5) (sentence has two missing words)
+
+`bleu-2 = BP * sqrt (p1 * p2)`
+`blue-3 = BP * sqrt_3 (p1 * p2 * p3)`
+...
+
+#### METEOR
+
+C = [a, dog, sits, on, grass]
+R = [a, dog, is, sitting, on, the, grass]
+
+METEOR aligns words between the candidate and reference, computes a weighted harmonic mean of unigram precision and unigram recall, and applies a penalty if matched words are in a different order.
+
+Aligned words:
+
+a → a
+dog → dog
+sits → sitting
+on → on
+grass → grass
+
+Matched words m = 5.
+Candidate words = 5.
+Reference words = 7.
+
+Precision P = 5 / 5 = 1.0
+Recall R = 5 / 7 = 0.7143
+
+F score = 10PR / (R+9P)
+
+Chunking: match words from start and end index until both of them contain 
+    - a -> a
+    - dog -> dog
+    - sits -> "is" (word missmatch, "is" is extra)
+    - chunk 1: [a, dog]
+    - sits -> sitting
+    - on -> on
+    - grass -> "a" (word missmatch, "a" is extra)
+    - chunk 2: [sits, on]
+    - chunk3: [grass]
+penalty = 0.5 * (num_chunks / num words) = 0.5 * (3/5)
+penality reduces meteor score
+
+METEOR = F * (1 - penality)
+
+
+#### ROUGE-L
+
+Strict meaning: ROUGE-L measures the longest common subsequence between the candidate and the reference. A subsequence keeps word order, but the words do not need to be next to each other.
+
+C = [a, dog, sits, on, grass]
+R = [a, dog, is, sitting, on, the, grass]
+
+Longest common subsequence:
+
+[a, dog, on, grass]
+LCS length = 4.
+
+Precision P = LCS / candidate length = 4 / 5 = 0.8
+Recall R = LCS / reference length = 4 / 7 = 0.5714
+ROUGE-L = 2PR / (P + R)
+
+#### CIDEr
+Strict meaning: CIDEr measures whether the candidate uses the same important n-grams as human references for the same image. It does not treat all words equally. Rare, image-specific words get more weight. Common words like “a”, “the”, and “is” get less weight. CIDEr uses TF-IDF vectors for 1-grams, 2-grams, 3-grams, and 4-grams, then computes cosine similarity against human references.
+
+Important: exact CIDEr cannot be computed from only one candidate and one reference. It also needs corpus-level document frequencies. That means it must know how common each n-gram is across the whole dataset.
+
+Real CIDEr does this for 1-grams through 4-grams, uses real IDF from the dataset, compares against multiple human references, averages the scores, and often multiplies by 10 in common COCO-style reporting.
+
+C 1-grams: a, dog, sits, on, grass
+R 1-grams: a, dog, is, sitting, on, the, grass
+
+Exact matches: a, dog, on, grass
+Number of exact matches = 4.
+
+Candidate TF weight for each word = 1/5 = 0.2
+Reference TF weight for each word = 1/7 = 0.1429
+
+Dot product = 4 × 0.2 × 0.1429 = 0.1143
+
+Candidate vector norm = sqrt(5 × 0.2²) = sqrt(0.2) = 0.4472
+Reference vector norm = sqrt(7 × 0.1429²) = sqrt(0.1429) = 0.3780
+
+CIDEr-1 cosine similarity = 0.1143 / (0.4472 × 0.3780)
+CIDEr-1 cosine similarity = 0.1143 / 0.1690 = 0.6763
