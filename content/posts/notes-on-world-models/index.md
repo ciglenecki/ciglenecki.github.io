@@ -2,6 +2,7 @@
 title = 'Notes on World Models'
 date = 2026-05-25T00:00:00+00:00
 group = "theory"
+mathjax = true
 +++
 
 ## Dreamer "Dream to Control: Learning Behaviors by Latent Imagination"

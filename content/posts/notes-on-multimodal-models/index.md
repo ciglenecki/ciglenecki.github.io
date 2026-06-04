@@ -2,6 +2,7 @@
 title = 'Notes on Multimodal Models'
 date = 2026-03-06T09:15:00+01:00
 group = "theory"
+mathjax = true
 +++
 
 
