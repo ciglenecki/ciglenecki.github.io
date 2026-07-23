@@ -11,45 +11,45 @@ mathjax = true
 ## adapting image/text modality
 Adapters for converting visual tokens into the LLM space:
 1. linear projections
-  - simply mapping visual tokens into LLM space via MLP layers
-  - used in LLaVa
-  - simple and effective, but a bit limited
+    - simply mapping visual tokens into LLM space via MLP layers
+    - used in LLaVa
+    - simple and effective, but a bit limited
 2. Q-Former (query transformer)
-  - two transformer blocks, shared self-attention layer
-    - there are two blocks, one for visual and textual modality
-    - they have shared self-attention layer because visual/textual embeddings should live in same embedding space
-  - learnable query tokens interact with self-attention layers
-  - access visual features via cross attention layers
-  - introduced in BLIP-2
-  - Qwen-VL does the similar approach
-    - compress visual features using single cross-attn module
-    - has learnable queries as well
-    - incorporates 2D encodings
+    - two transformer blocks, shared self-attention layer
+      - there are two blocks, one for visual and textual modality
+      - they have shared self-attention layer because visual/textual embeddings should live in same embedding space
+    - learnable query tokens interact with self-attention layers
+    - access visual features via cross attention layers
+    - introduced in BLIP-2
+    - Qwen-VL does the similar approach
+      - compress visual features using single cross-attn module
+      - has learnable queries as well
+      - incorporates 2D encodings
 3. additional cross-attention layers
-  - introduced flamingo
-  - dense visual tokens are conditioned on a model via cross-attenion mechanism throughout the layers of LLM
-  - zero initialized tanh gating is introduced to ensure that upon initialization the LLM behaves as it would normally. However, through training, this learned gating starts passing information about visual tokens 
-  - Perceiver
-    - 1. reduces number of visual tokens to fixed number of latent visual tokens: the tokens are not directly conditioned because number the number of visual tokens is large (even if it's small, we would have to pad to max length)
-    - 2. reduces feature dimensionality of visual tokens as well
-    - how do we learn these tokens? we construct [64, <actual_visual_tokens>]. Through layers, we propagate all tokens up, and then take final 64 latent visual tokensl
+    - introduced flamingo
+    - dense visual tokens are conditioned on a model via cross-attenion mechanism throughout the layers of LLM
+    - zero initialized tanh gating is introduced to ensure that upon initialization the LLM behaves as it would normally. However, through training, this learned gating starts passing information about visual tokens 
+    - Perceiver
+      1. reduces number of visual tokens to fixed number of latent visual tokens: the tokens are not directly conditioned because number the number of visual tokens is large (even if it's small, we would have to pad to max length)
+      2. reduces feature dimensionality of visual tokens as well
+          - how do we learn these tokens? we construct [64, <actual_visual_tokens>]. Through layers, we propagate all tokens up, and then take final 64 latent visual tokensl
 
 
 Multimodal training
 1. single stage training
-  - main idea: leave LLM completely frozen, but add learned latent (both text and image) prompts into the model. Both at the start and in deeper transformer layers
-  - the tokens are limited via gates. they limit attention given to these prompts
-  - train both on image-text pairs, and on text instructions
-  - why don't we give prompt directly to LLaMA?
-    - the prompt can be better optimized
-    - if the prompt is normal, it can only be inputed in the first layer
-    - in practice, we add it in almost every layer
-    - instruction loss: difference between answer and correct answer
-  - improvement: finall loss incorporates two contrastive losses for image-text retrieval
-  - flamingo's approach uses cross-attn and perceiver instead
+    - main idea: leave LLM completely frozen, but add learned latent (both text and image) prompts into the model. Both at the start and in deeper transformer layers
+    - the tokens are limited via gates. they limit attention given to these prompts
+    - train both on image-text pairs, and on text instructions
+    - why don't we give prompt directly to LLaMA?
+      - the prompt can be better optimized
+      - if the prompt is normal, it can only be inputed in the first layer
+      - in practice, we add it in almost every layer
+      - instruction loss: difference between answer and correct answer
+    - improvement: finall loss incorporates two contrastive losses for image-text retrieval
+    - flamingo's approach uses cross-attn and perceiver instead
 2. two stage training
-  1. stage, align image features with text emb
-  2. stage, improve multimodal conversational capability
+    1. stage, align image features with text emb
+    2. stage, improve multimodal conversational capability
 
 
 datasets for pretraining image-text
