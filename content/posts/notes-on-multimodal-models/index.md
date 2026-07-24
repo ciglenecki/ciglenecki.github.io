@@ -175,6 +175,40 @@ $$
 
 problem with clip: it's trained to contrast image/text pairs, it cannot decode images. the inversion is not teached
 
+## lora and qlora summary
+
+motivation: for a given 7B param model, finetune a model its performance increases for a downstream task
+- e.g. finetune image generation model to generate images of owls
+
+traditionally, you would finetune a pretrained model, or last few layers for this task, against. what are the cons?
+- you are training 100% to 10% of model parameters, which may still be huge for your tiny gpu
+- if you train on N different tasks, you have to store N full model weights -> expensive storage
+
+how does lora solve this problem?
+
+models weights consists of large weight matrices, this matrix may be something like W(1000, 3000). for example: attention matrices, feed forward (mlp) matrices. instead of finetuning the whole W, we can construct **two very small matrices** that, when multipled, have the same shape as W.
+- e.g. matrix A[1000, 3] and matrix B[3, 3000], their total number of params is (1000 * 3) + (3 * 3000) = 12_000 which is much smaller than W's 1000 * 3000 = 3_000_000
+- however, when multiplied, these matrices have exactly the shape of W because of the matrix product rule
+- therefore, we can effectively influence all of W's parameters at once while training a much smaller amount of parameters
+- lora update rule: $\Delta W = BA$
+- number `3` can be arbitrary, it's called rank parameter `r` and it determines the dimensionality of matrices A and B we train. In practice, it's often set from `1` to `128`. larger `r` means we train more params which is slower/harder to train/bigger storage size/better performance. `r=16` should be good
+- after $\Delta W$ is produced, it's added to the original `W`, with some scaling factor that increases/decreases lora's contribution
+- there more LoRA adapters you use throughout the model, the better (use it on whole model). this is way more important than increasing `r`
+
+qlora:
+- qlora corrects quantization errors caused by pretrained model quantization
+- load pretrained model in 4bit precision
+- train qlora in higher resolution (8/16 precision), qlora matrices stay in 16 precision
+  - in inference, mixed precision is used, where models 4bit weights are temporarirly dequantized
+    - note: model's weight is dequantized only for LoRA matrix sum calculation. there's not permanently stored 16bit pretrained model in the memory
+
+notes:
+- LoRA uses 0.1 - 0.05 dropout
+
+**low rank** meaning: (difference matrix of between a finetuned model's matrix and model's matrix) has a LOW RANK. this is because weights stayed mostly the same. the features mostly stay as they are and the **new task depends on small number of directions***.
+
+
+the hypothesis is that these matrices have **low rank**, meaning, their  
 ## Paper: SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization,**** and Dense Features
 Michael Tschannen, Alexey Gritsenko, Xiao Wang, Muhammad Ferjad Naeem, Ibrahim Alabdulmohsin, Nikhil Parthasarathy, Talfan Evans, Lucas Beyer, Ye Xia, Basil Mustafa, Olivier Hénaff, Jeremiah Harmsen, Andreas Steiner, Xiaohua Zhai
 
